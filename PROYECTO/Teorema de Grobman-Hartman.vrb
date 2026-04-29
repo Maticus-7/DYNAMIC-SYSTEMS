@@ -1,0 +1,13 @@
+\frametitle{Conjugación entre la Variedad y el Espacio Tangente}
+El homeomorfismo $h$ "plancha" la dinámica no lineal local en la variedad $M$ hacia la dinámica lineal en el espacio tangente $\mathbb{R}^m$.
+		
+		\vspace{0.5cm}
+		\begin{center}
+			% Se añade ampersand replacement=\& y se cambian los & por \&
+			\begin{tikzcd}[row sep=huge, column sep=huge, ampersand replacement=\&]
+				U(0) \subset \mathbb{R}^m \arrow[r, "A = Df_p"] \arrow[d, "h"', "\cong"] \& \mathbb{R}^m \arrow[d, "h", "\cong"'] \\
+				V(p) \subset M \arrow[r, "f"] \& M
+			\end{tikzcd}
+		\end{center}
+		\vspace{0.5cm}
+		Este diagrama conmutativo ilustra que iterar la función lineal $A$ en el plano y luego mapear a la variedad con $h$, es equivalente a mapear a la variedad y luego iterar la función no lineal $f$.

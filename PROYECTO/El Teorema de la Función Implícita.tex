@@ -1,0 +1,199 @@
+\documentclass[10pt]{beamer}
+\usetheme{Madrid}
+\usecolortheme{whale}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+
+% Configuraciones para entornos matemáticos
+\setbeamertemplate{theorems}[numbered]
+\newtheorem{proposicion}{Proposición}
+\newtheorem{definicion}{Definición}
+\newtheorem{notacion}{Notación}
+\newtheorem*{observacion}{Observación}
+
+\title{El Teorema de la Función Implícita}
+\subtitle{Principio del Punto Fijo y Espacios de Banach}
+\author{}
+\date{}
+
+\begin{document}
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	\begin{frame}{3.4 El Principio del Punto Fijo para Aplicaciones Contractivas}
+		Sea $X$ un espacio métrico completo con métrica $\rho$. Una aplicación $F : X \to X$ se llama \textbf{contracción} si existe una constante $0 < c < 1$ tal que
+		\[ \rho(F(x), F(y)) \leq c \cdot \rho(x, y) \]
+		para todo $x, y \in X$. 
+		
+		El hecho de que $c < 1$ nos dice que la imagen de un conjunto bajo $F$ se contrae: los puntos en $F(X)$ están más cerca entre sí de lo que están sus preimágenes en $X$. El teorema básico sobre aplicaciones contractivas es el siguiente.
+	\end{frame}
+	
+	\begin{frame}[allowframebreaks]{Teorema 3.4.1}
+		\begin{theorem}[3.4.1 (Principio del Punto Fijo para Aplicaciones Contractivas)]
+			Sea $F : X \to X$ una contracción del espacio métrico completo $X$. Entonces $F$ tiene un único punto fijo. Es decir, existe un único punto $x_0 \in X$ tal que $F(x_0) = x_0$.
+		\end{theorem}
+		
+		\textsc{Demostración.} Sea $P \in X$ un punto cualquiera. Definimos una sucesión inductivamente por
+		\begin{align*}
+			x_1 &= P \\
+			x_2 &= F(x_1) \\
+			x_j &= F(x_{j-1}).
+		\end{align*}
+		
+		Afirmamos que $\{x_j\}$ es una sucesión de Cauchy en $X$. Supongamos por un momento que esta afirmación ha sido demostrada. Entonces, debido a que $X$ es completo, existe un punto límite $x_0$ de la sucesión. Además,
+		\[ F(x_0) = F\left(\lim_{j \to \infty} x_j\right) = \lim_{j \to \infty} F(x_j) = \lim_{j \to \infty} x_{j+1} = x_0. \]
+		
+		\framebreak
+		
+		Así que $x_0$ es ciertamente un punto fijo para la aplicación $F$. Si $\tilde{x}_0$ fuera otro punto fijo, entonces tendríamos
+		\[ \rho(x_0, \tilde{x}_0) = \rho(F(x_0), F(\tilde{x}_0)) \leq c \cdot \rho(x_0, \tilde{x}_0). \]
+		Dado que $0 < c < 1$, la única conclusión posible es que $\rho(x_0, \tilde{x}_0) = 0$, o sea $x_0 = \tilde{x}_0$. Esto establece la existencia y unicidad de $x_0$. 
+		
+		Resta demostrar la afirmación. Calculamos, para $j > 1$, que
+		\begin{align*}
+			\rho(x_j, x_{j-1}) &= \rho(F(x_{j-1}), F(x_{j-2})) \leq c \cdot \rho(x_{j-1}, x_{j-2}) \\
+			&= c \cdot \rho(F(x_{j-2}), F(x_{j-3})) \leq c^2 \cdot \rho(x_{j-2}, x_{j-3}) \\
+			&\leq \dots \leq c^{j-1} \cdot \rho(x_2, x_1).
+		\end{align*}
+		
+		\framebreak
+		
+		Como resultado,
+		\begin{align*}
+			\rho(x_{j+k}, x_j) &\leq \rho(x_{j+k}, x_{j+k-1}) + \rho(x_{j+k-1}, x_{j+k-2}) + \dots + \rho(x_{j+1}, x_j) \\
+			&\leq \left[c^{j+k-1} + c^{j+k-2} + \dots + c^j\right] \rho(x_2, x_1) \\
+			&\leq \frac{c^j}{1 - c} \cdot \rho(x_2, x_1).
+		\end{align*}
+		
+		En particular, si $\epsilon > 0$ y si $j$ es lo suficientemente grande, entonces, independientemente del valor de $k \geq 1$,
+		\[ \rho(x_{j+k}, x_j) < \epsilon. \]
+		Por lo tanto, la sucesión $\{x_j\}$ es de Cauchy, y la afirmación queda demostrada. \hfill $\square$
+	\end{frame}
+	
+	\begin{frame}[allowframebreaks]{Variantes del Principio de Contracción}
+		De hecho, en la práctica necesitaremos una ligera variante del teorema del punto fijo para aplicaciones contractivas. Ahora enunciamos y establecemos este resultado.
+		
+		\begin{proposicion}[3.4.2]
+			Sea $\overline{B} = \overline{B}(p, r)$ una bola cerrada en un espacio métrico completo $X$. Supongamos que $H : \overline{B} \to X$ es una contracción (con constante de contracción $c$, $0 < c < 1$) tal que $\rho(H(p), p) \leq (1 - c)r$. Entonces $H$ tiene un único punto fijo en $\overline{B}$.
+		\end{proposicion}
+		
+		\textsc{Demostración.} Si $x \in \overline{B}$ es cualquier punto, entonces
+		\begin{align*}
+			\rho(H(x), p) &\leq \rho(H(x), H(p)) + \rho(H(p), p) \\
+			&\leq c\rho(x, p) + (1 - c)r \\
+			&\leq cr + (1 - c)r = r.
+		\end{align*}
+		Esta desigualdad verifica que la imagen de $\overline{B}$ yace en $\overline{B}$, por ende $H : \overline{B} \to \overline{B}$. El Teorema 3.4.1 ahora se aplica reemplazando $X$ por $\overline{B}$. La demostración está completa. \hfill $\square$
+	\end{frame}
+	
+	\begin{frame}{Variantes del Principio de Contracción}
+		\begin{proposicion}[3.4.3]
+			Sea $B = B(p, r)$ una bola abierta en un espacio métrico completo $X$. Asumamos que $H : B \to X$ es una contracción (con constante $c$, $0 < c < 1$) tal que $\rho(H(p), p) < (1 - c)r$. Entonces $H$ tiene un único punto fijo en $B$.
+		\end{proposicion}
+		\textsc{Demostración.} Simplemente restrinja $H$ a una bola cerrada $D$ ligeramente más pequeña que sea concéntrica y esté contenida en $B$. Aplique la Proposición 3.4.2. \hfill $\square$
+		
+		\vspace{0.3cm}
+		\begin{proposicion}[3.4.4]
+			Supongamos que $H$ es una contracción (con constante $c$, $0 < c < 1$) en el espacio métrico completo $X$. Sea $x \in X$, y supongamos que $\rho(H(x), x) = d$. Entonces la distancia desde $x$ al punto fijo $p$ (garantizado por el Teorema 3.4.1) es a lo sumo $d / (1 - c)$.
+		\end{proposicion}
+		\textsc{Demostración.} Sea $\overline{B}$ la bola cerrada en $X$ con centro $x$ y radio $r = d / (1 - c)$. Aplique la Proposición 3.4.2 a la restricción de $H$ a $\overline{B}$. Así, el punto fijo yace en $\overline{B}$, y hemos terminado. \hfill $\square$
+	\end{frame}
+	
+	\begin{frame}[allowframebreaks]{Contracción Uniforme}
+		\begin{proposicion}[3.4.5]
+			Sea $X$ un espacio métrico completo, y $S$ cualquier espacio métrico. Supongamos que $H : S \times X \to X$. Asumamos que $H(s, x)$ es una contracción en $X$ uniformemente sobre $s \in S$ (con constante uniforme $c$, $0 < c < 1$), es decir,
+			\[ \rho(H(s, x), H(s, y)) \leq c \cdot \rho(x, y) \]
+			para todo $s \in S$ y todo $x, y \in X$. Además, asumamos que $H$ es continua en $s$ para cada $x \in X$ fijo. Para cada $s \in S$, sea $p_s \in X$ el único punto fijo que satisface $H(s, p_s) = p_s$. Entonces la aplicación $s \mapsto p_s$ es una función continua de $s$.
+		\end{proposicion}
+		
+		\framebreak
+		
+		\textsc{Demostración.} Elijamos $t \in S$. Sea $\epsilon > 0$. Por la continuidad de $H$ en la primera variable, elijamos $\delta > 0$ de modo que si $\rho(s, t) < \delta$, entonces $\rho(H(s, p_t), H(t, p_t)) < \epsilon$. 
+		
+		Dado que $H(t, p_t) = p_t$, esta última desigualdad dice que la contracción con valor de parámetro $s$ mueve $p_t$ una distancia a lo sumo $\epsilon$. Así, $\rho(p_s, p_t) \leq \epsilon / (1 - c)$ por la Proposición 3.4.4. 
+		
+		Es decir, $\rho(s, t) < \delta$ implica que $\rho(p_s, p_t) \leq \epsilon / (1 - c)$. Concluimos que la aplicación $s \mapsto p_s$ es continua en $t \in S$. \hfill $\square$
+	\end{frame}
+	
+	\begin{frame}[allowframebreaks]{Teorema Combinado}
+		Ahora unimos las Proposiciones 3.4.3 y 3.4.5 en un solo resultado que será el que se utilice para establecer el teorema de la función implícita (Teorema 3.4.10). 
+		
+		\begin{theorem}[3.4.6]
+			Sea $X$ un espacio métrico completo, y $S$ cualquier espacio métrico. Sea $B = B(p, r)$ una bola abierta en $X$. Sea $H$ una aplicación de $S \times B$ a $X$ que es una contracción en $X$ uniformemente sobre $s \in S$ (con constante $c$, $0 < c < 1$); además, supongamos que $H$ es continua en la variable $s$ para cada valor fijo de $x \in X$. Finalmente, asumamos que, para cada $s \in S$, sabemos que $\rho(H(s, p), p) < (1 - c)r$.
+			
+			Entonces, para cada $s \in S$, existe un único $p_s \in B$ tal que $H(s, p_s) = p_s$; además, la aplicación $s \mapsto p_s$ es continua de $S$ a $B$.
+		\end{theorem}
+		\textsc{Demostración.} El resultado es inmediato a partir de las Proposiciones 3.4.3 y 3.4.5. \hfill $\square$
+	\end{frame}
+	
+	\begin{frame}[allowframebreaks]{Definiciones Previas}
+		Ahora el teorema de la función implícita, formulado de una manera que se presta a la demostración mediante el principio del punto fijo de contracción, será nuestro próximo resultado principal. Primero introducimos algunas definiciones y notación.
+		
+		\begin{notacion}[3.4.7 (Landau)]
+			Fijemos $a$ en los reales extendidos, es decir, $a \in \mathbb{R} \cup \{\pm\infty\}$. Supongamos que $g$ es una función de valor real en $\mathbb{R} \cup \{\pm\infty\}$ que no se anula en una vecindad de $a$. Para una función $f$ de valor real definida en una vecindad perforada de $a$, decimos que $f$ es "o" minúscula de $g$ cuando $x \to a$ y escribimos
+			\[ f(x) = o(g(x)) \quad \text{cuando } x \to a \]
+			en caso de que $\lim_{x \to a} \frac{f(x)}{g(x)} = 0$.
+		\end{notacion}
+		
+		\framebreak
+		
+		\begin{definicion}[3.4.8]
+			Sean $X, Z$ espacios lineales normados. Sea $x \in X$, y supongamos que $U$ es una vecindad de $x$ en $X$. Una aplicación $F : U \to Z$ es diferenciable en $x$ si existe un operador lineal $T$ de $X$ a $Z$ tal que
+			\[ F(x + \xi) - F(x) = T(\xi) + o(\|\xi\|) \]
+			para todo $\xi \in X$ pequeño.
+		\end{definicion}
+		
+		Por supuesto, esta definición, comúnmente conocida como la definición de "Fréchet" de derivada, simplemente dice que la función $F$ puede aproximarse bien en $x$ mediante la aplicación lineal $T$. Es directo comprobar que, si $T$ existe, entonces es único. Llamamos a $T$ la derivada de $F$ en $x$.
+		
+		\framebreak
+		
+		\begin{definicion}[3.4.9]
+			Si $X, Y, Z$ son espacios de Banach y $F : X \times Y \to Z$ es una aplicación, entonces, para cada $x_0 \in X$ fijo, podemos considerar la diferenciabilidad de la aplicación
+			\[ Y \ni y \mapsto F(x_0, y). \]
+			Si la derivada existe en un punto $y_0 \in Y$, entonces la denotamos por $d_2 F(x_0, y_0)$.
+		\end{definicion}
+	\end{frame}
+	
+	\begin{frame}[allowframebreaks]{Teorema de la Función Implícita}
+		Ahora tenemos el teorema de la función implícita, formulado de modo que pueda demostrarse con el principio del punto fijo para aplicaciones contractivas:
+		
+		\begin{theorem}[3.4.10]
+			Sean $X, Y, Z$ espacios de Banach. Sea $U \times V$ un subconjunto abierto de $X \times Y$. Supongamos que $G : U \times V \to Z$ es continua y tiene la propiedad de que $d_2 G$ existe y es continua en cada punto de $U \times V$.
+			
+			Asumamos que el punto $(x, y) \in X \times Y$ tiene la propiedad de que $G(x, y) = 0$ y que $d_2 G(x, y)$ es invertible.
+			
+			Entonces existen bolas abiertas $M = B_X(x, r)$ y $N = B_Y(y, s)$ tales que, para cada $\xi \in M$, existe un único $\eta \in N$ que satisface $G(\xi, \eta) = 0$. La función $f$, definida unívocamente cerca de $x$ por la condición $f(\xi) = \eta$, es continua.
+		\end{theorem}
+		
+		\framebreak
+		
+		\textsc{Demostración.} Sea $T = d_2 G(x, y)$ y, para $\alpha \in U$, $\beta \in V$, definamos
+		\[ L(\alpha, \beta) = \beta - T^{-1}[G(\alpha, \beta)]. \]
+		Por supuesto, $T$ es invertible por hipótesis.
+		
+		Se sigue por inspección que $L$ es una aplicación continua de $U \times V$ a $Z$ tal que
+		\[ L(x, y) = y - T^{-1}[G(x, y)] = y - T^{-1}(0) = y. \]
+		Además, $L$ es continuamente diferenciable en la segunda entrada y
+		\[ d_2 L(x, y) = \text{id} - T^{-1} \circ [d_2 G(x, y)] = 0. \]
+		
+		\framebreak
+		
+		Dado que $d_2 L(\cdot, \cdot)$ es una función continua de sus argumentos, existe un producto de bolas $M \times N$ (con $M = B(x, r)$ y $N = B(y, s)$) alrededor de $(x, y)$ en el cual $\|d_2 L(\cdot, \cdot)\|$ está acotado por $1/2$. También podemos asumir, reduciendo la bola $M$ si es necesario, que $\|L(\alpha, y) - y\| < s/2$ para $\alpha \in M$.
+		
+		El teorema del valor medio aplicado a $L$ en su segunda variable (parametrizada con un segmento) implica ahora que $L(\alpha, \cdot)$ es una contracción, con constante $1/2$ (esta afirmación es cierta uniformemente en $\alpha \in M$). 
+		
+		Por el Teorema 3.4.6, concluimos que para cada $\xi \in M$ existe un único $\eta \in N$ tal que $L(\xi, \eta) = \eta$; además, la aplicación $\xi \mapsto \eta$ es continua. Dado que $L(\xi, \eta) = \eta$ si y solo si $G(\xi, \eta) = 0$, el resultado queda demostrado. \hfill $\square$
+	\end{frame}
+	
+	\begin{frame}{Nota Histórica}
+		\begin{observacion}[3.4.11]
+			El uso del principio de aplicaciones contractivas para demostrar el teorema de la función implícita es un descendiente intelectual de la demostración iterativa dada por primera vez por Goursat [Go 03]. Edouard Goursat (1858-1936) se inspiró a su vez en la demostración iterativa de Charles Émile Picard (1856-1941) para la existencia de soluciones en ecuaciones diferenciales ordinarias.
+		\end{observacion}
+	\end{frame}
+	
+\end{document}

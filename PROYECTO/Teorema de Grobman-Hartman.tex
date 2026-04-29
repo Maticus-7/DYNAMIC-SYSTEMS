@@ -1,0 +1,200 @@
+\documentclass[10pt]{beamer}
+\usetheme{Madrid}
+\usecolortheme{whale}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs} % Para el símbolo de operador \mathscr{L}
+\usepackage{tikz} % Para el diagrama conmutativo
+
+% Configuraciones para teoremas y lemas en español
+\setbeamertemplate{theorems}[numbered]
+\newtheorem*{observacion}{Observación}
+
+\title{§4 Estabilidad Local}
+\subtitle{Teorema de Grobman-Hartman (Palis \& de Melo)}
+\author{}
+\date{}
+
+\begin{document}
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	\begin{frame}{§4 Estabilidad Local}
+		En esta sección demostraremos un teorema debido a Hartman y Grobman según el cual un difeomorfismo $f$ es localmente conjugado a su parte lineal en un punto fijo hiperbólico. Análogamente, un campo vectorial $X$ es localmente equivalente a su parte lineal en una singularidad hiperbólica. Como consecuencia tendremos estabilidad local en un punto fijo hiperbólico y en una singularidad hiperbólica. La demostración que presentaremos también es válida en espacios de Banach [25], [36], [74], [90]. Otras generalizaciones y referencias pueden encontrarse en [80].
+	\end{frame}
+	
+	\begin{frame}{Teorema 4.1}
+		\begin{theorem}[4.1]
+			Sea $f \in \text{Diff}^r(M)$ y sea $p \in M$ un punto fijo hiperbólico de $f$. Sea $A = Df_p: TM_p \to TM_p$. Entonces existen vecindades $V(p) \subset M$ y $U(0) \subset TM_p$ y un homeomorfismo $h: U \to V$ tal que
+			\[ hA = fh. \]
+		\end{theorem}
+		
+		\begin{observacion}
+			Como este es un problema local podemos, usando una carta local, suponer que $f: \mathbb{R}^m \to \mathbb{R}^m$ es un difeomorfismo con $0$ como un punto fijo hiperbólico. Antes de demostrar el Teorema 4.1 necesitaremos algunos lemas.
+		\end{observacion}
+	\end{frame}
+	
+	\begin{frame}{Conjugación entre la Variedad y el Espacio Tangente}
+		El homeomorfismo $h$ "plancha" la dinámica no lineal local en la variedad $M$ hacia la dinámica lineal en el espacio tangente $\mathbb{R}^m$.
+		
+		\vspace{0.5cm}
+		\begin{center}
+			\begin{tikzpicture}[node distance=3.5cm, auto, thick]
+				\node (U) {$U(0) \subset \mathbb{R}^m$};
+				\node (R) [right of=U] {$\mathbb{R}^m$};
+				\node (V) [below of=U, node distance=2.5cm] {$V(p) \subset M$};
+				\node (M) [right of=V] {$M$};
+				
+				\draw[->] (U) -- node {$A = Df_p$} (R);
+				\draw[->] (U) -- node[left] {$h \cong$} (V);
+				\draw[->] (R) -- node {$h \cong$} (M);
+				\draw[->] (V) -- node {$f$} (M);
+			\end{tikzpicture}
+		\end{center}
+		\vspace{0.5cm}
+		Este diagrama conmutativo ilustra que iterar la función lineal $A$ en el plano y luego mapear a la variedad con $h$, es equivalente a mapear a la variedad y luego iterar la función no lineal $f$.
+	\end{frame}
+	
+	\begin{frame}{Lema 4.2}
+		\begin{lemma}[4.2]
+			Sea $E$ un espacio de Banach, suponga que $L \in \mathscr{L}(E, E)$ satisface $\|L\| \le a < 1$ y que $G \in \mathscr{L}(E, E)$ es un isomorfismo con $\|G^{-1}\| \le a < 1$. Entonces
+			\begin{itemize}
+				\item[(a)] $I + L$ es un isomorfismo y $\|(I + L)^{-1}\| \le 1/(1 - a)$,
+				\item[(b)] $I + G$ es un isomorfismo y $\|(I + G)^{-1}\| \le a/(1 - a)$.
+			\end{itemize}
+		\end{lemma}
+	\end{frame}
+	
+	\begin{frame}[allowframebreaks]{Demostración del Lema 4.2}
+		\textsc{Demostración del Lema 4.2.} (a) Dado $y \in E$, defina $u: E \to E$ por $u(x) = y - L(x)$. Entonces $u(x_1) - u(x_2) = L(x_2 - x_1)$. Así, $\|u(x_1) - u(x_2)\| \le a\|x_1 - x_2\|$ de modo que $u$ es una contracción. Por lo tanto, $u$ tiene un único punto fijo $x \in E$; esto es, $x = u(x) = y - Lx$. En consecuencia, existe un único $x \in E$ tal que $(L + I)x = y$; es decir, $I + L$ es una biyección. Sea $y \in E$ con $\|y\| = 1$ y tome $x \in E$ tal que $(I + L)^{-1}y = x$. Como $x + Lx = y$, tenemos $\|x\| - a\|x\| \le 1$ de modo que $\|x\| \le 1/(1 - a)$. Así, $\|(I + L)^{-1}\| \le 1/(1 - a)$.
+		
+		\framebreak
+		
+		(b) Primero note que $I + G = G(I + G^{-1})$. Como $\|G^{-1}\| \le a < 1$, la primera parte del lema dice que $I + G^{-1}$ es invertible. Así $(I + G)^{-1} = (I + G^{-1})^{-1}G^{-1}$ y, por lo tanto,
+		\[ \|(I + G)^{-1}\| \le \|(I + G^{-1})^{-1}\| \|G^{-1}\| \le \frac{1}{1 - a} \cdot a = \frac{a}{1 - a}, \]
+		lo cual demuestra el lema. \hfill $\square$
+	\end{frame}
+	
+	\begin{frame}{Descomposición Invariante}
+		Como $A = Df_0$ es un isomorfismo hiperbólico, existe una descomposición invariante $\mathbb{R}^m = E^s \oplus E^u$ y una norma $\|\cdot\|$ en $\mathbb{R}^m$ en la cual
+		\begin{align*}
+			\|A^s\| &\le a < 1, \quad \text{donde} \quad A^s = A|_{E^s}: E^s \to E^s, \\
+			\|(A^u)^{-1}\| &\le a < 1, \quad \text{donde} \quad A^u = A|_{E^u}: E^u \to E^u.
+		\end{align*}
+		
+		Sea $C^0_b(\mathbb{R}^m)$ el espacio de Banach de aplicaciones continuas acotadas de $\mathbb{R}^m$ a $\mathbb{R}^m$ con la norma uniforme: $\|u\| = \sup\{\|u(x)\| ; x \in \mathbb{R}^m\}$. Como $\mathbb{R}^m = E^s \oplus E^u$ tenemos una descomposición $C^0_b(\mathbb{R}^m) = C^0_b(\mathbb{R}^m, E^s) \oplus C^0_b(\mathbb{R}^m, E^u)$ donde $u = u^s + u^u$ con $u^s = \pi_s \circ u$ y $u^u = \pi_u \circ u$ obtenidos de las proyecciones naturales $\pi_s: E^s \oplus E^u \to E^s$ y $\pi_u: E^s \oplus E^u \to E^u$.
+	\end{frame}
+	
+	\begin{frame}{Lema 4.3}
+		\begin{lemma}[4.3]
+			Existe $\varepsilon > 0$ tal que, si $\varphi_1, \varphi_2 \in C^0_b(\mathbb{R}^m)$ tienen constante de Lipschitz menor o igual a $\varepsilon$, entonces $A + \varphi_1$ y $A + \varphi_2$ son conjugados.
+		\end{lemma}
+	\end{frame}
+	
+	\begin{frame}[allowframebreaks]{Demostración del Lema 4.3}
+		\textsc{Demostración.} Debemos encontrar un homeomorfismo $h: \mathbb{R}^m \to \mathbb{R}^m$ que satisfaga la ecuación
+		\begin{equation}
+			h(A + \varphi_1) = (A + \varphi_2)h.
+		\end{equation}
+		Intentemos una solución de la forma $h = I + u$ con $u \in C^0_b(\mathbb{R}^m)$. Entonces necesitamos
+		\begin{equation}
+			(I + u)(A + \varphi_1) = (A + \varphi_2)(I + u)
+		\end{equation}
+		o
+		\[ A + \varphi_1 + u(A + \varphi_1) = A + Au + \varphi_2(I + u) \]
+		o equivalentemente,
+		\begin{equation}
+			Au - u(A + \varphi_1) = \varphi_1 - \varphi_2(I + u).
+		\end{equation}
+		
+		\framebreak
+		
+		Demostraremos que existe un único $u \in C^0_b(\mathbb{R}^m)$ que satisface la ecuación (3). Considere el operador lineal
+		\begin{align*}
+			\mathscr{L}: C^0_b(\mathbb{R}^m) &\to C^0_b(\mathbb{R}^m), \\
+			\mathscr{L}(u) &= Au - u(A + \varphi_1).
+		\end{align*}
+		
+		Afirmamos que $\mathscr{L}$ es invertible y que $\|\mathscr{L}^{-1}\| \le \|A^{-1}\|/(1 - a)$. De hecho, $\mathscr{L} = \bar{A}\mathscr{L}^*$ donde $\mathscr{L}^*: C^0_b(\mathbb{R}^m) \to C^0_b(\mathbb{R}^m)$ está dado por $\mathscr{L}^*(u) = u - A^{-1}u(A + \varphi_1)$ y $\bar{A}: C^0_b(\mathbb{R}^m) \to C^0_b(\mathbb{R}^m)$ por $\bar{A}(u) = A \circ u$. Como $\bar{A}$ es invertible, debemos mostrar que $\mathscr{L}^*$ es invertible ya que entonces $\mathscr{L}^{-1} = {\mathscr{L}^*}^{-1}\bar{A}^{-1}$. 
+		
+		\framebreak
+		
+		Observamos que $C^0_b(\mathbb{R}^m, E^s)$ y $C^0_b(\mathbb{R}^m, E^u)$ son invariantes bajo $\mathscr{L}^*$ ya que $E^s$ y $E^u$ son invariantes bajo $A^{-1}$. Así podemos escribir $\mathscr{L}^* = \mathscr{L}^{*s} \oplus \mathscr{L}^{*u}$ donde $\mathscr{L}^{*s} = \mathscr{L}^*|_{C^0_b(\mathbb{R}^m, E^s)}$ y $\mathscr{L}^{*u} = \mathscr{L}^*|_{C^0_b(\mathbb{R}^m, E^u)}$. Es fácil ver que si $\varepsilon$ es suficientemente pequeño entonces $A + \varphi_1$ es un homeomorfismo y por lo tanto el operador $u^s \mapsto A^{-1}u^s(A + \varphi_1)$ es invertible y su inverso $u^s \mapsto Au^s(A + \varphi_1)^{-1}$ es una contracción con norma acotada por el número $a < 1$ involucrado en la hiperbolicidad de $A$. 
+		
+		Por la parte (b) del Lema 4.2, $\mathscr{L}^{*s}$ es invertible y $\|(\mathscr{L}^{*s})^{-1}\| \le a/(1 - a)$. De la parte (a) del Lema 4.2 también concluimos que $\mathscr{L}^{*u}$ es invertible y $\|(\mathscr{L}^{*u})^{-1}\| \le 1/(1 - a) = \max\{1/(1 - a), a/(1 - a)\}$. 
+		
+		\framebreak
+		
+		Por lo tanto, $\mathscr{L}$ es invertible y
+		\[ \|\mathscr{L}^{-1}\| = \|{\mathscr{L}^*}^{-1}\bar{A}^{-1}\| \le \|A^{-1}\|/(1 - a), \]
+		lo cual prueba nuestra afirmación.
+		
+		Ahora considere la aplicación
+		\[ \mu: C^0_b(\mathbb{R}^m) \to C^0_b(\mathbb{R}^m), \quad \mu(u) = \mathscr{L}^{-1}[\varphi_1 - \varphi_2(I + u)]. \]
+		Tenemos
+		\begin{align*}
+			\|\mu(u_1) - \mu(u_2)\| &= \|\mathscr{L}^{-1}[\varphi_2(I + u_2) - \varphi_2(I + u_1)]\| \\
+			&\le \|A^{-1}\|(1 - a)^{-1}\varepsilon\|u_2 - u_1\|.
+		\end{align*}
+		
+		Si $\varepsilon$ es suficientemente pequeño para hacer $\varepsilon\|A^{-1}\|(1 - a)^{-1} < 1$ entonces $\mu$ es una contracción y por ende tiene un único punto fijo $u$, digamos, en $C^0_b(\mathbb{R}^m)$. 
+		
+		\framebreak
+		
+		Como $u \in C^0_b(\mathbb{R}^m)$ es una solución de (3) si y solo si es un punto fijo de $\mu$ concluimos que (3) tiene una solución única en $C^0_b(\mathbb{R}^m)$. Resta demostrar que $I + u$ es un homeomorfismo. Para esto primero notamos que el método usado anteriormente también muestra que la ecuación
+		\[ (A + \varphi_1)(I + v) = (I + v)(A + \varphi_2) \]
+		también tiene una solución única $v \in C^0_b(\mathbb{R}^m)$. Afirmamos que
+		\[ (I + u)(I + v) = (I + v)(I + u) = I. \]
+		De hecho,
+		\begin{align*}
+			(I + u)(I + v)(A + \varphi_2) &= (I + u)(A + \varphi_1)(I + v) \\
+			&= (A + \varphi_2)(I + u)(I + v).
+		\end{align*}
+		
+		\framebreak
+		
+		Por otro lado, como $(I + u)(I + v) = I + v + u(I + v)$ con $w = v + u(I + v) \in C^0_b(\mathbb{R}^m)$ e $I(A + \varphi_2) = (A + \varphi_2)I$, la unicidad de la solución de la ecuación $(I + w)(A + \varphi_2) = (A + \varphi_2)(I + w)$ muestra que
+		\[ (I + u)(I + v) = I. \]
+		Similarmente tenemos $(I + v)(I + u) = I$. Esto muestra que $I + u$ es un homeomorfismo que conjuga $A + \varphi_1$ y $A + \varphi_2$ y eso prueba el lema. \hfill $\square$
+	\end{frame}
+	
+	\begin{frame}{Lema 4.4}
+		\begin{lemma}[4.4]
+			Dado $\varepsilon > 0$ existe una vecindad $U$ de $0$ y una extensión de $f|_U$ a $\mathbb{R}^m$ de la forma $A + \varphi$ donde $\varphi \in C^0_b(\mathbb{R}^m)$ tiene constante de Lipschitz a lo sumo $\varepsilon$.
+		\end{lemma}
+	\end{frame}
+	
+	\begin{frame}[allowframebreaks]{Demostración del Lema 4.4}
+		\textsc{Demostración.} Sea $\alpha: \mathbb{R} \to \mathbb{R}$ una función $C^\infty$ con las siguientes propiedades:
+		\begin{align*}
+			\alpha(t) &= 0, \quad \text{si } t \ge 1; \\
+			\alpha(t) &= 1, \quad \text{si } t \le \frac{1}{2}; \\
+			|\alpha'(t)| &< K, \quad \forall t \in \mathbb{R}, K > 2.
+		\end{align*}
+		
+		Sea $f = A + \psi$ con $\psi(0) = 0$ y $D\psi_0 = 0$. Sea $B_e$ una bola con centro en el origen y radio $e$ tal que $\|D\psi_x\| < \varepsilon/2K$ para $x \in B_e$. Defina $\varphi: \mathbb{R}^m \to \mathbb{R}^m$ por $\varphi(x) = \alpha(\|x\|/e)\psi(x)$. Es claro que $\varphi(x) = 0$ si $\|x\| \ge e$. Demostremos que $\varphi$ satisface las condiciones del lema. De hecho, dado que $\varphi(x) = \psi(x)$ para $\|x\| \le e/2$ vemos que $A + \varphi$ es una extensión de $f|_{B_{e/2}}$. 
+		
+		\framebreak
+		
+		Por otro lado, si $x_1, x_2 \in B_e$ tenemos
+		\begin{align*}
+			\|\varphi(x_1) - \varphi(x_2)\| &= \|\alpha(\|x_1\|/e)\psi(x_1) - \alpha(\|x_2\|/e)\psi(x_2)\| \\
+			&= \|\alpha(\|x_1\|/e) - \alpha(\|x_2\|/e)]\psi(x_1) \\
+			&\quad + \alpha(\|x_2\|/e)[\psi(x_1) - \psi(x_2)]\| \\
+			&\le (K\|x_1 - x_2\|/e)(\varepsilon/2K)\|x_1\| \\
+			&\quad + (\varepsilon/2K)\|x_1 - x_2\| \le \varepsilon\|x_1 - x_2\|.
+		\end{align*}
+		
+		Si $x_1 \in B_e$ y $x_2 \notin B_e$ tenemos $\|\varphi(x_1) - \varphi(x_2)\| \le \varepsilon/2\|x_1 - x_2\| \le \varepsilon\|x_1 - x_2\|$ y, si $x_1, x_2 \notin B_e$, tenemos $\|\varphi(x_1) - \varphi(x_2)\| = 0 \le \varepsilon\|x_1 - x_2\|$. Así, $\varphi$ tiene constante de Lipschitz a lo sumo $\varepsilon$, lo cual demuestra el lema. \hfill $\square$
+	\end{frame}
+	
+	\begin{frame}{Demostración del Teorema 4.1}
+		\textsc{Demostración del Teorema 4.1.} Sea $\varepsilon > 0$ como en el Lema 4.3. Sea $A + \varphi$ una extensión de $f|_{U(0)}$ donde $U(0)$ es una vecindad de $0$ y $\varphi$ tiene constante de Lipschitz a lo sumo $\varepsilon$. Por el Lema 4.3 existe un homeomorfismo $h: \mathbb{R}^m \to \mathbb{R}^m$ tal que $hA = (A + \varphi)h$. Así $hA = fh$ en una vecindad de $0$ como se requería. \hfill $\square$
+	\end{frame}
+	
+\end{document}
