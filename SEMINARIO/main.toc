@@ -1,14 +1,6 @@
 \babel@toc {spanish}{}\relax 
 \contentsline {chapter}{Prefacio}{\es@scroman {i}}{chapter*.1}%
-\contentsline {chapter}{\numberline {1}Conceptos Básicos en Sistemas Dinámicos}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Espacios y Órbitas}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Puntos Fijos y Periódicos}{1}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Conjuntos Límite}{5}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Puntos No Errantes}{7}{section.1.4}%
-\contentsline {chapter}{\numberline {2}Semana 2: Rotaciones en el Círculo y Transitividad}{10}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Rotaciones en $S^1$}{10}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Conjugación Topológica}{11}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Sistemas Dinámicos Topológicamente Transitivos y Mixing}{14}{section.2.3}%
-\contentsline {chapter}{\numberline {3}Semana 3: Shift de Bernoulli y Semi-Conjugación}{19}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Shift de Bernoulli}{19}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Semi-Conjugación Topológica}{23}{section.3.2}%
+\contentsline {chapter}{\numberline {1}Semana 6: Punto Fijo Atractor y Repulsor}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Conceptos Fundamentales}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Familia Cuadrática}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Gráficos y Dinámica del Mapa Cuadrático $Q_c(x)$}{4}{section.1.3}%

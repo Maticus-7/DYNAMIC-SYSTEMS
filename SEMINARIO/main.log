@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.12)  18 APR 2026 21:10
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.2) (preloaded format=pdflatex 2026.3.12)  8 MAY 2026 10:04
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -855,219 +855,40 @@ LaTeX Info: Redefining \% on input line 1.
 
  [2
 
-] (Semana1.tex
+] (Semana6.tex
 Cap\'{\i }tulo 1.
 [1
 
 
 ]
-LaTeX Info: Redefining \. on input line 146.
-LaTeX Info: Redefining \% on input line 146.
+LaTeX Info: Redefining \. on input line 96.
+LaTeX Info: Redefining \% on input line 96.
 Package babel Info: 'spanish' activates 'spanish' shorthands.
-(babel)             Reported on input line 146.
+(babel)             Reported on input line 96.
  [2]
-LaTeX Info: Redefining \. on input line 216.
-LaTeX Info: Redefining \% on input line 216.
- [3]
-LaTeX Info: Redefining \. on input line 278.
-LaTeX Info: Redefining \% on input line 278.
+Overfull \hbox (22.69872pt too wide) in paragraph at lines 115--116
+[][]\T1/cmr/bx/n/12 Ejercicio 1.2.1. []\T1/cmr/m/n/12 Mos-trar que $\OML/cmm/m/
+it/12 q[]$ \T1/cmr/m/n/12 son pun-tos pe-rió-di-cos atrac-to-res pa-ra $\OML/cm
+m/m/it/12 c \OMS/cmsy/m/n/12 2 \OT1/cmr/m/n/12 (\OMS/cmsy/m/n/12 ^^@\OT1/cmr/m/
+n/12 5\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 4\OML/cmm/m/it/12 ; \OMS/cmsy/m/n/12 ^^
+@\OT1/cmr/m/n/12 3\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 4)$\T1/cmr/m/n/12 . 
+ []
+
+LaTeX Info: Redefining \. on input line 138.
+LaTeX Info: Redefining \% on input line 138.
+[3]
+Overfull \hbox (1.7001pt too wide) in paragraph at lines 140--140
+[]\T1/cmr/bx/n/17.28 Gráficos y Di-ná-mi-ca del Ma-pa Cua-drá-ti-co $\OML/cmm/m
+/it/17.28 Q[]\OT1/cmr/m/n/17.28 (\OML/cmm/m/it/17.28 x\OT1/cmr/m/n/17.28 )$ 
+ []
+
+)
+LaTeX Info: Redefining \. on input line 79.
+LaTeX Info: Redefining \% on input line 79.
  [4]
-LaTeX Info: Redefining \. on input line 318.
-LaTeX Info: Redefining \% on input line 318.
- [5]
-Overfull \hbox (14.17026pt too wide) in paragraph at lines 356--358
-[][]\T1/cmr/bx/n/12 Observación 1.3.2. []\T1/cmr/m/n/12 Las in-clu-sio-nes an-t
-e-rio-res pue-den ser es-tric-tas: $[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f\OT1/c
-mr/m/n/12 ) \U/msb/m/n/12 ( []\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f\OT1/cmr/m/n/1
-2 ) \U/msb/m/n/12 (
- []
-
-LaTeX Info: Redefining \. on input line 362.
-LaTeX Info: Redefining \% on input line 362.
-[6]
-
-LaTeX Font Warning: Font shape `T1/cmr/m/scit' undefined
-(Font)              using `T1/cmr/m/scsl' instead on input line 382.
-
-
-LaTeX Font Warning: Font shape `T1/cmr/m/scit' undefined
-(Font)              using `T1/cmr/m/scsl' instead on input line 383.
-
-
-LaTeX Font Warning: Font shape `T1/cmr/m/scit' undefined
-(Font)              using `T1/cmr/m/scsl' instead on input line 384.
-
-
-LaTeX Font Warning: Font shape `T1/cmr/m/scit' undefined
-(Font)              using `T1/cmr/m/scsl' instead on input line 385.
-
-LaTeX Info: Redefining \. on input line 398.
-LaTeX Info: Redefining \% on input line 398.
-[7]
-Overfull \hbox (23.48538pt too wide) in paragraph at lines 411--413
-[]\T1/cmr/bx/n/12 Caso 2: $\OML/cmm/m/it/12 y \OMS/cmsy/m/n/12 2 \OML/cmm/m/it/
-12 @ []$\T1/cmr/m/n/12 . Sea $\OML/cmm/m/it/12 U$ \T1/cmr/m/n/12 una ve-cin-dad
- de $\OML/cmm/m/it/12 y$\T1/cmr/m/n/12 . En-ton-ces, $\OML/cmm/m/it/12 U \OMS/c
-msy/m/n/12 \ [] 6\OT1/cmr/m/n/12 =
- []
-
-LaTeX Info: Redefining \. on input line 435.
-LaTeX Info: Redefining \% on input line 435.
-[8]) (Semana2.tex
-LaTeX Info: Redefining \. on input line 7.
-LaTeX Info: Redefining \% on input line 7.
- [9]
-Cap\'{\i }tulo 2.
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 9.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `superscript' on input line 9.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 9.
-
-[10
-
-]
-LaTeX Info: Redefining \. on input line 115.
-LaTeX Info: Redefining \% on input line 115.
-
-Overfull \hbox (16.38899pt too wide) has occurred while \output is active
-\T1/cmr/m/sl/12 CAPÍTULO 2.  SEMANA 2: ROTACIONES EN EL CÍRCULO Y TRANSITIVIDAD
- \T1/cmr/m/n/12 11
- []
-
-[11]
-Overfull \hbox (1.43869pt too wide) in paragraph at lines 115--119
-[]\T1/cmr/m/n/12 Por otro la-do, eva-lua-mos $\OML/cmm/m/it/12 h\OT1/cmr/m/n/12
- (\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x\OT1/cmr/m/n/12 ))$ \T1/
-cmr/m/n/12 en am-bos tra-mos de $\OML/cmm/m/it/12 f$\T1/cmr/m/n/12 : Si $\OML/c
-mm/m/it/12 x \OMS/cmsy/m/n/12 2 \OT1/cmr/m/n/12 [0\OML/cmm/m/it/12 ; \OT1/cmr/m
-/n/12 1\OML/cmm/m/it/12 =\OT1/cmr/m/n/12 2)$\T1/cmr/m/n/12 , $\OML/cmm/m/it/12 
-h\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x\OT1/cmr
-/m/n/12 )) =
- []
-
-LaTeX Info: Redefining \. on input line 150.
-LaTeX Info: Redefining \% on input line 150.
-
-Overfull \hbox (16.38899pt too wide) has occurred while \output is active
-\T1/cmr/m/sl/12 CAPÍTULO 2.  SEMANA 2: ROTACIONES EN EL CÍRCULO Y TRANSITIVIDAD
- \T1/cmr/m/n/12 12
- []
-
-[12]
-LaTeX Info: Redefining \. on input line 195.
-LaTeX Info: Redefining \% on input line 195.
-
-Overfull \hbox (16.38899pt too wide) has occurred while \output is active
-\T1/cmr/m/sl/12 CAPÍTULO 2.  SEMANA 2: ROTACIONES EN EL CÍRCULO Y TRANSITIVIDAD
- \T1/cmr/m/n/12 13
- []
-
-[13]
-LaTeX Info: Redefining \. on input line 224.
-LaTeX Info: Redefining \% on input line 224.
-
-Overfull \hbox (16.38899pt too wide) has occurred while \output is active
-\T1/cmr/m/sl/12 CAPÍTULO 2.  SEMANA 2: ROTACIONES EN EL CÍRCULO Y TRANSITIVIDAD
- \T1/cmr/m/n/12 14
- []
-
-[14]
-LaTeX Info: Redefining \. on input line 297.
-LaTeX Info: Redefining \% on input line 297.
-
-Overfull \hbox (16.38899pt too wide) has occurred while \output is active
-\T1/cmr/m/sl/12 CAPÍTULO 2.  SEMANA 2: ROTACIONES EN EL CÍRCULO Y TRANSITIVIDAD
- \T1/cmr/m/n/12 15
- []
-
-[15]
-LaTeX Info: Redefining \. on input line 317.
-LaTeX Info: Redefining \% on input line 317.
-
-Overfull \hbox (16.38899pt too wide) has occurred while \output is active
-\T1/cmr/m/sl/12 CAPÍTULO 2.  SEMANA 2: ROTACIONES EN EL CÍRCULO Y TRANSITIVIDAD
- \T1/cmr/m/n/12 16
- []
-
-[16]
-LaTeX Info: Redefining \. on input line 357.
-LaTeX Info: Redefining \% on input line 357.
-
-Overfull \hbox (16.38899pt too wide) has occurred while \output is active
-\T1/cmr/m/sl/12 CAPÍTULO 2.  SEMANA 2: ROTACIONES EN EL CÍRCULO Y TRANSITIVIDAD
- \T1/cmr/m/n/12 17
- []
-
-[17]) (Semana3.tex
-LaTeX Info: Redefining \. on input line 5.
-LaTeX Info: Redefining \% on input line 5.
-
-Overfull \hbox (16.38899pt too wide) has occurred while \output is active
-\T1/cmr/m/sl/12 CAPÍTULO 2.  SEMANA 2: ROTACIONES EN EL CÍRCULO Y TRANSITIVIDAD
- \T1/cmr/m/n/12 18
- []
-
-[18]
-Cap\'{\i }tulo 3.
-
-Overfull \hbox (62.2882pt too wide) detected at line 25
-[] [] \OT1/cmr/m/n/12 = [] [] + [] + [] [] \OMS/cmsy/m/n/12 ^^T [] [] \OT1/cmr/
-m/n/12 + 1 + [] [] \OML/cmm/m/it/12 < \OT1/cmr/m/n/12 1 + 1 + 1 = 3
- []
-
-
-Overfull \hbox (37.33658pt too wide) in paragraph at lines 31--32
-[]\T1/cmr/m/n/12 Sea $\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 x[]\OT1/cmr/m/n/12 )\OM
-L/cmm/m/it/12 ; \OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y[]\OT1/cmr/m/n/12 )\OML/cmm/
-m/it/12 ; \OT1/cmr/m/n/12 (\OML/cmm/m/it/12 z[]\OT1/cmr/m/n/12 ) \OMS/cmsy/m/n/
-12 2 \OT1/cmr/m/n/12 ^^F  =[]\OMS/cmsy/m/n/12 )  \OML/cmm/m/it/12 d\OT1/cmr/m/n
-/12 ((\OML/cmm/m/it/12 x[]\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 (
-\OML/cmm/m/it/12 y[]\OT1/cmr/m/n/12 )) = [][] [] \OMS/cmsy/m/n/12 ^^T [][] [] \
-OT1/cmr/m/n/12 =
- []
-
-[19
-
-]
-LaTeX Info: Redefining \. on input line 93.
-LaTeX Info: Redefining \% on input line 93.
- [20]
-Overfull \hbox (39.05695pt too wide) in paragraph at lines 115--117
-\OT1/cmr/m/n/12 (3\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; \OT1/c
-mr/m/n/12 0\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; \OT1/cmr/m/n/
-12 3\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 0\OM
-L/cmm/m/it/12 ; \OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 3\OML/cmm/m
-/it/12 ; \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 
-; \OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; [] \OT1/cmr/m/n/12 )  =[]\OMS/cmsy/m/n/12
- )  \OT1/cmr/m/n/12 (\OML/cmm/m/it/12 y[]\OT1/cmr/m/n/12 )[] = \OML/cmm/m/it/12
- ^^[\OT1/cmr/m/n/12 ((\OML/cmm/m/it/12 x[]\OT1/cmr/m/n/12 )[]) = (1\OML/cmm/m/i
-t/12 ; \OT1/cmr/m/n/12 0\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; 
-\OT1/cmr/m/n/12 3\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; \OT1/cm
-r/m/n/12 0\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; \OT1/cmr/m/n/1
-2 3\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 1\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 0\OML
-/cmm/m/it/12 ; \OT1/cmr/m/n/12 2\OML/cmm/m/it/12 ; [] \OT1/cmr/m/n/12 )$\T1/cmr
-/m/n/12 . 
- []
-
-LaTeX Info: Redefining \. on input line 140.
-LaTeX Info: Redefining \% on input line 140.
-[21]
-LaTeX Info: Redefining \. on input line 183.
-LaTeX Info: Redefining \% on input line 183.
- [22]
-LaTeX Info: Redefining \. on input line 241.
-LaTeX Info: Redefining \% on input line 241.
- [23])
-LaTeX Info: Redefining \. on input line 77.
-LaTeX Info: Redefining \% on input line 77.
- [24] (main.aux
+LaTeX Info: Redefining \. on input line 79.
+LaTeX Info: Redefining \% on input line 79.
+ [5] (main.aux
 LaTeX Info: Redefining \. on input line 8.
 LaTeX Info: Redefining \% on input line 8.
 )
@@ -1075,49 +896,53 @@ LaTeX Info: Redefining \% on input line 8.
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 882786C882C31F5BCBBAC8DF5398743A;2605.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: DC01A738EC1C4902C1F44E32CE1DC794;979
+(rerunfilecheck)             After:  CCDAED1ABF70F45E8EC82AFC56505CAC;987.
  ) 
 Here is how much of TeX's memory you used:
- 24780 strings out of 467866
- 460248 string characters out of 5418313
- 860990 words of memory out of 5000000
- 53130 multiletter control sequences out of 15000+600000
- 654059 words of font info for 107 fonts, out of 8000000 for 9000
+ 25903 strings out of 467866
+ 484982 string characters out of 5418313
+ 882073 words of memory out of 5000000
+ 54369 multiletter control sequences out of 15000+600000
+ 651122 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 102i,14n,107p,597b,970s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi
+ 102i,15n,107p,573b,920s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecsl
 1200.pk> <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi60
-0\ecrm0800.pk> <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
-/dpi600\ecsc1200.pk> <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
-pen/ec/dpi600\ecti1200.pk> <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/ljfour
-/jknappen/ec/dpi600\ecsl1200.pk> <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/
-ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\matic\AppData\Local\MiKTeX\fon
-ts/pk/ljfour/jknappen/ec/dpi600\ecxc1200.pk> <C:\Users\matic\AppData\Local\MiKT
-eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\matic\AppData\Loca
-l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\eccc1200.pk> <C:\Users\matic\AppDat
-a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\matic\
-AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\
-matic\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1440.pk> <C:\
-Users\matic\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk
-> <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1
-728.pk> <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600
-\ecbx2488.pk><C:/Users/matic/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
-msfonts/cm/cmex10.pfb><C:/Users/matic/AppData/Local/Programs/MiKTeX/fonts/type1
-/public/amsfonts/cm/cmmi12.pfb><C:/Users/matic/AppData/Local/Programs/MiKTeX/fo
-nts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/matic/AppData/Local/Programs/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/matic/AppData/Local/Pr
-ograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/matic/AppData/
-Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/matic/A
-ppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/
-matic/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
-C:/Users/matic/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cms
-y6.pfb><C:/Users/matic/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfont
-s/cm/cmsy8.pfb><C:/Users/matic/AppData/Local/Programs/MiKTeX/fonts/type1/public
-/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (27 pages, 424555 bytes).
+0\ecti1200.pk> <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec
+/dpi600\ecbx1728.pk> <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/ljfour/jknap
+pen/ec/dpi600\ecxc1200.pk> <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/ljfour
+/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\matic\AppData\Local\MiKTeX\fonts/pk/
+ljfour/jknappen/ec/dpi600\eccc1200.pk> <C:\Users\matic\AppData\Local\MiKTeX\fon
+ts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\matic\AppData\Local\MiKT
+eX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\matic\AppData\Loca
+l\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1440.pk> <C:\Users\matic\AppDat
+a\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\matic\
+AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1728.pk> <C:\Users\
+matic\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk><C:/U
+sers/matic/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.
+pfb><C:/Users/matic/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/c
+m/cmmi10.pfb><C:/Users/matic/AppData/Local/Programs/MiKTeX/fonts/type1/public/a
+msfonts/cm/cmmi12.pfb><C:/Users/matic/AppData/Local/Programs/MiKTeX/fonts/type1
+/public/amsfonts/cm/cmmi8.pfb><C:/Users/matic/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/matic/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/matic/AppData/Local/Pro
+grams/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/matic/AppData/L
+ocal/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/matic/Ap
+pData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users
+/matic/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy8.pfb><
+C:/Users/matic/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbol
+s/msbm10.pfb>
+Output written on main.pdf (8 pages, 260530 bytes).
 PDF statistics:
- 817 PDF objects out of 1000 (max. 8388607)
- 140 named destinations out of 1000 (max. 500000)
- 117 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 488 PDF objects out of 1000 (max. 8388607)
+ 29 named destinations out of 1000 (max. 500000)
+ 53 words of extra memory for PDF output out of 10000 (max. 10000000)
 

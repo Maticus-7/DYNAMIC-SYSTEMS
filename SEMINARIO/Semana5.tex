@@ -1,0 +1,199 @@
+% =========================================================================
+% --- INICIO INPUT SEMANA 5 (Primera parte) ---
+% =========================================================================
+
+\chapter{Semana 5: Conjunto Minimal y Clasificación}
+
+\section{Conjunto Minimal}
+
+\begin{definicion}[Conjunto Minimal]
+	Sea $X$ un espacio topológico localmente compacto y de Hausdorff y $f: X \to X$ continua. Decimos que $A \subseteq X$ es un \textbf{conjunto minimal} respecto a $f$ si cumple:
+	\begin{enumerate}[1)]
+		\item $A$ es cerrado e invariante por $f$ ($f(A) \subseteq A$).
+		\item Si existe un conjunto $B \subseteq A$ cerrado e invariante, entonces necesariamente $B = A$.
+	\end{enumerate}
+\end{definicion}
+
+\begin{ejemplo}
+	Sea $R_\theta: S^1 \to S^1$, $\theta \in \mathbb{Q}$, $\theta = p/q$.
+	Afirmación: $G = \mathcal{O}_{R_\theta}(z) = \{z, R_\theta(z), \dots, R_\theta^{q-1}(z)\}$ es un conjunto minimal.
+	
+	En efecto:
+	\begin{enumerate}[i)]
+		\item $G$ es invariante por $R_\theta$, pues es una órbita. $G$ es cerrado por ser finito.
+		\item Sea $A \subseteq G, A \neq \emptyset$, $A$ cerrado e invariante. Supongamos que $A \subsetneq G$.
+		Sea $w \in G / w \notin A \Rightarrow R_\theta^n(w) \notin A$, pues $(R_\theta(A) = A)$ ya que $A$ es invariante por el homeomorfismo $R_\theta$.
+		Observe que: $\mathcal{O}_{R_\theta}(w) = \mathcal{O}_{R_\theta}(z)$, pues $w = R_\theta^j(z)$, para algún $j \in \{1, 2, \dots, q-1\}$. Así $A = \emptyset$, lo cual es una contradicción ($\rightarrow \leftarrow$).
+	\end{enumerate}
+\end{ejemplo}
+
+\begin{proposicion}
+	$A \subseteq X$ es un conjunto minimal respecto a $f \iff A = \overline{\mathcal{O}_f^+(x)}$ para todo $x \in A$.
+\end{proposicion}
+\begin{proof}
+	$(\Rightarrow)$ Sea $A$ un conjunto minimal y $x \in A$. 
+	Claramente el conjunto $\overline{\mathcal{O}_f^+(x)}$ es cerrado por definición y es invariante (la clausura de una órbita es invariante bajo funciones continuas).
+	Además, como $x \in A$ y $A$ es invariante y cerrado, toda la órbita futura y su clausura quedan dentro de $A$: $\overline{\mathcal{O}_f^+(x)} \subseteq A$.
+	Al ser $\overline{\mathcal{O}_f^+(x)}$ un subconjunto cerrado e invariante dentro de $A$, por la definición de minimalidad no queda más opción que $\overline{\mathcal{O}_f^+(x)} = A$.
+	
+	$(\Leftarrow)$ Asumimos que $A = \overline{\mathcal{O}_f^+(x)}$ para todo $x \in A$. Esta propiedad garantiza que $A$ es cerrado e invariante (al ser la clausura de una órbita de un punto interno).
+	Sea $B \subseteq A$, $B \neq \emptyset$, cerrado e invariante.
+	Tomemos un punto $y \in B$. Dado que $B \subseteq A$, entonces $y \in A$. Por la hipótesis, esto implica que $A = \overline{\mathcal{O}_f^+(y)}$.
+	Por otro lado, como $B$ es cerrado e invariante y contiene a $y$, debe contener a toda su órbita y clausura: $\overline{\mathcal{O}_f^+(y)} \subseteq B$.
+	Concluimos que $A \subseteq B$. Como inicialmente teníamos $B \subseteq A$, entonces $B = A$, cumpliendo la condición de minimalidad.
+\end{proof}
+
+\begin{definicion}
+	Sea $X$ un espacio topológico y $f: X \to X$ continua. Decimos que $f$ es \textbf{minimal} si todo el espacio $X$ es un conjunto minimal respecto a $f$.
+\end{definicion}
+
+\begin{ejemplo}
+	Para la rotación $R_\theta: S^1 \to S^1$ con ángulo irracional $\theta \notin \mathbb{Q}$, hemos demostrado que para todo punto $z \in S^1$, la clausura de su órbita llena el espacio: $\overline{\mathcal{O}_{R_\theta}^+(z)} = S^1$. 
+	Por la proposición anterior, $S^1$ cumple con ser un conjunto minimal. Por consiguiente, la rotación irracional $R_\theta$ es una función minimal.
+	
+	En contraste, la rotación racional $\theta = p/q \in \mathbb{Q}$ no es minimal, puesto que las clausuras de sus órbitas son simples conjuntos finitos $\{z, \dots, R^{q-1}(z)\}$, estrictamente contenidos en $S^1$ ($\subsetneq S^1$).
+\end{ejemplo}
+
+\begin{ejercicio}
+	Sean $X$ un espacio topológico localmente compacto y de Hausdorff, e $Y$ otro espacio. Sean $f: X \to X$, $g: Y \to Y$ aplicaciones continuas tales que $f$ es topológicamente conjugada a $g$ vía un homeomorfismo $h: X \to Y$. Muestre que $f$ es minimal $\iff g$ es minimal.
+\end{ejercicio}
+
+\begin{ejercicio}
+	Si $g: Y \to Y$ es un factor de $f: X \to X$ tal que $f: X \to X$ es minimal. Entonces:
+	\begin{enumerate}[a)]
+		\item ¿Si $f$ es minimal, entonces $g$ es minimal?
+		\item ¿Si $g$ es minimal, entonces $f$ es minimal?
+	\end{enumerate}
+\end{ejercicio}
+
+\begin{ejercicio}
+	Sea $X$ un espacio topológico localmente compacto y Hausdorff y $f: X \to X \in C^0$, $G \subseteq X$ compacto. Muestre que $G$ es minimal respecto a $f \iff \omega_f(x) = G : \forall x \in G$.
+\end{ejercicio}
+
+\begin{teorema}[Número de Rotación Irracional y Minimalidad]
+	Sea $f \in \text{Hom}_+(S^1)$ con $\rho(f) \notin \mathbb{Q}$. Entonces $\Omega(f)$ es minimal respecto a $f$.
+\end{teorema}
+\begin{proof}
+	Recordemos que en general el conjunto NO-ERRANTE $\Omega(f)$ es cerrado e invariante por $f$. Tenemos $\Omega(f) \subseteq S^1$; $S^1$ es compacto $\Rightarrow \Omega(f)$ es compacto.
+	
+	Sea $\emptyset \neq M \subseteq \Omega(f)$ cerrado e invariante. PD: $M = \Omega(f)$.
+	Tenemos $S^1 - M$ es abierto. Así: $S^1 - M = \bigcup_{i \in I} (a_i, b_i)$ (donde $(a_i,b_i)$ son componentes conexas de $S^1 - M$ o intervalos, e $I$ es un conjunto numerable).
+	
+	Desde que $M$ es invariante, $S^1 - M$ es invariante por $f$, es decir, $f(S^1 - M) = S^1 - M$ ($f$ homeo). Así, para cualquier $i \in I$, $f(a_i, b_i)$ es una componente conexa de $S^1 - M$ y es uno de estos intervalos $\{(a_i, b_i)\}_{i \in I}$. Denotemos $f(a_i, b_i) = (a_{\phi(i)}, b_{\phi(i)})$, donde $\phi: I \to I$ es biyección. Observe que $f^n(a_i, b_i) = (a_{\phi^n(i)}, b_{\phi^n(i)})$, además $\nexists n \in \mathbb{N} \land i \in I / \phi^n(i) = i$, caso contrario, $f^n(a_i, b_i) = (a_i, b_i)$.
+	
+	Así: $f^n: [a_i, b_i] \to [a_i, b_i] \in C^0$ y por tanto: $\exists p \in [a_i, b_i] / f^n(p) = p \Rightarrow \rho(f) \in \mathbb{Q}$, lo cual es una contradicción ($\rightarrow \leftarrow$).
+	
+	Luego: $\{f^n(a_i, b_i)\}_{n \in \mathbb{N}}$ es disjunta 2-2, i.e: $f^n(a_i, b_i) \cap (a_i, b_i) = \emptyset, \forall n \in \mathbb{N}, \forall i \in I$. Luego $(a_i, b_i) \subseteq S^1 - \Omega(f) : \forall i \in I \Rightarrow S^1 - M \subseteq S^1 - \Omega(f) \Rightarrow \Omega(f) \subseteq M \therefore \Omega(f) = M$.
+\end{proof}
+
+\begin{corolario}
+	Sea $f \in \text{Hom}_+(S^1)$ con $\rho(f) \notin \mathbb{Q}$. Entonces $\Omega(f) = S^1$ ó $\Omega(f)$ es perfecto con interior vacío (Conjunto de Cantor).
+	(Recordemos que perfecto significa cerrado y que todos sus puntos son de acumulación. Además es compacto por estar en $S^1$).
+\end{corolario}
+\begin{proof}
+	$\partial\Omega(f) = \overline{\Omega(f)} \cap \overline{S^1 - \Omega(f)} = \Omega(f) \cap \overline{S^1 - \Omega(f)} \Rightarrow \partial\Omega(f) \subseteq \Omega(f)$. Y como $f(\partial\Omega(f)) \subseteq f(\Omega(f) \cap \overline{S^1 - \Omega(f)}) \subseteq f(\Omega(f)) \cap f(\overline{S^1 - \Omega(f)}) \subseteq \Omega(f) \cap \overline{f(S^1 - \Omega(f))} = \Omega(f) \cap \overline{S^1 - \Omega(f)} = \partial\Omega(f)$. Es invariante.
+	
+	Luego: $\partial\Omega(f) = \emptyset \lor \partial\Omega(f) = \Omega(f)$. (Por el Teorema anterior)
+	
+	Ejm: Si $f: X \to X$ es homeo con $X$ compacto $\Rightarrow \Omega(f) \neq \emptyset$. Luego $\Omega(f) = S^1$ ó $\text{int}(\Omega(f)) = \emptyset$.
+	
+	Supongamos que si $z \in \Omega(f) \Rightarrow z \notin (\Omega(f))'$ (es decir, asumiendo por contradicción que tiene puntos aislados). Supongamos: $\exists U_z - \{z\} / (U_z - \{z\}) \cap \Omega(f) = \emptyset$. Pero como $\Omega(f)$ es minimal $\Rightarrow \overline{\mathcal{O}_f^+(z)} = \Omega(f)$. Luego: $\exists n_0 \in \mathbb{N}$ donde $f^{n_0}(z) \neq z \land f^{n_0}(z) \in U_z$. Y como $f^{n_0}(\Omega(f)) \subseteq \Omega(f) \Rightarrow f^{n_0}(z) \in \Omega(f)$, lo cual contradice que la intersección sea vacía ($\rightarrow \leftarrow$).
+	
+	Finalmente $\Omega(f)$ es perfecto.
+\end{proof}
+
+\section{Teorema de Clasificación de Poincaré}
+
+
+
+\begin{teorema}[Teorema de Clasificación de Poincaré]
+	
+	Sea $f \in \text{Hom}^+(S^1)$ con número de rotación $\rho(f) = \alpha \notin \mathbb{Q}$. Se cumple que:
+	
+	\begin{enumerate}[1)]
+		
+		\item Si $f$ es topológicamente transitiva (es decir, $\Omega(f) = S^1$), entonces $f$ es topológicamente conjugada a la rotación irracional $R_\alpha$.
+		
+		\item Si $f$ no es topológicamente transitiva (es decir, $\Omega(f)$ es un conjunto de Cantor), entonces $f$ no es topológicamente conjugada a $R_\alpha$, sino que es un factor de ella. Existe una aplicación $H: S^1 \to S^1$ continua, sobreyectiva y de grado 1 tal que $H \circ f = R_\alpha \circ H$.
+		
+	\end{enumerate}
+	
+\end{teorema}
+
+
+
+\begin{lema}
+	
+	Sea $f \in \text{Hom}^+(S^1)$ con $\rho(f) = \alpha \notin \mathbb{Q}$, y sea $F: \mathbb{R} \to \mathbb{R}$ un levantamiento de $f$. Entonces, para cualquier par de enteros $n_1, n_2$ y $m_1, m_2$, se cumple que el orden relativo de las iteraciones de $F$ refleja la rotación pura dictada por $\alpha$:
+	
+	$$ F^{n_1}(x) + m_1 < F^{n_2}(x) + m_2 \iff n_1\alpha + m_1 < n_2\alpha + m_2 $$
+	
+\end{lema}
+
+\begin{proof}
+	
+	Definimos $G(x) = F^{n_1-n_2}(x) + (m_1-m_2) - x$. 
+	
+	Es claro que $G$ es continua y que $\rho(G) = (n_1-n_2)\alpha + (m_1-m_2)$.
+	
+	Como $\alpha \notin \mathbb{Q}$, el número de rotación $\rho(G)$ es no nulo. Supongamos, sin pérdida de generalidad, que $\rho(G) > 0$.
+	
+	Por un análisis con el Teorema del Valor Intermedio (sabiendo que $\rho(G)$ es el promedio del desplazamiento), si $G(x)$ cruzara el $0$, entonces $\rho(G)$ debería poder ser $0$, pero es irracional. 
+	
+	Así, el signo del desplazamiento $G(x)$ debe ser constante para todo $x$, y concuerda estrictamente con el signo del número de rotación $\rho(G)$.
+	
+	De aquí se desprende la equivalencia lógica del lema.
+	
+\end{proof}
+
+
+
+\begin{proof}[Demostración del Teorema de Clasificación]
+	
+	Sea $F$ un levantamiento de $f$. Dado un $x \in \mathbb{R}$ fijo, definimos el conjunto de todas las iteraciones y traslaciones de $F(x)$:
+	
+	$$ B = \{F^n(x) + m : n, m \in \mathbb{Z}\} $$
+	
+	Construimos una aplicación $H: B \to \mathbb{R}$ de forma natural basándonos en el lema anterior:
+	
+	$$ H(F^n(x) + m) = n\alpha + m $$
+	
+	Por el lema, esta aplicación preserva el orden rigurosamente. Es estrictamente monótona creciente en $B$.
+	
+	Sabemos que $D = \{n\alpha + m : n, m \in \mathbb{Z}\}$ es un conjunto denso en $\mathbb{R}$ debido a que $\alpha \notin \mathbb{Q}$.
+	
+	Así, $H: B \to D$ es una biyección que preserva el orden hacia un conjunto denso en la imagen.
+	
+	
+	Definimos la extensión continua a todo $\mathbb{R}$:
+	
+	$$ \tilde{H}(y) = \sup \{H(z) : z \in B, z \le y\} $$
+	
+	Como el codominio $D$ es denso, esta $\tilde{H}$ resulta continua, no decreciente, y cumple que $\tilde{H}(y+1) = \tilde{H}(y) + 1$, lo que implica que es un levantamiento de una aplicación de grado 1.
+	
+	
+	Verificamos la condición de semi-conjugación levantada $\tilde{H} \circ F = R_\alpha \circ \tilde{H}$:
+	
+	$$ \tilde{H}(F(F^n(x) + m)) = \tilde{H}(F^{n+1}(x) + m) = (n+1)\alpha + m = (n\alpha + m) + \alpha = \tilde{H}(F^n(x) + m) + \alpha $$
+	
+	Por continuidad, esto se extiende a todo $\mathbb{R}$.
+	
+	Al proyectar mediante $\pi: \mathbb{R} \to S^1$, obtenemos una aplicación $h: S^1 \to S^1$ continua y sobreyectiva (de grado 1) que satisface:
+	
+	$$ h \circ f = R_\alpha \circ h $$
+	
+	Esto prueba que $f$ es un factor de $R_\alpha$ (semi-conjugada).
+	
+	
+	Para demostrar la conjugación topológica (Parte 1), notemos que si $f$ es topológicamente transitiva, entonces $B$ es denso en $\mathbb{R}$ (ya que su proyección en $S^1$ es una órbita densa). 
+	
+	Si $B$ es denso en el dominio y $D$ es denso en el codominio, la extensión $\tilde{H}$ es estrictamente creciente (sin zonas planas). Una función continua y estrictamente creciente en $\mathbb{R}$ (que cumple traslaciones enteras) es biyectiva. 
+	
+	Por tanto $\tilde{H}$ es un homeomorfismo, y su proyección $h: S^1 \to S^1$ es un homeomorfismo, garantizando así la conjugación topológica exacta.
+	
+\end{proof}
+
+
+% =========================================================================
+% --- FIN INPUT SEMANA 5 (Primera parte) ---
+% =========================================================================
