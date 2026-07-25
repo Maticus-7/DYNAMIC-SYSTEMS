@@ -1,0 +1,226 @@
+% =========================================================================
+% --- INICIO INPUT SEMANA 10 ---
+% =========================================================================
+
+\chapter{Semana 10: Sistemas Dinámicos Ergódicos}
+
+\section{Definiciones y Ejemplos Básicos}
+
+\begin{definicion}[Sistema Dinámico Ergódico]
+	Sea $(M, \mathcal{B}, \mu)$ un espacio de probabilidad y $f: M \to M$ una aplicación medible que preserva la medida $\mu$. Decimos que $\mu$ es \textbf{ergódica} (respecto a $f$) si para todo $E \in \mathcal{B}$ tal que $f^{-1}(E) = E$ $\mu$-c.t.p., se cumple que:
+	$$ \mu(E) = 0 \quad \text{o} \quad \mu(E) = 1 $$
+\end{definicion}
+
+\begin{observacion}
+	Sea $M$ un espacio topológico, $(M, \mathcal{B}_M)$ un espacio medible y $f: M \to M$ una aplicación medible. Supongamos que existe $p \in M$ tal que $f(p) = p$. Sabemos que la medida de Dirac $\mu = \delta_p$ es invariante por $f$.\\	
+	\textbf{Afirmación:} $\mu$ es ergódica respecto a $f$.
+\end{observacion}
+\begin{proof}[Demostración de la Afirmación]
+	En efecto, sea $E \in \mathcal{B}_M$ tal que $f^{-1}(E) = E$ $\mu$-c.t.p. Por definición de la medida de Dirac centrada en el punto $p$, se tiene directamente que:
+	$$ \mu(E) = 0 \quad \text{o} \quad \mu(E) = 1 $$
+	Por lo tanto, la medida $\delta_p$ es ergódica respecto a $f$.
+\end{proof}
+
+\begin{ejemplo}
+	Sea $R_\theta: S^1 \to S^1$ la rotación por un ángulo racional, es decir, $\theta \in \mathbb{Q}$ ($\theta = p/q$). Sea $m$ la medida de Lebesgue en $S^1$, la cual es invariante por $R_\theta$.
+	\textbf{Afirmación:} $m$ no es ergódica respecto a $R_\theta$.
+\end{ejemplo}
+\begin{proof}[Demostración]
+	En efecto, sea $A \subset S^1$ un subarco tal que $0 < m(A) < 1/q$. Consideramos el conjunto formado por las preimágenes sucesivas de $A$:
+	$$ E = A \cup R_\theta^{-1}(A) \cup R_\theta^{-2}(A) \cup \dots \cup R_\theta^{-(q-1)}(A) $$
+	Se tiene que $R_\theta^{-1}(E) = E$. Observe que al ser las rotaciones disjuntas por la elección de la longitud de $A$:
+	$$ m(E) = m(A) + m(R_\theta^{-1}(A)) + \dots + m(R_\theta^{-(q-1)}(A)) = q \cdot m(A) $$
+	Así, deducimos que:
+	$$ 0 < m(E) = q \cdot m(A) < 1 $$
+	Como $m(E) \notin \{0, 1\}$, la medida de Lebesgue $m$ no es ergódica respecto a la rotación racional $R_\theta$.
+\end{proof}
+
+\section{Ergodicidad del Shift de Bernoulli}
+
+\begin{proposicion}
+	Consideremos el alfabeto finito $\Sigma = \{z_0, z_1, \dots, z_{d-1}\}^{\mathbb{Z}}$, la aplicación de corrimiento $\sigma: \Sigma \to \Sigma$ (shift de Bernoulli) y $\mu$ la medida de Bernoulli asociada a las probabilidades $p_0, p_1, \dots, p_{d-1} > 0$ con $\sum p_i = 1$. Entonces, $\mu$ es ergódica respecto a $\sigma$.
+\end{proposicion}
+\begin{proof}[Demostración]
+	Sea $\mathcal{A} = \{C \subseteq \Sigma : C \text{ es una unión finita de cilindros disjuntos}\}$. Sabemos que $\mathcal{A}$ es un álgebra que genera la $\sigma$-álgebra de Borel en $\Sigma$.
+	
+	\textbf{Afirmación 1:} Para $j \gg 1$, se cumple que $\mu(B \cap \sigma^{-j}(C)) = \mu(B)\mu(C)$, donde $B$ y $C$ son cilindros.
+	
+	\textit{En efecto:} Sean los cilindros $B = [k : b_k, \dots, b_l]$ y $C = [m : c_m, \dots, c_n]$. Tenemos que:
+	$$ \sigma^{-j}(C) = [m+j : c_m, \dots, c_n] $$
+	Consideramos un entero $j$ suficientemente grande tal que $m+j > l$. Entonces la intersección se escribe explícitamente como:
+	$$ B \cap \sigma^{-j}(C) = [k : b_k, \dots, b_l, v_{l+1}, v_{l+2}, \dots, v_{m+j-1}, c_m, \dots, c_n] $$
+	donde los símbolos intermedios $v_{l+1}, \dots, v_{m+j-1} \in \{z_0, \dots, z_{d-1}\}$ son libres. Aplicando la definición de la medida de Bernoulli y sumando sobre todas las combinaciones posibles de símbolos libres:
+	\begin{align*}
+		\mu(B \cap \sigma^{-j}(C)) &= \sum_{v_{l+1}, \dots, v_{m+j-1}} \mu([k : b_k, \dots, b_l, v_{l+1}, \dots, v_{m+j-1}, c_m, \dots, c_n]) \\
+		&= \sum_{v_{l+1}, \dots, v_{m+j-1}} p_{b_k} \cdots p_{b_l} \cdot p_{v_{l+1}} \cdots p_{v_{m+j-1}} \cdot p_{c_m} \cdots p_{c_n} \\
+		&= (p_{b_k} \cdots p_{b_l}) (p_{c_m} \cdots p_{c_n}) \left( \sum_{v_{l+1}} p_{v_{l+1}} \right) \cdots \left( \sum_{v_{m+j-1}} p_{v_{m+j-1}} \right) \\
+		&= \mu(B)\mu(C) \cdot 1 \cdots 1 = \mu(B)\mu(C)
+	\end{align*}
+	
+	\textbf{Afirmación 2:} Para $j \gg 1$, se cumple que $\mu(B \cap \sigma^{-j}(C)) = \mu(B)\mu(C)$, donde $B, C \in \mathcal{A}$.
+	
+	\textit{En efecto:} Sean $B = \bigsqcup_{i=1}^u B_i$ y $C = \bigsqcup_{r=1}^v C_r$ uniones finitas disjuntas de cilindros. Por linealidad y la Afirmación 1:
+	\begin{align*}
+		\mu(B \cap \sigma^{-j}(C)) &= \mu \left( \left( \bigcup_{i=1}^u B_i \right) \cap \left( \bigcup_{r=1}^v \sigma^{-j}(C_r) \right) \right) = \sum_{i=1}^u \sum_{r=1}^v \mu(B_i \cap \sigma^{-j}(C_r)) \\
+		&= \sum_{i=1}^u \sum_{r=1}^v \mu(B_i)\mu(C_r) = \left( \sum_{i=1}^u \mu(B_i) \right) \left( \sum_{r=1}^v \mu(C_r) \right) = \mu(B)\mu(C)
+	\end{align*}
+	
+	\textbf{Afirmación 3:} Sea $E \in \mathcal{A}$ tal que $\sigma^{-1}(E) = E$. Entonces $\mu(E) = 0$ o $\mu(E) = 1$.
+	
+	\textit{En efecto:} Por la Afirmación 2, tomando $B = C = E$, para $j \gg 1$ se tiene:
+	$$ \mu(E \cap \sigma^{-j}(E)) = \mu(E)\mu(E) \implies \mu(E) = \mu(E)^2 \implies \mu(E) \in \{0, 1\} $$
+	
+	\textbf{Afirmación 4:} Sea $E \in \mathcal{B}_\Sigma$ tal que $\sigma^{-1}(E) = E$. Entonces $\mu(E) = 0$ o $\mu(E) = 1$.
+	
+	\textit{En efecto:} Dado $\epsilon > 0$, por el Teorema de Aproximación, existe un conjunto del álgebra $B \in \mathcal{A}$ tal que $\mu(E \triangle B) < \epsilon$.
+	
+	\begin{teorema}[Teorema de Aproximación]
+		Sea $(X, \mathcal{B}, \mu)$ un espacio de probabilidad y $\mathcal{A}$ un álgebra que genera a $\mathcal{B}$. Entonces, para todo $\epsilon > 0$ y para todo $E \in \mathcal{B}$, existe $B \in \mathcal{A}$ tal que $\mu(E \triangle B) < \epsilon$.
+	\end{teorema}
+	
+	Para este conjunto $B$, fijando un entero $j \gg 1$ que depende de $\mathcal{A}$ y de $E$, se tiene por la Afirmación 2 que:
+	\begin{equation} \label{eq:bernoulli1}
+		\mu(B \cap \sigma^{-j}(B)) = \mu(B)\mu(B) = \mu(B)^2
+	\end{equation}
+	Por propiedades de la diferencia simétrica:
+	$$ (E \cap \sigma^{-j}(E)) \triangle (B \cap \sigma^{-j}(B)) \subseteq (E \triangle B) \cup \sigma^{-j}(E \triangle B) $$
+	Tomando medidas y utilizando la invariancia de $\mu$ por el shift $\sigma$:
+	\begin{align} \label{eq:bernoulli2}
+		|\mu(E \cap \sigma^{-j}(E)) - \mu(B \cap \sigma^{-j}(B))| &\le \mu \left( (E \cap \sigma^{-j}(E)) \triangle (B \cap \sigma^{-j}(B)) \right) \nonumber \\
+		&\le \mu(E \triangle B) + \mu(\sigma^{-j}(E \triangle B)) \nonumber \\
+		&= 2\mu(E \triangle B) < 2\epsilon
+	\end{align}
+	Observe también que:
+	\begin{equation} \label{eq:bernoulli3}
+		|\mu(E)^2 - \mu(B)^2| = |\mu(E) + \mu(B)| \cdot |\mu(E) - \mu(B)| \le 2\mu(E \triangle B) < 2\epsilon
+	\end{equation}
+	Finalmente, combinando las ecuaciones \eqref{eq:bernoulli1}, \eqref{eq:bernoulli2} y \eqref{eq:bernoulli3} mediante la desigualdad triangular:
+	\begin{align*}
+		|\mu(E) - \mu(E)^2| &= |\mu(E \cap \sigma^{-j}(E)) - \mu(E)^2| \\
+		&\le |\mu(E \cap \sigma^{-j}(E)) - \mu(B \cap \sigma^{-j}(B))| + |\mu(B \cap \sigma^{-j}(B)) - \mu(B)^2| + |\mu(B)^2 - \mu(E)^2| \\
+		&< 2\epsilon + 0 + 2\epsilon = 4\epsilon
+	\end{align*}
+	Como $\epsilon > 0$ fue arbitrario, concluimos que $\mu(E) - \mu(E)^2 = 0$, lo que implica que $\mu(E) = 0$ o $\mu(E) = 1$. Por lo tanto, la medida de Bernoulli $\mu$ es ergódica.
+\end{proof}
+
+\section{Ejercicios Resueltos}
+
+\begin{ejercicio}
+	Sea $R_\theta: S^1 \to S^1$ una rotación racional ($\theta \in \mathbb{Q}$) y $m$ la medida de Lebesgue en $S^1$. Muestre que $m$ no es ergódica respecto a $R_\theta$.
+\end{ejercicio}
+\begin{proof}[Solución]
+	Tomemos un arco $A \subset S^1$ tal que $0 < m(A) < 1/q$, donde $\theta = p/q$ en fracción irreductible. Definamos el conjunto:
+	$$ E = \bigcup_{i=0}^{q-1} R_\theta^i(A) $$
+	Se tiene que la imagen bajo la rotación satisface:
+	$$ R_\theta(E) = \bigcup_{i=0}^{q-1} R_\theta^{i+1}(A) = \bigcup_{i=1}^{q-1} R_\theta^i(A) \cup R_\theta^q(A) = E $$
+	lo cual implica que $R_\theta^{-1}(E) = E$.
+	Evaluando la medida de Lebesgue del conjunto $E$:
+	$$ 0 < m(E) = \sum_{i=0}^{q-1} m(R_\theta^i(A)) = q \cdot m(A) < q \cdot \frac{1}{q} = 1 $$
+	Como $0 < m(E) < 1$, el conjunto $E$ es no trivial, probando que $m$ no es ergódica respecto a $R_\theta$.
+\end{proof}
+
+\begin{ejercicio}
+	Sea $\theta = p/q \in \mathbb{Q}$ con $(p,q)=1$. Mostrar que la medida:
+	$$ \mu = \frac{1}{q} \left( \delta_z + \delta_{R_\theta(z)} + \dots + \delta_{R_\theta^{q-1}(z)} \right) $$
+	es ergódica respecto a la rotación racional $R_\theta: S^1 \to S^1$, donde $z \in S^1$.
+\end{ejercicio}
+\begin{proof}[Solución]
+	Notemos que la órbita periódica $\mathcal{O}_{R_\theta}(z) = \{z, R_\theta(z), \dots, R_\theta^{q-1}(z)\}$ consta exactamente de $q$ puntos distintos por ser $(p,q)=1$.
+	
+	Sea $E \in \mathcal{B}_{S^1}$ tal que $R_\theta^{-1}(E) = E$. Definamos el conjunto finito:
+	$$ A = \{R_\theta^i(z) \in E : i = 0, \dots, q-1\} $$
+	Por definición de la medida $\mu$ como suma de deltas de Dirac, se tiene que $\mu(E) = \frac{\text{card}(A)}{q}$.
+	
+	Analicemos los dos casos posibles para el conjunto $A$:
+	\begin{itemize}
+		\item Si $A = \emptyset$, entonces ningún punto de la órbita está en $E$, por lo que $\mu(E) = 0$.
+		\item Si $A \neq \emptyset$, existe al menos un índice $j \in \{0, \dots, q-1\}$ tal que $R_\theta^j(z) \in E$.
+		Sea $i \in \{0, \dots, q-1\}$ cualquier otro índice. Sin pérdida de generalidad, supongamos que $i > j$. Como $E$ es invariante ($R_\theta^{-1}(E) = E \implies R_\theta(E) = E$), se cumple que:
+		$$ R_\theta^i(z) = R_\theta^{i-j}(R_\theta^j(z)) \in R_\theta^{i-j}(E) = E $$
+		Esto implica que absolutamente todos los $q$ puntos de la órbita periódica pertenecen a $E$, por lo que $\text{card}(A) = q$. En consecuencia, $\mu(E) = q/q = 1$.
+	\end{itemize}
+	En cualquier caso obtenemos $\mu(E) \in \{0, 1\}$, por lo tanto la medida $\mu$ es ergódica respecto a $R_\theta$.
+\end{proof}
+
+\section{Ergodicidad y Semiconjugación}
+
+\begin{proposicion}
+	Sean $(X, \mathcal{B}, \mu)$ un espacio de probabilidad y $(Y, \mathcal{C})$ un espacio medible. Sean $f: X \to X$ y $g: Y \to Y$ aplicaciones medibles. Supongamos que existe una aplicación medible $\phi: X \to Y$ que semiconjuga los sistemas, es decir, $\phi \circ f = g \circ \phi$, y consideremos la medida imagen (push-forward) $\nu = \phi_* \mu = \mu \circ \phi^{-1}$. Mostrar que:
+	\begin{enumerate}[1)]
+		\item Si $\mu$ es invariante por $f$, entonces $\nu$ es invariante por $g$.
+		\item Si $\mu$ es ergódica respecto a $f$, entonces $\nu$ es ergódica respecto a $g$.
+	\end{enumerate}
+\end{proposicion}
+\begin{proof}[Demostración]
+	\textbf{1)} Sea $E \in \mathcal{C}$. Utilizando la definición de push-forward y la conmutatividad $\phi \circ f = g \circ \phi$:
+	\begin{align*}
+		(\phi_* \mu)(g^{-1}(E)) &= \mu(\phi^{-1}(g^{-1}(E))) = \mu((g \circ \phi)^{-1}(E)) = \mu((\phi \circ f)^{-1}(E)) \\
+		&= \mu(f^{-1}(\phi^{-1}(E))) = \mu(\phi^{-1}(E)) = (\phi_* \mu)(E)
+	\end{align*}
+	Por lo tanto, la medida $\nu = \phi_* \mu$ es invariante por $g$.
+	
+	\textbf{2)} Sea $E \in \mathcal{C}$ tal que $g^{-1}(E) = E$. Luego, para su preimagen en $X$ se cumple que:
+	$$ f^{-1}(\phi^{-1}(E)) = \phi^{-1}(g^{-1}(E)) = \phi^{-1}(E) $$
+	Esto demuestra que el conjunto $\phi^{-1}(E) \in \mathcal{B}$ es invariante por $f$. Como por hipótesis la medida $\mu$ es ergódica respecto a $f$, aplicamos la ley cero-uno:
+	$$ \mu(\phi^{-1}(E)) = 0 \quad \text{o} \quad \mu(\phi^{-1}(E)) = 1 $$
+	Pero por definición de la medida imagen, $\nu(E) = (\phi_* \mu)(E) = \mu(\phi^{-1}(E))$. En consecuencia:
+	$$ \nu(E) = 0 \quad \text{o} \quad \nu(E) = 1 $$
+	concluyendo que $\nu$ es ergódica respecto a $g$.
+\end{proof}
+
+\begin{ejemplo}
+	Considere la aplicación $g: [0,1] \to [0,1]$ dada por $g(x) = 10x \pmod 1$ y el shift de Bernoulli $\sigma: \Sigma_{10}^+ \to \Sigma_{10}^+$ en el espacio unilateral $\Sigma_{10}^+ = \{0, 1, \dots, 9\}^{\mathbb{N}}$ dotado de la medida de Bernoulli equiprobable $\mu$ asociada a $p_0 = p_1 = \dots = p_9 = 1/10$.
+	
+	Consideramos la proyección decimal canónica $\phi: \Sigma_{10}^+ \to [0,1]$ definida por:
+	$$ (x_n)_{n \in \mathbb{N}} \mapsto \phi((x_n)_{n \in \mathbb{N}}) = \sum_{n=1}^\infty \frac{x_n}{10^n} $$
+	Es inmediato verificar que el diagrama es conmutativo: $\phi \circ \sigma = g \circ \phi$. Además, sabemos que la medida imagen bajo esta proyección coincide con la medida de Lebesgue en el intervalo: $\phi_* \mu = m$.
+	
+	Por la Proposición de la Sección 10.2, sabemos que la medida de Bernoulli $\mu$ es ergódica respecto al shift $\sigma$. Invocando la parte 2) de la Proposición de Semiconjugación recién demostrada, concluimos directamente que \textbf{la medida de Lebesgue $m$ es ergódica respecto a $g(x) = 10x \pmod 1$}.
+\end{ejemplo}
+
+\section{Caracterizaciones de la Ergodicidad}
+
+\begin{teorema}
+	Sea $(M, \mathcal{B}, \mu)$ un espacio de probabilidad y $f: M \to M$ una aplicación medible que preserva la medida $\mu$. Son equivalentes:
+	\begin{enumerate}[a)]
+		\item $f$ es ergódica respecto a $\mu$.
+		\item Si $E \in \mathcal{B}$ satisface $\mu(f^{-1}(E) \triangle E) = 0$, entonces $\mu(E) = 0$ o $\mu(E) = 1$.
+		\item Si $A \in \mathcal{B}$ satisface $\mu(A) > 0$, entonces $\mu \left( \bigcup_{n=1}^\infty f^{-n}(A) \right) = 1$.
+		\item Si $A, B \in \mathcal{B}$ cumplen $\mu(A) > 0$ y $\mu(B) > 0$, entonces existe $n \ge 1$ tal que $\mu(f^{-n}(A) \cap B) > 0$.
+	\end{enumerate}
+\end{teorema}
+\begin{proof}[Demostración]
+	Probaremos las implicaciones en orden cíclico: $(b) \implies (c) \implies (d) \implies (a) \implies (b)$.
+	
+	\textbf{$(b) \implies (c)$:} Sea $A \in \mathcal{B}$ con $\mu(A) > 0$ y definamos el conjunto saturado $E = \bigcup_{n=1}^\infty f^{-n}(A)$. Evaluando su preimagen:
+	$$ f^{-1}(E) = \bigcup_{n=1}^\infty f^{-n-1}(A) = \bigcup_{k=2}^\infty f^{-k}(A) \subseteq E $$
+	Luego, se tiene que $E \setminus f^{-1}(E) \ge 0$. Como la medida $\mu$ es invariante por $f$ ($\mu(f^{-1}(E)) = \mu(E)$), evaluamos la diferencia simétrica:
+	$$ \mu(f^{-1}(E) \triangle E) = \mu(E \setminus f^{-1}(E)) = \mu(E) - \mu(f^{-1}(E)) = 0 $$
+	Por la hipótesis $(b)$, deducimos que $\mu(E) = 0$ o $\mu(E) = 1$. Observe que $f^{-1}(A) \subseteq E$, lo que implica por monotonía e invariancia que $\mu(E) \ge \mu(f^{-1}(A)) = \mu(A) > 0$. Al descartar el cero, obtenemos obligatoriamente que:
+	$$ \mu(E) = \mu \left( \bigcup_{n=1}^\infty f^{-n}(A) \right) = 1 $$
+	
+	\textbf{$(c) \implies (d)$:} Sean $A, B \in \mathcal{B}$ con $\mu(A) > 0$ y $\mu(B) > 0$. Como $\mu(A) > 0$, por la hipótesis $(c)$ tenemos que $\mu \left( \bigcup_{n=1}^\infty f^{-n}(A) \right) = 1$. Luego:
+	$$ \mu(B) = \mu \left( B \cap \bigcup_{n=1}^\infty f^{-n}(A) \right) = \mu \left( \bigcup_{n=1}^\infty (f^{-n}(A) \cap B) \right) \le \sum_{n=1}^\infty \mu(f^{-n}(A) \cap B) $$
+	Como la suma de la serie está acotada inferiormente por $\mu(B) > 0$, es imposible que todos los sumandos sean nulos. Así, existe al menos un entero $n \ge 1$ tal que $\mu(f^{-n}(A) \cap B) > 0$.
+	
+	\textbf{$(d) \implies (a)$:} Sea $E \in \mathcal{B}$ un conjunto estrictamente invariante ($f^{-1}(E) = E$). Queremos demostrar que $\mu(E) = 0$ o $\mu(E) = 1$.
+	Supongamos por contradicción que $0 < \mu(E) < 1$. Entonces, su complemento satisface $\mu(E^c) = 1 - \mu(E) > 0$.
+	
+	Aplicando la hipótesis $(d)$ a los conjuntos de medida positiva $A = E$ y $B = E^c$, debe existir un entero $n \ge 1$ tal que:
+	$$ \mu(f^{-n}(E) \cap E^c) > 0 $$
+	Sin embargo, como $f^{-1}(E) = E$, por inducción se cumple que $f^{-n}(E) = E$. Luego:
+	$$ f^{-n}(E) \cap E^c = E \cap E^c = \emptyset \implies \mu(f^{-n}(E) \cap E^c) = 0 $$
+	lo cual es una contradicción. Por lo tanto, la suposición es falsa y se cumple que $\mu(E) \in \{0, 1\}$, demostrando que $f$ es ergódica respecto a $\mu$.
+	
+	\textbf{$(a) \implies (b)$:} Sea $E \in \mathcal{B}$ un conjunto casi-invariante, es decir, $\mu(f^{-1}(E) \triangle E) = 0$. En teoría de la medida se sabe que existe un conjunto estrictamente invariante $C \in \mathcal{B}$ con $f^{-1}(C) = C$ tal que $\mu(C \triangle E) = 0$.
+	
+	Asumiendo la verdad de esta afirmación, por la ergodicidad de la medida $\mu$ (hipótesis $(a)$) aplicada a $C$, se tiene que $\mu(C) = 0$ o $\mu(C) = 1$.
+	Dado que $\mu(C \triangle E) = 0$, tenemos que:
+	$$ 0 = \mu(C \triangle E) = \mu(C \setminus E) + \mu(E \setminus C) \implies \mu(C \setminus E) = 0 \quad \text{y} \quad \mu(E \setminus C) = 0 $$
+	Por consiguiente, $\mu(C) = \mu(E)$. Así concluimos que $\mu(E) = 0$ o $\mu(E) = 1$, completando el ciclo de equivalencias.
+\end{proof}
+
+
+% =========================================================================
+% --- FIN INPUT SEMANA 10 ---
+% =========================================================================

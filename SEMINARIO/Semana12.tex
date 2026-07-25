@@ -1,0 +1,172 @@
+% =========================================================================
+% --- INICIO INPUT SEMANA 12 ---
+% =========================================================================
+
+\chapter{Semana 12: Teorema Ergódico de Birkhoff y Caracterización}
+
+\section{Tiempo Medio de Visita y Motivación}
+
+\begin{observacion}
+	Sea $(M, \mathcal{B}_M, \mu)$ un espacio de medida finita y $f: M \to M$ una aplicación medible que preserva $\mu$. Sea $E \in \mathcal{B}_M$ con $\mu(E) > 0$. Por el Teorema de Recurrencia de Poincaré, para $\mu$-c.t.p. $x \in E$, se tiene que $f^n(x) \in E$ para infinitos valores de $n \in \mathbb{N}$.
+	
+	Llamamos \textbf{tiempo medio de visita} de $x$ a $E$ al valor del límite:
+	$$ \tau(x, E) = \lim_{n \to \infty} \frac{1}{n} \# \{ 0 \le j \le n-1 : f^j(x) \in E \} $$
+	el cual cuantifica cuántas veces retorna $x$ a $E$ en el intervalo de iteraciones de $0$ a $n-1$.
+\end{observacion}
+
+¿El límite anterior existe siempre? La respuesta es \textbf{no siempre}. El siguiente ejemplo muestra que $\tau(x, E)$, en general, podría no existir si la transformación no preserva medida.
+
+\begin{ejemplo}
+	Consideramos la transformación decimal multiplicativa $f: (0, 1] \to [0, 1]$ definida por:
+	$$ f(x) = 10x \pmod 1 $$
+	Considere el intervalo elemental $E = (0, 1/2]$. Observe que un punto cae en este intervalo dependiendo de su primer dígito decimal:
+	$$ x = 0.a_1 a_2 a_3 \dots \in E \iff a_1 \in \{0, 1, 2, 3, 4\} $$
+	Construyamos un número real específico $x \in (0,1)$ de la forma $x = 0.a_1 a_2 a_3 \dots$ donde los bloques de dígitos se alternan en tamaños de potencias de 2:
+	$$ a_i = \begin{cases} 1, & \text{si } 2^k \le i < 2^{k+1} \text{ con } k \text{ par} \\ 0, & \text{si } 2^k \le i < 2^{k+1} \text{ con } k \text{ impar} \end{cases} $$
+	Explícitamente, los dígitos de este número están dados por la secuencia de bloques:
+	$$ x = 0.\underbrace{1}_{2^0} \underbrace{00}_{2^1} \underbrace{1111}_{2^2} \underbrace{00000000}_{2^3} \underbrace{1111111111111111}_{2^4} \dots $$
+	
+	Evaluemos la proporción de visitas para dos subsucesiones de tiempos distintas:
+	\begin{itemize}
+		\item Tomemos la subsucesión de tiempos $n_m = 2^{2m}-1$ para $m \in \mathbb{N}$. El número total de unos acumulados hasta esta iteración es la suma geométrica de las potencias pares:
+		$$ \frac{1}{n_m} \sum_{j=0}^{n_m-1} \chi_E(f^j(x)) = \frac{1}{2^{2m}-1} (2^0 + 2^2 + 2^4 + \dots + 2^{2m-2}) = \frac{1}{2^{2m}-1} \left( \frac{2^{2m}-1}{3} \right) = \frac{1}{3} $$
+		\item Tomemos ahora la subsucesión de tiempos $l_m = 2^{2m+1}-1$ para $m \in \mathbb{N}$. Incorporando el siguiente bloque par de unos que va desde $2^{2m}$ hasta $2^{2m+1}-1$:
+		$$ \frac{1}{l_m} \sum_{j=0}^{l_m-1} \chi_E(f^j(x)) = \frac{1}{2^{2m+1}-1} \left( \frac{2^{2m}-1}{3} + 2^{2m} \right) = \frac{4 \cdot 2^{2m}-1}{3(2 \cdot 2^{2m}-1)} \xrightarrow{m \to \infty} \frac{2}{3} $$
+	\end{itemize}
+	Como los límites por ambas subsucesiones son distintos ($1/3 \neq 2/3$), el límite del promedio $\tau(x, E)$ no existe. Esto ocurre porque al construir este punto patológico, no estamos preservando ninguna medida invariante en la dinámica.
+\end{ejemplo}
+
+\section{Teorema Ergódico de Birkhoff}
+
+\begin{teorema}[Teorema Ergódico de Birkhoff]
+	Sea $(M, \mathcal{B}_M, \mu)$ un espacio de probabilidad (o medida finita) y $f: M \to M$ una aplicación medible que preserva $\mu$. Si $\varphi \in \mathcal{L}^1(M, \mathcal{B}_M, \mu)$, entonces:
+	\begin{enumerate}[1)]
+		\item El promedio espacial temporal converge casi siempre:
+		$$ \tilde{\varphi}(x) = \lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \varphi(f^j(x)) \quad \text{existe para } \mu\text{-c.t.p. } x \in M $$
+		\item La función límite $\tilde{\varphi}$ es invariante, es decir, $\tilde{\varphi} \circ f = \tilde{\varphi}$ para $\mu$-c.t.p. en $M$.
+		\item La integral de la función límite coincide con la integral original:
+		$$ \int_M \tilde{\varphi} \, d\mu = \int_M \varphi \, d\mu $$
+		\item Si además $f$ es ergódica respecto a $\mu$, entonces la función límite es constante casi siempre y coincide con la integral (si $\mu(M)=1$):
+		$$ \tilde{\varphi}(x) = \int_M \varphi \, d\mu \quad \text{para } \mu\text{-c.t.p. } x \in M $$
+	\end{enumerate}
+\end{teorema}
+
+\section{Caracterización Espectral de la Ergodicidad}
+
+\begin{teorema}[Caracterización Espectral de la Ergodicidad]
+	Sea $(M, \mathcal{B}, \mu)$ un espacio de probabilidad y $f: M \to M$ una aplicación medible que preserva $\mu$. Las siguientes afirmaciones son equivalentes:
+	\begin{enumerate}[a)]
+		\item La medida $\mu$ es ergódica respecto a $f$.
+		\item Para todo par de subconjuntos medibles $A, B \in \mathcal{B}$, se tiene la convergencia de Cesàro:
+		$$ \lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \mu(f^{-j}(A) \cap B) = \mu(A)\mu(B) $$
+		\item Para todo par de exponentes conjugados $p, q \in [1, +\infty]$ con $\frac{1}{p} + \frac{1}{q} = 1$, y para cualesquiera funciones $\varphi \in \mathcal{L}^p(M, \mathcal{B}, \mu)$ y $\psi \in \mathcal{L}^q(M, \mathcal{B}, \mu)$, se cumple:
+		$$ \lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \int_M (\varphi \circ f^j)\psi \, d\mu = \left( \int_M \varphi \, d\mu \right) \left( \int_M \psi \, d\mu \right) $$
+	\end{enumerate}
+\end{teorema}
+
+\begin{proof}[Demostración]
+	\textbf{$c) \implies b)$:}
+	Sean $A, B \in \mathcal{B}$ dos conjuntos medibles arbitrarios. Tomemos sus funciones características $\varphi = \chi_A \in \mathcal{L}^p(M, \mathcal{B}, \mu)$ y $\psi = \chi_B \in \mathcal{L}^q(M, \mathcal{B}, \mu)$ (lo cual es válido dado que en un espacio de probabilidad toda función característica es acotada e integrable para cualquier exponente).
+	
+	Invocando la hipótesis $c)$ para este par de funciones:
+	\begin{align*}
+		\lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \int_M (\chi_A \circ f^j)\chi_B \, d\mu &= \left( \int_M \chi_A \, d\mu \right) \left( \int_M \chi_B \, d\mu \right) = \mu(A)\mu(B) \\
+		\Longrightarrow \lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \int_M \chi_{f^{-j}(A)}(x)\chi_B(x) \, d\mu &= \mu(A)\mu(B) \\
+		\Longrightarrow \lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \mu(f^{-j}(A) \cap B) &= \mu(A)\mu(B)
+	\end{align*}
+	lo cual demuestra exactamente la condición $b)$.
+	
+	\textbf{$b) \implies a)$:}
+	Sea $E \in \mathcal{B}$ un conjunto estrictamente invariante por la dinámica, es decir, $f^{-1}(E) = E$. Por inducción matemática, esto implica que $f^{-j}(E) = E$ para todo $j \in \mathbb{N} \cup \{0\}$.
+	
+	Tomando la elección particular $A = B = E$ en la hipótesis $b)$:
+	\begin{align*}
+		\lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \mu(f^{-j}(E) \cap E) &= \mu(E)\mu(E) \\
+		\Longrightarrow \lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \mu(E \cap E) &= (\mu(E))^2 \\
+		\Longrightarrow \lim_{n \to \infty} \frac{n \cdot \mu(E)}{n} &= (\mu(E))^2 \implies \mu(E) = (\mu(E))^2
+	\end{align*}
+	La ecuación algebraica $\mu(E) - (\mu(E))^2 = 0$ se factoriza como $\mu(E)(1 - \mu(E)) = 0$, cuyas únicas soluciones reales posibles son:
+	$$ \mu(E) = 0 \quad \text{o} \quad \mu(E) = 1 $$
+	Por lo tanto, todo conjunto invariante es trivial en medida, probando que $\mu$ es ergódica respecto a $f$.
+	
+	\textbf{$a) \implies c)$:}
+	Sean $\varphi \in \mathcal{L}^p(M, \mathcal{B}, \mu) \subseteq \mathcal{L}^1(M, \mathcal{B}, \mu)$ y $\psi \in \mathcal{L}^q(M, \mathcal{B}, \mu) \subseteq \mathcal{L}^1(M, \mathcal{B}, \mu)$ (las inclusiones en $\mathcal{L}^1$ son garantizadas porque $\mu(M) = 1 < \infty$).
+	
+	Como por hipótesis $a)$ la medida $\mu$ es ergódica respecto a $f$, el Teorema Ergódico de Birkhoff asegura que el promedio temporal converge casi siempre a la constante del promedio espacial:
+	$$ \lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \varphi(f^j(x)) = \int_M \varphi \, d\mu \quad \text{para } \mu\text{-c.t.p. } x \in M $$
+	Multiplicando ambos lados por la función medible $\psi(x)$, obtenemos para $\mu$-c.t.p. $x \in M$:
+	$$ \lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \varphi(f^j(x))\psi(x) = \left( \int_M \varphi \, d\mu \right) \psi(x) $$
+	
+	Para evaluar la convergencia de las integrales, dividimos la prueba en dos casos según la acotación de $\varphi$:
+	
+	\textbf{Caso 1 ($\varphi$ es una función acotada):} Supongamos que existe una constante $K > 0$ tal que $|\varphi(x)| \le K$ para todo $x \in M$. Entonces la sucesión de sumas parciales está acotada por una función integrable:
+	$$ \left| \frac{1}{n} \sum_{j=0}^{n-1} (\varphi \circ f^j)\psi \right| \le \frac{1}{n} \sum_{j=0}^{n-1} (|\varphi| \circ f^j)|\psi| \le \frac{1}{n} \sum_{j=0}^{n-1} K|\psi| = K|\psi| \in \mathcal{L}^1(M, \mathcal{B}, \mu) $$
+	Por el Teorema de Convergencia Dominada de Lebesgue, podemos intercambiar el límite con la integral:
+	\begin{align*}
+		\lim_{n \to \infty} \int_M \left[ \frac{1}{n} \sum_{j=0}^{n-1} (\varphi \circ f^j)\psi \right] d\mu &= \int_M \left[ \lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \varphi(f^j(x))\psi(x) \right] d\mu \\
+		\Longrightarrow \lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \int_M (\varphi \circ f^j)\psi \, d\mu &= \int_M \left( \int_M \varphi \, d\mu \right) \psi \, d\mu = \left( \int_M \varphi \, d\mu \right) \left( \int_M \psi \, d\mu \right)
+	\end{align*}
+	con lo que se establece la afirmación para funciones acotadas.
+	
+	\textbf{Caso 2 ($\varphi: M \to \mathbb{R}$ es una función no acotada):}
+	Para cada entero de corte $K \in \mathbb{N}$, definamos la función truncada $\varphi_K: M \to \mathbb{R}$ mediante:
+	$$ \varphi_K(x) = \begin{cases} \varphi(x), & \text{si } |\varphi(x)| \le K \\ \operatorname{sgn}(\varphi(x))K, & \text{si } |\varphi(x)| > K \end{cases} $$
+	Por construcción, se satisface que $|\varphi_K(x)| \le |\varphi(x)|$ para todo $x \in M$, lo que implica que $\int_M |\varphi_K| \, d\mu \le \int_M |\varphi| \, d\mu < \infty$, por lo que $\varphi_K \in \mathcal{L}^1(M, \mathcal{B}, \mu)$. Como además $\varphi_K$ está acotada por $K$, podemos aplicarle directamente el \textbf{Caso 1}:
+	$$ \lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \int_M (\varphi_K \circ f^j)\psi \, d\mu = \left( \int_M \varphi_K \, d\mu \right) \left( \int_M \psi \, d\mu \right) $$
+	Por la propia definición de límite, para cualquier tolerancia arbitraria $\varepsilon > 0$, existe un entero umbral $N_0 \in \mathbb{N}$ (el cual depende de $K$) tal que para todo $n \ge N_0$:
+	\begin{equation}
+		\left| \frac{1}{n} \sum_{j=0}^{n-1} \int_M (\varphi_K \circ f^j)\psi \, d\mu - \int_M \varphi_K \, d\mu \int_M \psi \, d\mu \right| < \varepsilon \label{eq:esp_I}
+	\end{equation}
+	
+	Por otro lado, evaluemos la convergencia en norma de la truncada hacia la función original:
+	\begin{align*}
+		\|\varphi_K - \varphi\|_p &= \left( \int_M |\varphi_K - \varphi|^p \, d\mu \right)^{1/p} \\
+		&= \left( \int_{\varphi^{-1}(-\infty, -K)} |\varphi_K - \varphi|^p \, d\mu + \int_{\varphi^{-1}[-K, K]} 0 \, d\mu + \int_{\varphi^{-1}(K, +\infty)} |\varphi_K - \varphi|^p \, d\mu \right)^{1/p}
+	\end{align*}
+	Como $\varphi \in \mathcal{L}^p(M, \mathcal{B}, \mu)$, la integral total es finita, lo que obliga a que el conjunto de puntos donde la función se indefine tenga medida nula: $\mu(\{x : |\varphi(x)| = \infty\}) = 0$. Además, los conjuntos de nivel superior satisfacen un anidamiento decreciente:
+	$$ E_K = \{x \in M : |\varphi(x)| > K\} \implies E_{K+1} \subseteq E_K \quad \text{y} \quad \bigcap_{K=1}^\infty E_K = \{x \in M : |\varphi(x)| = \infty\} $$
+	Por la continuity superior de las medidas finitas, la masa de las colas tiende a cero: $\lim_{K \to \infty} \mu(E_K) = 0$. En consecuencia, por el Teorema de Convergencia Dominada, la cola de la integral desaparece: $\|\varphi_K - \varphi\|_p \xrightarrow[K \to \infty]{} 0$.
+	
+	Por la desigualdad de Hölder, podemos acotar la distancia entre los promedios espaciales:
+	$$ \left| \int_M (\varphi_K - \varphi) \, d\mu \int_M \psi \, d\mu \right| \le \int_M |\varphi_K - \varphi| \cdot |\psi| \, d\mu \le \|\varphi_K - \varphi\|_p \|\psi\|_q $$
+	Como $\|\varphi_K - \varphi\|_p \to 0$, podemos fijar un corte $K \gg 1$ suficientemente grande de modo que:
+	\begin{equation}
+		\left| \int_M \varphi_K \, d\mu \int_M \psi \, d\mu - \int_M \varphi \, d\mu \int_M \psi \, d\mu \right| < \varepsilon \label{eq:esp_II}
+	\end{equation}
+	
+	De manera semejante, para el promedio de las integrales dinámicas, aplicando la desigualdad triangular, Hölder y la invariancia de la medida bajo $f$ ($\|\psi \circ f^j\|_r = \|\psi\|_r$):
+	\begin{align*}
+		\left| \frac{1}{n} \sum_{j=0}^{n-1} \int_M [(\varphi_K - \varphi) \circ f^j]\psi \, d\mu \right| &\le \frac{1}{n} \sum_{j=0}^{n-1} \int_M |(\varphi_K - \varphi) \circ f^j| \cdot |\psi| \, d\mu \\
+		&\le \frac{1}{n} \sum_{j=0}^{n-1} \|(\varphi_K - \varphi) \circ f^j\|_p \|\psi\|_q \\
+		&= \frac{1}{n} \sum_{j=0}^{n-1} \|\varphi_K - \varphi\|_p \|\psi\|_q = \|\varphi_K - \varphi\|_p \|\psi\|_q
+	\end{align*}
+	Para el mismo entero fijo $K \gg 1$ elegido anteriormente, esta cota es uniforme e independiente de $n$:
+	\begin{equation}
+		\left| \frac{1}{n} \sum_{j=0}^{n-1} \int_M (\varphi_K \circ f^j)\psi \, d\mu - \frac{1}{n} \sum_{j=0}^{n-1} \int_M (\varphi \circ f^j)\psi \, d\mu \right| < \varepsilon \label{eq:esp_III}
+	\end{align}
+	
+	Finalmente, combinamos las tres acotaciones mediante la desigualdad triangular para un $K \gg 1$ fijo y tomando un tiempo de iteración $n \ge N_0(K)$ suficientemente grande:
+	\begin{align*}
+		&\left| \frac{1}{n} \sum_{j=0}^{n-1} \int_M (\varphi \circ f^j)\psi \, d\mu - \int_M \varphi \, d\mu \int_M \psi \, d\mu \right| \\
+		&\qquad \le \left| \frac{1}{n} \sum_{j=0}^{n-1} \int_M (\varphi \circ f^j)\psi \, d\mu - \frac{1}{n} \sum_{j=0}^{n-1} \int_M (\varphi_K \circ f^j)\psi \, d\mu \right| \\
+		&\qquad \quad + \left| \frac{1}{n} \sum_{j=0}^{n-1} \int_M (\varphi_K \circ f^j)\psi \, d\mu - \int_M \varphi_K \, d\mu \int_M \psi \, d\mu \right| \\
+		&\qquad \quad + \left| \int_M \varphi_K \, d\mu \int_M \psi \, d\mu - \int_M \varphi \, d\mu \int_M \psi \, d\mu \right| \\
+		&\qquad < \varepsilon + \varepsilon + \varepsilon = 3\varepsilon
+	\end{align*}
+	Dado que $\varepsilon > 0$ fue tomado de manera arbitraria, concluimos rigurosamente que:
+	$$ \lim_{n \to \infty} \frac{1}{n} \sum_{j=0}^{n-1} \int_M (\varphi \circ f^j)\psi \, d\mu = \left( \int_M \varphi \, d\mu \right) \left( \int_M \psi \, d\mu \right), \quad \forall \varphi \in \mathcal{L}^p, \; \forall \psi \in \mathcal{L}^q $$
+	cerrando así la equivalencia del teorema.
+\end{proof}
+
+\begin{corolario}[Caracterización por subconjuntos densos y álgebras generadoras]
+	Sea $(M, \mathcal{B}, \mu)$ un espacio de probabilidad y $f: M \to M$ una aplicación medible que preserva $\mu$. Entonces son equivalentes:
+	\begin{enumerate}[1)]
+		\item La medida $\mu$ es ergódica respecto a $f$.
+		\item La condición sobre conjuntos $b)$ es válida para todo par $A, B \in \mathcal{A}$, donde $\mathcal{A} \subseteq \mathcal{B}$ es un álgebra que genera la $\sigma$-álgebra de Borel (es decir, $\sigma(\mathcal{A}) = \mathcal{B}$).
+		\item La condición de promedios funcionales $c)$ es válida para todo par de funciones $\varphi \in S_1$ y $\psi \in S_2$, donde $S_1$ es un subconjunto denso en $\mathcal{L}^p(M, \mathcal{B}, \mu)$ y $S_2$ es un subconjunto denso en $\mathcal{L}^q(M, \mathcal{B}, \mu)$.
+	\end{enumerate}
+\end{corolario}
+
+% =========================================================================
+% --- FIN INPUT SEMANA 12 ---
+% =========================================================================

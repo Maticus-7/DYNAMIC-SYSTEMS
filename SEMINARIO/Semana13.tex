@@ -1,0 +1,156 @@
+% =========================================================================
+% --- INICIO INPUT SEMANA 13 ---
+% =========================================================================
+
+\chapter{Semana 13: Sistemas Mixing y Caracterización}
+
+\section{Medidas Mixing: Definición y Observaciones}
+
+\begin{definicion}[Sistema Mixing]
+	Sea $(M, \mathcal{B}, \mu)$ un espacio de medida de probabilidad y $f: M \to M$ una aplicación medible que deja invariante a $\mu$. Decimos que $\mu$ es \textbf{mixing} (o mezclante) con respecto a $f$ si para cualesquiera $A, B \in \mathcal{B}$, se cumple:
+	$$ \lim_{n \to \infty} \mu(f^{-n}(A) \cap B) = \mu(A)\mu(B) $$
+\end{definicion}
+
+\begin{observacion}
+	Si $\mu$ es mixing respecto a $f$, entonces $\mu$ es ergódica respecto a $f$.
+	
+	\textit{En efecto:} Sea $E \in \mathcal{B}$ un conjunto invariante, es decir, $f^{-1}(E) = E$. Tomando la elección particular $A = B = E$, tenemos por inducción que $f^{-n}(E) = E$ para todo $n \in \mathbb{N}$. Luego:
+	$$ \lim_{n \to \infty} \mu(f^{-n}(E) \cap E) = \mu(E)\mu(E) \implies \lim_{n \to \infty} \mu(E \cap E) = (\mu(E))^2 \implies \mu(E) = (\mu(E))^2 $$
+	La ecuación algebraica $\mu(E) - (\mu(E))^2 = 0$ implica obligatoriamente que:
+	$$ \mu(E) = 0 \quad \text{o} \quad \mu(E) = 1 $$
+	Por lo tanto, la medida $\mu$ es ergódica respecto a $f$.
+\end{observacion}
+
+\begin{observacion}
+	El converso de la observación anterior es falso: existen sistemas ergódicos que no son mixing.
+	
+	Por ejemplo, considere la rotación irracional $R_\theta: S^1 \to S^1$ (donde $\theta \in \mathbb{R} \setminus \mathbb{Q}$). Sabemos que la medida de Lebesgue $\mu$ en $S^1$ es ergódica respecto a $R_\theta$.
+	\textbf{Afirmación:} $\mu$ no es mixing respecto a $R_\theta$.
+	
+	\textit{En efecto:} Sean $A, B \subset S^1$ dos arcos (intervalos) disjuntos, es decir, $A \cap B = \emptyset$, elegidos con longitudes estrictamente positivas pero pequeñas:
+	$$ 0 < \mu(A) \ll 1 \quad \text{y} \quad 0 < \mu(B) \ll 1 $$
+	Como la rotación por un ángulo irracional en el círculo tiene órbitas densas y preserva distancias (es una isometría), el arco rotado $R_\theta^n(A)$ recorrerá todo el círculo rígidamente sin deformarse. En consecuencia, existirá una subsucesión infinita de tiempos $\{n_k\}_{k \in \mathbb{N}} \subset \mathbb{N}$ para la cual el arco trasladado cae en el complemento de $B$, manteniéndose disjunto de él:
+	$$ R_\theta^{n_k}(A) \cap B = \emptyset, \quad \forall k \in \mathbb{N} $$
+	Como la preimagen de una biyección preserva la intersección vacía ($f^{-n}(A) \cap B = \emptyset \iff A \cap f^n(B) = \emptyset$), evaluando el límite por esta subsucesión de tiempos:
+	$$ \lim_{k \to \infty} \mu(R_\theta^{-n_k}(A) \cap B) = \lim_{k \to \infty} \mu(\emptyset) = 0 $$
+	Sin embargo, por la elección de nuestros arcos de medida positiva, el producto de sus medidas es estrictamente mayor que cero:
+	$$ \mu(A)\mu(B) > 0 $$
+	Como el límite por la subsucesión $\{n_k\}$ difiere del valor esperado $\mu(A)\mu(B)$, el límite general $\lim_{n \to \infty} \mu(R_\theta^{-n}(A) \cap B)$ no puede ser igual a $\mu(A)\mu(B)$. Así, $R_\theta$ no es mixing.
+\end{observacion}
+
+\section{Caracterización Funcional de Sistemas Mixing}
+
+\begin{teorema}[Caracterización Funcional de Sistemas Mixing]
+	Sea $(M, \mathcal{B}, \mu)$ un espacio de probabilidad y $f: M \to M$ una aplicación medible que preserva la medida $\mu$. Las siguientes proposiciones son equivalentes:
+	\begin{enumerate}[a)]
+		\item $\mu$ es mixing respecto a $f$.
+		\item Para todo par de exponentes conjugados $p, q \in [1, +\infty)$ con $\frac{1}{p} + \frac{1}{q} = 1$, se cumple la factorización asintótica:
+		$$ \lim_{n \to \infty} \int_M (\varphi \circ f^n)\chi \, d\mu = \left( \int_M \varphi \, d\mu \right) \left( \int_M \chi \, d\mu \right), \quad \forall \varphi \in \mathcal{L}^p(M, \mathcal{B}, \mu) \text{ y } \forall \chi \in \mathcal{L}^q(M, \mathcal{B}, \mu) $$
+		\item La condición $b)$ es válida para $\varphi$ en un conjunto denso de $\mathcal{L}^p(M, \mathcal{B}, \mu)$ y para $\chi$ en un conjunto denso de $\mathcal{L}^q(M, \mathcal{B}, \mu)$.
+	\end{enumerate}
+\end{teorema}
+
+\begin{proof}[Demostración]
+	\textbf{$b) \implies a)$:}
+	Sean $A, B \in \mathcal{B}$. Consideremos sus funciones características:
+	$$ \varphi = \chi_A \in \mathcal{L}^p(M, \mathcal{B}, \mu), \qquad \chi = \chi_B \in \mathcal{L}^q(M, \mathcal{B}, \mu) \quad (\text{pues } \mu \text{ es una medida finita}). $$
+	Invocando la hipótesis $b)$ para estas dos funciones:
+	\begin{align*}
+		\lim_{n \to \infty} \int_M (\chi_A \circ f^n)\chi_B \, d\mu &= \left( \int_M \chi_A \, d\mu \right) \left( \int_M \chi_B \, d\mu \right) \\
+		\Longrightarrow \lim_{n \to \infty} \int_M \chi_{f^{-n}(A)}\chi_B \, d\mu &= \mu(A)\mu(B) \\
+		\Longrightarrow \lim_{n \to \infty} \mu(f^{-n}(A) \cap B) &= \mu(A)\mu(B) \implies \mu \text{ es mixing respecto a } f.
+	\end{align*}
+	
+	\textbf{$a) \implies c)$:}
+	Por la hipótesis de mixing $a)$, para todo par de conjuntos $A, B \in \mathcal{B}$ se tiene:
+	\begin{equation}
+		\lim_{n \to \infty} \mu(f^{-n}(A) \cap B) = \mu(A)\mu(B) \Longrightarrow \lim_{n \to \infty} \int_M (\chi_A \circ f^n)\chi_B \, d\mu = \left( \int_M \chi_A \, d\mu \right) \left( \int_M \chi_B \, d\mu \right) \label{eq:caract_mixing}
+	\end{equation}
+	Así, la relación (\ref{eq:caract_mixing}) es válida para todas las funciones características.
+	
+	\textbf{Afirmación:} (\ref{eq:caract_mixing}) es válida para funciones simples. En efecto, sean las funciones simples expresadas en su forma canónica disjunta:
+	$$ \varphi = \sum_{i=1}^{k} a_i \chi_{E_i}, \qquad \chi = \sum_{j=1}^{m} b_j \chi_{F_j} $$
+	con $\bigcup_{i=1}^{k} E_i = M$, $\bigcup_{j=1}^{m} F_j = M$, y particiones disjuntas $E_i \cap E_j = \emptyset$ ($i \neq j$), $F_i \cap F_j = \emptyset$ ($i \neq j$).
+	
+	Por la linealidad de la integral y de la composición con $f^n$:
+	\begin{align*}
+		\int_M (\varphi \circ f^n)\chi \, d\mu &= \int_M \left[ \left( \sum_{i=1}^{k} a_i \chi_{E_i} \right) \circ f^n \right] \left( \sum_{j=1}^{m} b_j \chi_{F_j} \right) d\mu \\
+		&= \int_M \left( \sum_{i=1}^{k} a_i (\chi_{E_i} \circ f^n) \right) \left( \sum_{j=1}^{m} b_j \chi_{F_j} \right) d\mu \\
+		&= \int_M \left( \sum_{i,j} a_i b_j (\chi_{E_i} \circ f^n)\chi_{F_j} \right) d\mu = \sum_{i,j} a_i b_j \int_M (\chi_{E_i} \circ f^n)\chi_{F_j} \, d\mu
+	\end{align*}
+	
+	Tomando el límite cuando $n \to \infty$ y aplicando la identidad (\ref{eq:caract_mixing}) para cada par de características:
+	\begin{align*}
+		\lim_{n \to \infty} \int_M (\varphi \circ f^n)\chi \, d\mu &= \sum_{i,j} a_i b_j \lim_{n \to \infty} \int_M (\chi_{E_i} \circ f^n)\chi_{F_j} \, d\mu \\
+		&= \sum_{i,j} a_i b_j \left( \int_M \chi_{E_i} \, d\mu \right) \left( \int_M \chi_{F_j} \, d\mu \right) = \sum_{i,j} a_i b_j \mu(E_i)\mu(F_j) \\
+		&= \left( \sum_{i=1}^{k} a_i \mu(E_i) \right) \left( \sum_{j=1}^{m} b_j \mu(F_j) \right) = \left( \int_M \varphi \, d\mu \right) \left( \int_M \chi \, d\mu \right)
+	\end{align*}
+	Dado que el conjunto de funciones simples es denso en la norma de $\mathcal{L}^r(M, \mathcal{B}, \mu)$ para todo $r \ge 1$, esto prueba la condición $c)$.
+	
+	\textbf{$c) \implies b)$:}
+	Dadas $\varphi_1, \varphi_2 \in \mathcal{L}^p(M, \mathcal{B}, \mu)$ y $\chi_1, \chi_2 \in \mathcal{L}^q(M, \mathcal{B}, \mu)$, evaluamos la diferencia bajo la integral dinámica:
+	\begin{align*}
+		\left| \int_M (\varphi_1 \circ f^n)\chi_1 \, d\mu - \int_M (\varphi_2 \circ f^n)\chi_2 \, d\mu \right| &\le \left| \int_M (\varphi_1 \circ f^n)\chi_1 \, d\mu - \int_M (\varphi_2 \circ f^n)\chi_1 \, d\mu \right| \\
+		&\quad + \left| \int_M (\varphi_2 \circ f^n)\chi_1 \, d\mu - \int_M (\varphi_2 \circ f^n)\chi_2 \, d\mu \right| \\
+		&= \left| \int_M ((\varphi_1 - \varphi_2)\circ f^n)\chi_1 \, d\mu \right| + \left| \int_M (\varphi_2 \circ f^n)(\chi_1 - \chi_2) \, d\mu \right|
+	\end{align*}
+	Aplicando la desigualdad de Hölder en los espacios conjugados:
+	$$ \le \|(\varphi_1 - \varphi_2)\circ f^n\|_p \|\chi_1\|_q + \|\varphi_2 \circ f^n\|_p \|\chi_1 - \chi_2\|_q $$
+	Como la medida $\mu$ es invariante bajo $f$ (lo que implica la isometría $\|\psi \circ f^n\|_r = \|\psi\|_r$):
+	\begin{equation}
+		= \|\varphi_1 - \varphi_2\|_p \|\chi_1\|_q + \|\varphi_2\|_p \|\chi_1 - \chi_2\|_q \label{eq:cota_I}
+	\end{equation}
+	
+	De manera análoga, para el producto de las integrales espaciales, añadiendo y restando el término cruzado:
+	\begin{align*}
+		\left| \int_M \varphi_1 \, d\mu \int_M \chi_1 \, d\mu - \int_M \varphi_2 \, d\mu \int_M \chi_2 \, d\mu \right| &\le \left| \int_M \varphi_1 \, d\mu \int_M \chi_1 \, d\mu - \int_M \varphi_2 \, d\mu \int_M \chi_1 \, d\mu \right| \\
+		&\quad + \left| \int_M \varphi_2 \, d\mu \int_M \chi_1 \, d\mu - \int_M \varphi_2 \, d\mu \int_M \chi_2 \, d\mu \right| \\
+		&= \left| \int_M (\varphi_1 - \varphi_2) \, d\mu \right| \left| \int_M \chi_1 \, d\mu \right| \\
+		&\quad + \left| \int_M \varphi_2 \, d\mu \right| \left| \int_M (\chi_1 - \chi_2) \, d\mu \right|
+	\end{align*}
+	Invocando nuevamente la desigualdad de Hölder (con el factor constante $1 \in \mathcal{L}^p, \mathcal{L}^q$ en un espacio de medida unitaria $\|1\|_r = 1$):
+	\begin{align}
+		&\le \|\varphi_1 - \varphi_2\|_p \|1\|_q \|\chi_1\|_q \|1\|_p + \|\varphi_2\|_p \|1\|_q \|1\|_p \|\chi_1 - \chi_2\|_q \notag \\
+		&= \|\varphi_1 - \varphi_2\|_p \|\chi_1\|_q + \|\varphi_2\|_p \|\chi_1 - \chi_2\|_q \label{eq:cota_II}
+	\end{align}
+	
+	Combinando las acotaciones (\ref{eq:cota_I}) y (\ref{eq:cota_II}) mediante la desigualdad triangular:
+	\begin{align*}
+		&\left| \int_M (\varphi_1 \circ f^n)\chi_1 \, d\mu - \int_M \varphi_1 \, d\mu \int_M \chi_1 \, d\mu - \left[ \int_M (\varphi_2 \circ f^n)\chi_2 \, d\mu - \int_M \varphi_2 \, d\mu \int_M \chi_2 \, d\mu \right] \right| \\
+		&\qquad \le \left| \int_M (\varphi_1 \circ f^n)\chi_1 \, d\mu - \int_M (\varphi_2 \circ f^n)\chi_2 \, d\mu \right| \\
+		&\qquad \quad + \left| \int_M \varphi_1 \, d\mu \int_M \chi_1 \, d\mu - \int_M \varphi_2 \, d\mu \int_M \chi_2 \, d\mu \right| \\
+		&\qquad \le 2\left( \|\varphi_1 - \varphi_2\|_p \|\chi_1\|_q + \|\varphi_2\|_p \|\chi_1 - \chi_2\|_q \right)
+	\end{align*}
+	Lo cual nos proporciona la cota maestra de aproximación para todo par de funciones:
+	\begin{align}
+		\left| \int_M (\varphi_1 \circ f^n)\chi_1 \, d\mu - \int_M \varphi_1 \, d\mu \int_M \chi_1 \, d\mu \right| &\le \left| \int_M (\varphi_2 \circ f^n)\chi_2 \, d\mu - \int_M \varphi_2 \, d\mu \int_M \chi_2 \, d\mu \right| \notag \\
+		&\quad + 2\left( \|\varphi_1 - \varphi_2\|_p \|\chi_1\|_q + \|\varphi_2\|_p \|\chi_1 - \chi_2\|_q \right) \label{eq:cota_maestra}
+	\end{align}
+	
+	Sean $S \subseteq \mathcal{L}^p(M, \mathcal{B}, \mu)$ un conjunto denso en $\mathcal{L}^p$ y $R \subseteq \mathcal{L}^q(M, \mathcal{B}, \mu)$ un conjunto denso en $\mathcal{L}^q$ para los cuales se cumple la hipótesis de factorización $c)$, es decir:
+	\begin{equation}
+		\lim_{n \to \infty} \int_M (\varphi' \circ f^n)\chi' \, d\mu = \left( \int_M \varphi' \, d\mu \right) \left( \int_M \chi' \, d\mu \right), \quad \forall \varphi' \in S \text{ y } \forall \chi' \in R. \label{eq:hipotesis_densidad}
+	\end{equation}
+	
+	Tomemos funciones arbitrarias $\varphi \in \mathcal{L}^p(M, \mathcal{B}, \mu)$ y $\chi \in \mathcal{L}^q(M, \mathcal{B}, \mu)$. Para cualquier tolerancia $\varepsilon > 0$, por densidad existen $\varphi' \in S$ y $\chi' \in R$ tales que:
+	$$ \|\varphi - \varphi'\|_p < \varepsilon \qquad \text{y} \qquad \|\chi - \chi'\|_q < \varepsilon. $$
+	
+	Asignando $\varphi_1 = \varphi$, $\chi_1 = \chi$, $\varphi_2 = \varphi'$, $\chi_2 = \chi'$ en la cota maestra (\ref{eq:cota_maestra}):
+	\begin{align*}
+		\left| \int_M (\varphi \circ f^n)\chi \, d\mu - \int_M \varphi \, d\mu \int_M \chi \, d\mu \right| &\le \left| \int_M (\varphi' \circ f^n)\chi' \, d\mu - \int_M \varphi' \, d\mu \int_M \chi' \, d\mu \right| \\
+		&\quad + 2\left( \|\varphi - \varphi'\|_p \|\chi\|_q + \|\varphi'\|_p \|\chi - \chi'\|_q \right) \\
+		&< \left| \int_M (\varphi' \circ f^n)\chi' \, d\mu - \int_M \varphi' \, d\mu \int_M \chi' \, d\mu \right| \\
+		&\quad + 2\varepsilon\left( \|\chi\|_q + \|\varphi'\|_p \right)
+	\end{align*}
+	
+	Dado que $\varphi' \in S$ y $\chi' \in R$, por (\ref{eq:hipotesis_densidad}) el primer término del lado derecho tiende a cero cuando $n \to \infty$. Por lo tanto, para un tiempo $n$ suficientemente grande ($n \gg 1$), podemos hacerlo menor que $\varepsilon$:
+	$$ \left| \int_M (\varphi \circ f^n)\chi \, d\mu - \int_M \varphi \, d\mu \int_M \chi \, d\mu \right| < \varepsilon \left( 1 + 2\|\chi\|_q + 2\|\varphi'\|_p \right). $$
+	
+	Por la absoluta arbitrariedad de $\varepsilon > 0$, concluimos que el límite es exacto:
+	$$ \lim_{n \to \infty} \int_M (\varphi \circ f^n)\chi \, d\mu = \left( \int_M \varphi \, d\mu \right) \left( \int_M \chi \, d\mu \right), \quad \forall \varphi \in \mathcal{L}^p \text{ y } \forall \chi \in \mathcal{L}^q $$
+	lo cual demuestra que se cumple $b)$ y cierra el teorema de caracterización.
+\end{proof}
+
+% =========================================================================
+% --- FIN INPUT SEMANA 13 ---
+% =========================================================================

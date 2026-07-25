@@ -1,0 +1,183 @@
+% =========================================================================
+% --- INICIO INPUT SEMANA 14 ---
+% =========================================================================
+
+\chapter{Semana 14: Conexión entre Dinámica Métrica y Topológica}
+
+\section{Soporte de una Medida de Borel}
+
+El puente fundamental que conecta las propiedades estadísticas de un sistema dinámico (teoría ergódica y de la medida) con sus propiedades cualitativas y espaciales (dinámica topológica) se establece a través del concepto de soporte de una medida invariante.
+
+\begin{definicion}[Soporte de una medida de Borel]
+	Sea $(M, \mathcal{B}, \mu)$ un espacio de medida, donde $M$ es un espacio topológico, $\mathcal{B}$ es la $\sigma$-álgebra de Borel en $M$ y $\mu$ es una medida de Borel. El \textbf{soporte} de la medida $\mu$, denotado por $\operatorname{supp}(\mu)$, se define como el conjunto de puntos cuyas vecindades tienen medida estrictamente positiva:
+	$$ \operatorname{supp}(\mu) = \{ x \in M : \mu(U_x) > 0, \;\; \forall U_x \text{ vecindad abierta de } x \} $$
+\end{definicion}
+
+\begin{ejemplo}[Medida de Lebesgue en la recta real]
+	Considere el espacio $M = \mathbb{R}$ con su $\sigma$-álgebra de Borel $\mathcal{B} = \mathcal{B}_{\mathbb{R}}$ y la medida de Lebesgue $\mu = m$.
+	\textbf{Afirmación:} $\operatorname{supp}(m) = \mathbb{R}$.
+	
+	\textit{En efecto:} Sea $x \in \mathbb{R}$ un punto arbitrario y sea $U_x$ una vecindad abierta cualquiera de $x$. Por definición de la topología usual, existe un radio $\delta > 0$ tal que el intervalo abierto $(x-\delta, x+\delta) \subseteq U_x$. Por monotonía y definición de la medida de Lebesgue:
+	$$ m(U_x) \ge m((x-\delta, x+\delta)) = 2\delta > 0 $$
+	Como toda vecindad de $x$ posee medida positiva, se concluye que $x \in \operatorname{supp}(m)$, luego $\operatorname{supp}(m) = \mathbb{R}$.
+\end{ejemplo}
+
+\begin{ejemplo}[Medida de Bernoulli en el shift bilateral]
+	Considere el espacio de sucesiones simbólicas bilaterales $M = \Sigma_d = \{0, 1, \dots, d-1\}^{\mathbb{Z}}$ dotado de su $\sigma$-álgebra de Borel $\mathcal{B} = \mathcal{B}_{\Sigma_d}$. Sea $\mu$ la medida de Bernoulli producto asociada al vector de probabilidades $(p_0, p_1, \dots, p_{d-1})$ donde cada peso es estrictamente positivo ($p_i > 0$ para todo $i$) y $\sum_{i=0}^{d-1} p_i = 1$.
+	\textbf{Afirmación:} $\operatorname{supp}(\mu) = \Sigma_d$.
+	
+	\textit{En efecto:} Sea $x = (x_k)_{k \in \mathbb{Z}} \in \Sigma_d$ una sucesión cualquiera. En la topología producto (o métrica de Cantor), una base de vecindades abiertas para $x$ está formada por los cilindros elementales centrados en sus coordenadas:
+	$$ U_x = [m : a_m, a_{m+1}, \dots, a_n] $$
+	donde las coordenadas coinciden con las de la sucesión: $a_k = x_k$ para $m \le k \le n$. Evaluando la medida producto en este cilindro:
+	$$ \mu(U_x) = \prod_{k=m}^n p_{a_k} = p_{a_m} \cdot p_{a_{m+1}} \cdots p_{a_n} $$
+	Como cada factor individual satisface $p_{a_k} > 0$, el producto finito es estrictamente positivo: $\mu(U_x) > 0$. En consecuencia, absolutamente toda sucesión del espacio pertenece al soporte, es decir, $\operatorname{supp}(\mu) = \Sigma_d$.
+\end{ejemplo}
+
+\begin{ejemplo}[Medida de Dirac en espacios de Hausdorff]
+	Sea $M$ un espacio topológico de Hausdorff, $\mathcal{B}$ su $\sigma$-álgebra de Borel y sea la medida puntual $\mu = \delta_p$ centrada en un punto fijo $p \in M$.
+	\textbf{Afirmación:} $\operatorname{supp}(\delta_p) = \{p\}$.
+	
+	\textit{En efecto:} Por un lado, si $U_p$ es una vecindad abierta cualquiera de $p$, como $p \in U_p$, la definición de la medida puntual garantiza que $\delta_p(U_p) = 1 > 0$. Por lo tanto, $p \in \operatorname{supp}(\delta_p)$.
+	
+	Por otro lado, procediendo por reducción al absurdo, supongamos que existe otro punto $q \in \operatorname{supp}(\delta_p)$ con $q \neq p$. Al ser $M$ un espacio de Hausdorff, existen vecindades abiertas disjuntas $U_p$ y $U_q$ tales que $p \in U_p$, $q \in U_q$ y $U_p \cap U_q = \emptyset$. Como $U_p$ y $U_q$ son disjuntos y $p \in U_p$, obligatoriamente $p \notin U_q$. Evaluando la medida de Dirac en la vecindad de $q$:
+	$$ \delta_p(U_q) = 0 $$
+	Esto contradice la suposición de que $q$ pertenece al soporte (lo cual exigiría $\delta_p(U_q) > 0$). Por lo tanto, el soporte es únicamente el punto singular $\{p\}$.
+\end{ejemplo}
+
+\begin{ejemplo}[Soporte discreto finito]
+	De manera general, si consideramos una combinación lineal convexa de medidas de Dirac centradas en una colección finita de puntos distintos $\{p_1, p_2, \dots, p_n\} \subset M$:
+	$$ \mu = \frac{1}{n} \sum_{i=1}^n \delta_{p_i} \implies \operatorname{supp}(\mu) = \{p_1, p_2, \dots, p_n\} $$
+\end{ejemplo}
+
+\begin{ejercicio}
+	En el espacio de sucesiones simbólicas $\Sigma_d$, determine explícitamente el soporte $\operatorname{supp}(\mu)$ para una medida de Bernoulli asociada a un vector de probabilidades $(p_0, p_1, \dots, p_{d-1})$ en el caso en que al menos uno de los pesos sea nulo (es decir, existe algún $j \in \{0, \dots, d-1\}$ tal que $p_j = 0$).
+\end{ejercicio}
+
+\section{Propiedades Topológicas del Soporte}
+
+\begin{proposicion}[Propiedades topológicas y métricas del soporte] \label{prop:propiedades_soporte}
+	Sea $M$ un espacio topológico separable y de segundo orden (por ejemplo, un espacio métrico separable), $\mathcal{B}$ su $\sigma$-álgebra de Borel y $\mu$ una medida de Borel. Se satisfacen las siguientes propiedades:
+	\begin{enumerate}[a)]
+		\item El soporte es el complemento del mayor conjunto abierto de medida nula:
+		$$ \operatorname{supp}(\mu) = V^c, \quad \text{donde } V \text{ es la unión de todos los abiertos } U \subset M \text{ tales que } \mu(U) = 0 $$
+		\item El soporte $\operatorname{supp}(\mu)$ es un subconjunto \textbf{cerrado} de $M$.
+		\item El soporte concentra toda la masa de la medida:
+		$$ \mu(M \setminus \operatorname{supp}(\mu)) = 0 $$
+		\item Si $A \in \mathcal{B}$ es un conjunto medible que concentra medida total, es decir, $\mu(M \setminus A) = 0$ (o equivalentemente, $\mu(A) = \mu(M)$ si la medida es finita), entonces el soporte está contenido dentro de su clausura topológica:
+		$$ \operatorname{supp}(\mu) \subseteq \overline{A} $$
+	\end{enumerate}
+\end{proposicion}
+
+\begin{proof}[Demostración]
+	\textbf{a)} Sea $V = \bigcup \{ U \subset M : U \text{ es abierto y } \mu(U) = 0 \}$. Demostraremos la doble inclusión comprobando que $\operatorname{supp}(\mu) = V^c$, o equivalentemente, que $(\operatorname{supp}(\mu))^c = V$.
+	\begin{itemize}
+		\item ($\subseteq$) Sea $x \in (\operatorname{supp}(\mu))^c$. Por definición de soporte, $x \notin \operatorname{supp}(\mu)$, lo que significa que existe al menos una vecindad abierta $U_x$ del punto tal que $\mu(U_x) = 0$. Como $V$ es la unión de todos los abiertos de medida nula, se tiene que $x \in U_x \subseteq V$. Luego, $(\operatorname{supp}(\mu))^c \subseteq V$.
+		\item ($\supseteq$) Sea $x \in V$. Al ser $V$ un conjunto abierto, constituye en sí mismo una vecindad abierta para el punto $x$. En espacios que poseen una base numerable (como los métricos separables), el teorema de Lindelöf garantiza que la unión arbitraria $V$ de abiertos de medida cero se reduce a una unión subnumerable $V = \bigcup_{n=1}^\infty U_n$ con $\mu(U_n) = 0$. Por subaditividad numerable:
+		$$ \mu(V) \le \sum_{n=1}^\infty \mu(U_n) = \sum_{n=1}^\infty 0 = 0 \implies \mu(V) = 0 $$
+		Como existe una vecindad de $x$ (el propio $V$) con medida cero, se deduce que $x \notin \operatorname{supp}(\mu)$, es decir, $x \in (\operatorname{supp}(\mu))^c$. Por lo tanto, $V \subseteq (\operatorname{supp}(\mu))^c$.
+	\end{itemize}
+	
+	\textbf{b)} Como $\operatorname{supp}(\mu) = V^c$ y $V$ es un conjunto abierto (por ser unión de conjuntos abiertos), su complemento es obligatoriamente un conjunto cerrado en la topología de $M$.
+	
+	\textbf{c)} Directamente de la parte a) y del hecho de que $\mu(V) = 0$:
+	$$ \mu(M \setminus \operatorname{supp}(\mu)) = \mu((\operatorname{supp}(\mu))^c) = \mu(V) = 0 $$
+	
+	\textbf{d)} Supongamos por reducción al absurdo que $\operatorname{supp}(\mu) \not\subseteq \overline{A}$. Entonces existiría algún punto $x \in \operatorname{supp}(\mu)$ tal que $x \notin \overline{A}$. Al no pertenecer a la clausura, el punto está en su exterior: $x \in (\overline{A})^c$.
+	
+	Como el complemento de la clausura $(\overline{A})^c$ es un conjunto abierto, existe una vecindad abierta $U_x$ del punto que está completamente contenida en el exterior:
+	$$ x \in U_x \subseteq (\overline{A})^c \implies U_x \cap A = \emptyset \implies U_x \subseteq M \setminus A $$
+	Por la monotonía de la medida de Borel y nuestra hipótesis de que $M \setminus A$ es un conjunto de masa nula:
+	$$ 0 \le \mu(U_x) \le \mu(M \setminus A) = 0 \implies \mu(U_x) = 0 $$
+	Pero si el punto $x$ admite una vecindad de medida cero, entonces por definición $x \notin \operatorname{supp}(\mu)$, lo cual entra en contradicción directa con nuestra hipótesis inicial. En conclusión, $\operatorname{supp}(\mu) \subseteq \overline{A}$.
+\end{proof}
+
+\section{Implicaciones Topológicas de la Ergodicidad y el Mixing}
+
+El siguiente teorema representa uno de los resultados más hermosos del seminario: demuestra cómo la indecomponibilidad estadística (ergodicidad y mixing métrico) fuerza una indecomponibilidad cualitativa extrema (transitividad y mixing topológico) sobre el soporte del sistema.
+
+\begin{proposicion}[Dinámica restringida al soporte] \label{prop:dinamica_soporte}
+	Sea $M$ un espacio métrico separable y localmente compacto, $f: M \to M$ un homeomorfismo y $\mu$ una medida de probabilidad en $M$ que es invariante bajo $f$. Entonces se verifican las siguientes afirmaciones:
+	\begin{enumerate}[a)]
+		\item El soporte de la medida es estrictamente invariante bajo el homeomorfismo:
+		$$ f(\operatorname{supp}(\mu)) = \operatorname{supp}(\mu) $$
+		En particular, el sistema dinámico restringido al soporte $f|_{\operatorname{supp}(\mu)}: \operatorname{supp}(\mu) \to \operatorname{supp}(\mu)$ está bien definido.
+		\item Si la medida $\mu$ es \textbf{ergódica} respecto a $f$, entonces el sistema restringido $f|_{\operatorname{supp}(\mu)}$ es \textbf{topológicamente transitivo}.
+		\item Si la medida $\mu$ es \textbf{mixing} respecto a $f$, entonces el sistema restringido $f|_{\operatorname{supp}(\mu)}$ es \textbf{topológicamente mixing}.
+	\end{enumerate}
+\end{proposicion}
+
+\begin{proof}[Demostración]
+	\textbf{a)} Proprobemos las dos inclusiones para establecer la igualdad fundamental:
+	\begin{itemize}
+		\item ($\subseteq$) Sea $x \in f(\operatorname{supp}(\mu))$. Esto significa que existe un elemento del soporte $z \in \operatorname{supp}(\mu)$ tal que $x = f(z)$. Sea $U_x$ una vecindad abierta arbitraria del punto $x$. 
+		
+		Como la aplicación $f$ es continua, la preimagen topológica $f^{-1}(U_x)$ es una vecindad abierta del punto preimagen $z$. Como $z \in \operatorname{supp}(\mu)$, su vecindad tiene medida positiva: $\mu(f^{-1}(U_x)) > 0$.
+		
+		Invocando la invariancia de la medida $\mu$ bajo la dinámica ($f_* \mu = \mu \implies \mu(U_x) = \mu(f^{-1}(U_x))$):
+		$$ \mu(U_x) = \mu(f^{-1}(U_x)) > 0 $$
+		Como toda vecindad de $x$ tiene medida positiva, deducimos que $x \in \operatorname{supp}(\mu)$. Luego, $f(\operatorname{supp}(\mu)) \subseteq \operatorname{supp}(\mu)$.
+		
+		\item ($\supseteq$) Aplicando exactamente el mismo argumento analítico para el homeomorfismo inverso $f^{-1}$ (el cual preserva la misma medida invariante $\mu$), obtenemos que:
+		$$ f^{-1}(\operatorname{supp}(\mu)) \subseteq \operatorname{supp}(\mu) $$
+		Aplicando la aplicación biyectiva $f$ a ambos lados de esta última inclusión, obtenemos la contención recíproca: $\operatorname{supp}(\mu) \subseteq f(\operatorname{supp}(\mu))$. Por lo tanto, el soporte es invariante: $f(\operatorname{supp}(\mu)) = \operatorname{supp}(\mu)$.
+	\end{itemize}
+	
+	\textbf{b)} Para demostrar la transitividad topológica del sistema restringido al soporte, debemos comprobar que para cualquier par de conjuntos abiertos relativos no vacíos $U, V \subset \operatorname{supp}(\mu)$, existe algún tiempo futuro $k \ge 0$ donde sus trayectorias se cruzan: $f^{-k}(U) \cap V \neq \emptyset$.
+	
+	Por definición de la topología relativa, los conjuntos abiertos en el soporte provienen de intersecciones con abiertos generales en el espacio ambiente $M$:
+	$$ U = \tilde{U} \cap \operatorname{supp}(\mu) \neq \emptyset \quad \text{y} \quad V = \tilde{V} \cap \operatorname{supp}(\mu) \neq \emptyset, \quad \text{donde } \tilde{U}, \tilde{V} \text{ son abiertos en } M $$
+	Por la propia definición del operador de soporte, si un abierto interseca al soporte en al menos un punto, su medida de Borel debe ser estrictamente positiva:
+	$$ \mu(\tilde{U}) > 0 \quad \text{y} \quad \mu(\tilde{V}) > 0 $$
+	
+	Dado que por hipótesis la medida $\mu$ es \textbf{ergódica}, aplicamos la caracterización por promedios temporales (Teorema de la Semana 12) a los conjuntos de medida positiva $\tilde{U}$ y $\tilde{V}$:
+	$$ \lim_{n \to \infty} \frac{1}{n} \sum_{k=0}^{n-1} \mu(f^{-k}(\tilde{U}) \cap \tilde{V}) = \mu(\tilde{U})\mu(\tilde{V}) > 0 $$
+	
+	Como el límite de promedios algebraicos converge a un valor estrictamente positivo, la sucesión de sumas parciales no puede ser idénticamente nula a partir de un cierto paso. Luego, existe algún entero $n_0 \in \mathbb{N}$ tal que:
+	$$ \frac{1}{n_0} \sum_{k=0}^{n_0-1} \mu(f^{-k}(\tilde{U}) \cap \tilde{V}) > 0 $$
+	Para que una suma finita de términos no negativos sea estrictamente positiva, al menos uno de los sumandos debe ser positivo. Así, existe un índice de tiempo $k_0 \in \{0, 1, \dots, n_0-1\}$ para el cual:
+	$$ \mu(f^{-k_0}(\tilde{U}) \cap \tilde{V}) > 0 $$
+	
+	Si la medida de un conjunto es estrictamente positiva, dicho conjunto no puede ser vacío en el espacio topológico:
+	$$ f^{-k_0}(\tilde{U}) \cap \tilde{V} \neq \emptyset \implies \tilde{U} \cap f^{k_0}(\tilde{V}) \neq \emptyset $$
+	Como la medida se concentra absolutamente dentro del soporte ($\mu(M \setminus \operatorname{supp}(\mu)) = 0$) y la intersección tiene masa positiva, esta intersección geométrica debe ocurrir necesariamente dentro de los límites de $\operatorname{supp}(\mu)$. Por consiguiente, los abiertos relativos se intersecan bajo la dinámica:
+	$$ U \cap f^{k_0}(V) \neq \emptyset $$
+	lo cual demuestra que la restricción $f|_{\operatorname{supp}(\mu)}$ es topológicamente transitiva.
+	
+	\textbf{c)} Para verificar que el sistema restringido es topológicamente mixing, debemos demostrar que para cualquier par de abiertos relativos no vacíos $U, V \subset \operatorname{supp}(\mu)$, existe un tiempo umbral $N_0 \in \mathbb{N}$ a partir del cual las trayectorias se intersecan de manera ininterrumpida para todo instante posterior:
+	$$ f^{-n}(U) \cap V \neq \emptyset, \quad \forall n \ge N_0 $$
+	
+	Al igual que en la parte anterior, representamos los abiertos relativos mediante abiertos en $M$: $U = \tilde{U} \cap \operatorname{supp}(\mu)$ y $V = \tilde{V} \cap \operatorname{supp}(\mu)$, los cuales satisfacen por hipótesis de soporte que $\mu(\tilde{U}) > 0$ y $\mu(\tilde{V}) > 0$.
+	
+	Dado que en este caso la medida $\mu$ es métricamente \textbf{mixing}, aplicamos la definición asintótica de mezcla fuerte a ambos abiertos:
+	$$ \lim_{n \to \infty} \mu(f^{-n}(\tilde{U}) \cap \tilde{V}) = \mu(\tilde{U})\mu(\tilde{V}) > 0 $$
+	
+	Por la propia definición analítica de límite para una sucesión de números reales que converge a un valor estrictamente positivo $L = \mu(\tilde{U})\mu(\tilde{V}) > 0$, tomando por ejemplo una tolerancia $\varepsilon = L/2 > 0$, existe un entero $N_0 \in \mathbb{N}$ tal que para absolutamente todo $n \ge N_0$, el término de la sucesión se mantiene dentro de la vecindad positiva del límite:
+	$$ \mu(f^{-n}(\tilde{U}) \cap \tilde{V}) > \frac{1}{2} \mu(\tilde{U})\mu(\tilde{V}) > 0, \quad \forall n \ge N_0 $$
+	
+	(En otras palabras, el conjunto de índices temporales donde la medida de la intersección pudiera anularse es, en el peor de los casos, un conjunto finito contenido en el intervalo inicial $\{0, 1, \dots, N_0-1\}$).
+	
+	Como para todo tiempo posterior $n \ge N_0$ la medida de la intersección es positiva, el conjunto intersección es topológicamente no vacío y ocurre dentro del soporte:
+	$$ f^{-n}(\tilde{U}) \cap \tilde{V} \neq \emptyset \implies U \cap f^n(V) \neq \emptyset, \quad \forall n \ge N_0 $$
+	probando así que el sistema restringido $f|_{\operatorname{supp}(\mu)}$ es topológicamente mixing.
+\end{proof}
+
+\begin{corolario}[Sistemas dinámicos con soporte total] \label{cor:soporte_total}
+	Bajo las mismas hipótesis geométricas y métricas de la Proposición \ref{prop:dinamica_soporte}, supongamos además que la medida invariante tiene \textbf{soporte total}, es decir, $\operatorname{supp}(\mu) = M$. Entonces se cumplen las siguientes implicaciones directas hacia la dinámica global:
+	\begin{enumerate}[a)]
+		\item Si $\mu$ es una medida ergódica, entonces el homeomorfismo $f: M \to M$ es topológicamente transitivo en todo el espacio.
+		\item Si $\mu$ es una medida mixing, entonces el homeomorfismo $f: M \to M$ es topológicamente mixing en todo el espacio.
+	\end{enumerate}
+\end{corolario}
+
+\begin{ejercicio}[Análisis de los recíprocos topológicos]
+	Estudie y responda de manera fundamentada las preguntas abiertas planteadas en el Corolario \ref{cor:soporte_total}:
+	\begin{enumerate}[1)]
+		\item ¿Es cierto el recíproco del ítem a)? Es decir, si $f: M \to M$ es topológicamente transitivo en $M$ y preserva una medida de probabilidad $\mu$ con soporte total ($\operatorname{supp}(\mu) = M$), ¿implica esto necesariamente que la medida $\mu$ es ergódica respecto a $f$?
+		\item ¿Es cierto el recíproco del ítem b)? Es decir, si el sistema es topológicamente mixing en todo $M$ con una medida invariante de soporte total, ¿debe ser dicha medida obligatoriamente mixing?
+	\end{enumerate}
+	\textit{(Sugerencia: Piense en sistemas dinámicos que posean más de una medida de probabilidad invariante o explore contraejemplos basados en rotaciones y transformaciones de corrimiento en espacios simbólicos).}
+\end{ejercicio}
+
+% =========================================================================
+% --- FIN INPUT SEMANA 14 ---
+% =========================================================================

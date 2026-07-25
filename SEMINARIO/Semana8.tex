@@ -1,0 +1,259 @@
+% =========================================================================
+% --- INICIO INPUT SEMANA 8 ---
+% =========================================================================
+
+\chapter{Semana 8: Funciones Medibles e Integración de Lebesgue}
+
+\section{Funciones Medibles}
+
+Una vez establecida la estructura de los espacios medibles $(X, \mathcal{B})$ y la medida de Lebesgue, el siguiente paso fundamental para el análisis dinámico y la teoría ergódica es el estudio de las transformaciones que preservan dicha estructura medible, generalizando el concepto topológico de función continua.
+
+\begin{definicion}[Función medible]
+	Sean $(X, \mathcal{B})$ y $(Y, \mathcal{C})$ dos espacios medibles. Una función $f: X \to Y$ se denomina \textbf{medible} (o $(\mathcal{B}, \mathcal{C})$-medible) si la preimagen de todo conjunto medible en el codominio es un conjunto medible en el dominio:
+	$$ f^{-1}(C) \in \mathcal{B}, \quad \forall C \in \mathcal{C} $$
+	Cuando $(Y, \mathcal{C}) = (\mathbb{R}, \mathcal{B}_\mathbb{R})$ o $(\overline{\mathbb{R}}, \mathcal{B}_{\overline{\mathbb{R}}})$, donde $\overline{\mathbb{R}} = [-\infty, +\infty]$ es la recta real extendida, decimos simplemente que $f$ es una \textbf{función medible en $X$}.
+\end{definicion}
+
+\begin{proposicion}[Criterio de generación para medibilidad]
+	Sean $(X, \mathcal{B})$ y $(Y, \mathcal{C})$ espacios medibles, y supongamos que la $\sigma$-álgebra del codominio es generada por una familia de subconjuntos $\mathcal{E} \subset 2^Y$, es decir, $\mathcal{C} = \sigma(\mathcal{E})$. Entonces, una aplicación $f: X \to Y$ es medible si y solo si:
+	$$ f^{-1}(E) \in \mathcal{B}, \quad \forall E \in \mathcal{E} $$
+\end{proposicion}
+
+\begin{proof}[Demostración]
+	$[\Rightarrow]$ Si $f$ es medible, por definición $f^{-1}(C) \in \mathcal{B}$ para todo $C \in \mathcal{C}$. Como $\mathcal{E} \subseteq \sigma(\mathcal{E}) = \mathcal{C}$, en particular se cumple para todo $E \in \mathcal{E}$.
+	
+	$[\Leftarrow]$ Definamos la familia de subconjuntos del codominio cuya preimagen bajo $f$ es medible en $X$:
+	$$ \mathcal{D} = \{ C \subset Y : f^{-1}(C) \in \mathcal{B} \} $$
+	Demostraremos que $\mathcal{D}$ es una $\sigma$-álgebra en $Y$:
+	\begin{enumerate}[i)]
+		\item Como $f^{-1}(\emptyset) = \emptyset \in \mathcal{B}$, se tiene que $\emptyset \in \mathcal{D}$.
+		\item Si $C \in \mathcal{D}$, entonces $f^{-1}(C) \in \mathcal{B}$. Por las propiedades algebraicas de la preimagen, $f^{-1}(C^c) = (f^{-1}(C))^c$. Como $\mathcal{B}$ es una $\sigma$-álgebra, es cerrada bajo complementación, luego $(f^{-1}(C))^c \in \mathcal{B} \implies C^c \in \mathcal{D}$.
+		\item Si $\{C_n\}_{n=1}^\infty \subset \mathcal{D}$, entonces $f^{-1}(C_n) \in \mathcal{B}$ para todo $n$. Como la preimagen conmuta con la unión, $f^{-1}\left( \bigcup_{n=1}^\infty C_n \right) = \bigcup_{n=1}^\infty f^{-1}(C_n) \in \mathcal{B}$, por lo que $\bigcup_{n=1}^\infty C_n \in \mathcal{D}$.
+	\end{enumerate}
+	Por hipótesis, $\mathcal{E} \subseteq \mathcal{D}$. Al ser $\mathcal{D}$ una $\sigma$-álgebra que contiene a la familia generadora $\mathcal{E}$, debe contener a la menor $\sigma$-álgebra generada: $\mathcal{C} = \sigma(\mathcal{E}) \subseteq \mathcal{D}$. Por lo tanto, para todo $C \in \mathcal{C}$, se cumple $f^{-1}(C) \in \mathcal{B}$, probando que $f$ es medible.
+\end{proof}
+
+\begin{corolario}[Medibilidad real por rayos abiertos]
+	Una función real $f: X \to \mathbb{R}$ es medible si y solo si cumple cualquiera de las siguientes cuatro condiciones equivalentes para todo número real $\alpha \in \mathbb{R}$:
+	\begin{align*}
+		1)\quad & \{x \in X : f(x) > \alpha\} = f^{-1}((\alpha, +\infty)) \in \mathcal{B} \\
+		2)\quad & \{x \in X : f(x) \ge \alpha\} = f^{-1}([\alpha, +\infty)) \in \mathcal{B} \\
+		3)\quad & \{x \in X : f(x) < \alpha\} = f^{-1}((-\infty, \alpha)) \in \mathcal{B} \\
+		4)\quad & \{x \in X : f(x) \le \alpha\} = f^{-1}((-\infty, \alpha]) \in \mathcal{B}
+	\end{align*}
+\end{corolario}
+
+\begin{ejercicio}
+	Demuestre que si $(X, \tau_X)$ y $(Y, \tau_Y)$ son espacios topológicos dotados de sus respectivas $\sigma$-álgebras de Borel $\mathcal{B}_X$ y $\mathcal{B}_Y$, entonces toda función continua $f: X \to Y$ es $(\mathcal{B}_X, \mathcal{B}_Y)$-medible.
+\end{ejercicio}
+\begin{proof}[Solución]
+	La $\sigma$-álgebra de Borel $\mathcal{B}_Y$ es generada por la familia de conjuntos abiertos $\tau_Y$, es decir, $\mathcal{B}_Y = \sigma(\tau_Y)$. 
+	Por la definición topológica de continuidad, para todo abierto $V \in \tau_Y$, su preimagen $f^{-1}(V)$ es un conjunto abierto en el dominio $X$, por lo que $f^{-1}(V) \in \tau_X \subseteq \mathcal{B}_X$.
+	Aplicando el Proposición anterior con $\mathcal{E} = \tau_Y$, se concluye directamente que $f$ es medible de Borel.
+\end{proof}
+
+\begin{teorema}[Propiedades algebraicas y analíticas de funciones medibles]
+	Sean $f, g: X \to \mathbb{R}$ funciones medibles y sea $c \in \mathbb{R}$ una constante. Entonces:
+	\begin{enumerate}[1)]
+		\item Las funciones $cf$, $f + g$, $f - g$ y $f \cdot g$ son medibles en $X$.
+		\item Si $g(x) \neq 0$ para todo $x \in X$, el cociente $f/g$ es medible.
+		\item Las funciones valor absoluto $|f|$, parte positiva $f^+ = \max\{f, 0\}$ y parte negativa $f^- = \max\{-f, 0\}$ son medibles.
+		\item Si $\{f_n\}_{n=1}^\infty$ es una sucesión de funciones medibles en $X$, entonces las siguientes funciones elementales del análisis funcional también son medibles:
+		$$ \sup_{n \ge 1} f_n, \quad \inf_{n \ge 1} f_n, \quad \limsup_{n \to \infty} f_n \quad \text{y} \quad \liminf_{n \to \infty} f_n $$
+		En particular, si la sucesión converge puntualmente en todo $X$, su función límite $f(x) = \lim_{n \to \infty} f_n(x)$ es medible.
+	\end{enumerate}
+\end{teorema}
+
+\begin{proof}[Demostración selecta para el límite superior e inferior]
+	Para un $x \in X$ fijo, recordemos que el supremo de una sucesión de funciones satisface la siguiente propiedad de preimagen para cualquier $\alpha \in \mathbb{R}$:
+	$$ \left\{ x \in X : \sup_{n \ge 1} f_n(x) > \alpha \right\} = \bigcup_{n=1}^\infty \{x \in X : f_n(x) > \alpha\} $$
+	Como cada $f_n$ es medible, cada conjunto $\{x \in X : f_n(x) > \alpha\} \in \mathcal{B}$. Al ser $\mathcal{B}$ cerrada bajo uniones numerables, el conjunto unión pertenece a $\mathcal{B}$, probando la medibilidad de $\sup_{n \ge 1} f_n$. De forma análoga, $\inf_{n \ge 1} f_n$ es medible al usar intersecciones numerables.
+	
+	Finalmente, observando las identidades analíticas del límite superior e inferior:
+	$$ \limsup_{n \to \infty} f_n = \inf_{k \ge 1} \left( \sup_{n \ge k} f_n \right) \quad \text{y} \quad \liminf_{n \to \infty} f_n = \sup_{k \ge 1} \left( \inf_{n \ge k} f_n \right) $$
+	se deduce que ambas son composiciones numerables de supremos e ínfimos de funciones medibles, por lo que su medibilidad queda plenamente garantizada.
+\end{proof}
+
+\section{Funciones Simples y Aproximación}
+
+La teoría de integración de Lebesgue se construye mediante una aproximación estructurada desde el rango de la función (el eje vertical), a diferencia de la integral de Riemann que particiona el dominio (el eje horizontal). El bloque constructor fundamental para este proceso es la función simple.
+
+\begin{definicion}[Función característica e indicadora]
+	Dado un subconjunto $E \subseteq X$, su \textbf{función característica} (o indicadora) $\chi_E: X \to \{0, 1\}$ se define mediante:
+	$$ \chi_E(x) = \begin{cases} 1 & \text{si } x \in E \\ 0 & \text{si } x \notin E \end{cases} $$
+	Es inmediato notar que $\chi_E$ es una función medible si y solo si el conjunto $E$ es medible ($E \in \mathcal{B}$).
+\end{definicion}
+
+\begin{definicion}[Función simple]
+	Una función $s: X \to \mathbb{R}$ se denomina \textbf{función simple} si su imagen $s(X)$ es un conjunto finito de valores reales. Si $s(X) = \{c_1, c_2, \dots, c_n\}$ con $c_i \neq c_j$ para $i \neq j$, podemos expresar $s$ de manera unívoca como una combinación lineal de funciones características:
+	$$ s(x) = \sum_{i=1}^n c_i \chi_{E_i}(x) $$
+	donde los conjuntos $E_i = \{x \in X : s(x) = c_i\} = s^{-1}(\{c_i\})$ forman una partición del espacio $X$ (son disjuntos dos a dos y su unión es $X$). Esta expresión se conoce como la \textbf{representación canónica} de la función simple. Una función simple es medible si y solo si cada conjunto $E_i$ pertenece a la $\sigma$-álgebra $\mathcal{B}$.
+\end{definicion}
+
+\begin{teorema}[Teorema de Aproximación Fundamental de Lebesgue]
+	Sea $f: X \to [0, +\infty]$ una función medible no negativa. Entonces existe una sucesión monótona creciente $\{s_n\}_{n=1}^\infty$ de funciones simples medibles no negativas tal que:
+	\begin{enumerate}[i)]
+		\item $0 \le s_1(x) \le s_2(x) \le \dots \le s_n(x) \le f(x)$ para todo $x \in X$ y para todo $n \in \mathbb{N}$.
+		\item La sucesión converge puntualmente a $f$ en todo punto: $\lim_{n \to \infty} s_n(x) = f(x), \forall x \in X$.
+		\item Si $f$ es acotada en todo el espacio $X$, la convergencia de $s_n$ hacia $f$ es \textbf{uniforme} en $X$.
+	\end{enumerate}
+\end{teorema}
+
+\begin{proof}[Construcción algebraica canónica]
+	Para cada entero $n \ge 1$, particionamos el rango vertical $[0, n)$ en $n2^n$ subintervalos de igual longitud $\frac{1}{2^n}$, aislando el comportamiento en el infinito en el intervalo $[n, +\infty]$. Definimos los siguientes subconjuntos medibles en el dominio $X$:
+	$$ E_{n, k} = \left\{ x \in X : \frac{k-1}{2^n} \le f(x) < \frac{k}{2^n} \right\}, \quad \text{para } k = 1, 2, \dots, n2^n $$
+	$$ F_n = \{ x \in X : f(x) \ge n \} $$
+	Como $f$ es medible, cada $E_{n,k}$ y $F_n$ pertenece a $\mathcal{B}$. Construimos la función simple no negativa $s_n: X \to \mathbb{R}$ asignando el extremo inferior de cada intervalo vertical:
+	$$ s_n(x) = \sum_{k=1}^{n2^n} \frac{k-1}{2^n} \chi_{E_{n, k}}(x) + n \chi_{F_n}(x) $$
+	
+	Al pasar del índice $n$ a $n+1$, cada subintervalo vertical se divide exactamente por la mitad. Por lo tanto, el valor asignado por $s_{n+1}(x)$ en la mitad superior de cada división aumenta en $\frac{1}{2^{n+1}}$, mientras que en la mitad inferior se mantiene constante, garantizando que $s_n(x) \le s_{n+1}(x) \le f(x)$ para todo $x \in X$.
+	
+	Si $f(x) < +\infty$, existe un $N \in \mathbb{N}$ tal que $f(x) < N$, luego para todo $n \ge N$, el punto $x$ no cae en el estrato de desborde $F_n$, cumpliéndose que $0 \le f(x) - s_n(x) < \frac{1}{2^n} \to 0$. Si $f(x) = +\infty$, entonces $x \in F_n$ para todo $n$, dando $s_n(x) = n \to +\infty = f(x)$. Si $f$ es acotada globalmente por una constante $M$, tomando $n > M$ obtenemos que $\sup_{x \in X} |f(x) - s_n(x)| < \frac{1}{2^n}$, lo cual demuestra la convergencia uniforme.
+\end{proof}
+
+\section{La Integral de Lebesgue}
+
+\subsection{Integración de Funciones Simples No Negativas}
+
+\begin{definicion}[Integral de una función simple]
+	Sea $(X, \mathcal{B}, \mu)$ un espacio de medida y sea $s(x) = \sum_{i=1}^n c_i \chi_{E_i}(x)$ una función simple medible no negativa en su representación canónica ($c_i \ge 0$, $E_i \in \mathcal{B}$ disjuntos). Definimos la \textbf{integral de Lebesgue de $s$ respecto a la medida $\mu$} sobre el espacio $X$ como:
+	$$ \int_X s \, d\mu = \sum_{i=1}^n c_i \mu(E_i) $$
+	donde adoptamos la convención aritmética canónica de la teoría de la medida: $0 \cdot (+\infty) = 0$.
+	Si $A \in \mathcal{B}$ es un subconjunto medible cualquiera, la integral de $s$ sobre el conjunto $A$ se define como:
+	$$ \int_A s \, d\mu = \int_X (s \cdot \chi_A) \, d\mu = \sum_{i=1}^n c_i \mu(E_i \cap A) $$
+\end{definicion}
+
+\begin{lema}[Propiedades elementales para funciones simples]
+	Sean $s, t: X \to [0, +\infty)$ funciones simples medibles no negativas y sea $c \ge 0$ una constante real. Entonces:
+	\begin{enumerate}[1)]
+		\item \textbf{Linealidad:} $\int_X (cs + t) \, d\mu = c \int_X s \, d\mu + \int_X t \, d\mu$.
+		\item \textbf{Monotonía:} Si $s(x) \le t(x)$ para todo $x \in X$, entonces $\int_X s \, d\mu \le \int_X t \, d\mu$.
+		\item \textbf{Aditividad sobre conjuntos:} Si $A, B \in \mathcal{B}$ son conjuntos medibles disjuntos ($A \cap B = \emptyset$), entonces:
+		$$ \int_{A \cup B} s \, d\mu = \int_A s \, d\mu + \int_B s \, d\mu $$
+	\end{enumerate}
+\end{lema}
+
+\subsection{Integración de Funciones Medibles No Negativas}
+
+\begin{definicion}[Integral de una función no negativa]
+	Sea $f: X \to [0, +\infty]$ una función medible no negativa. Se define su \textbf{integral de Lebesgue} respecto a $\mu$ sobre $X$ como el supremo de las integrales de todas las funciones simples medibles no negativas que la acotan inferiormente:
+	$$ \int_X f \, d\mu = \sup \left\{ \int_X s \, d\mu : 0 \le s \le f, \text{ con } s \text{ función simple medible} \right\} $$
+	Para cualquier conjunto medible $A \in \mathcal{B}$, definimos $\int_A f \, d\mu = \int_X (f \cdot \chi_A) \, d\mu$. Esta integral siempre existe en el intervalo extendido $[0, +\infty]$.
+\end{definicion}
+
+\subsection{Integración de Funciones Medibles Generales y el Espacio \texorpdfstring{$\mathcal{L}^1(\mu)$}{L\^1(mu)}}
+
+Para integrar funciones que toman valores tanto positivos como negativos, separamos la función en sus dos componentes modulares no negativas.
+
+\begin{definicion}[Descomposición canónica]
+	Dada una función medible $f: X \to \overline{\mathbb{R}}$, la descomponemos unívocamente como la diferencia de dos funciones medibles no negativas:
+	$$ f(x) = f^+(x) - f^-(x) $$
+	donde $f^+(x) = \max\{f(x), 0\}$ y $f^-(x) = \max\{-f(x), 0\}$. Notemos además que el valor absoluto satisface la relación lineal modular: $|f(x)| = f^+(x) + f^-(x)$.
+\end{definicion}
+
+\begin{definicion}[Integrabilidad de Lebesgue]
+	Sea $f: X \to \overline{\mathbb{R}}$ una función medible. Decimos que la integral $\int_X f \, d\mu$ \textbf{existe} si al menos una de las dos integrales no negativas $\int_X f^+ \, d\mu$ o $\int_X f^- \, d\mu$ es finita. En tal caso, definimos:
+	$$ \int_X f \, d\mu = \int_X f^+ \, d\mu - \int_X f^- \, d\mu $$
+	Decimos que la función $f$ es \textbf{integrable según Lebesgue} (o sumable) respecto a la medida $\mu$ si ambas integrales son finitas simultáneamente, lo cual equivale a la condición de integrabilidad absoluta:
+	$$ \int_X |f| \, d\mu = \int_X f^+ \, d\mu + \int_X f^- \, d\mu < +\infty $$
+	El conjunto de todas las funciones reales medibles e integrables en $(X, \mathcal{B}, \mu)$ constituye un espacio vectorial normado denotado universalmente por $\mathcal{L}^1(X, \mathcal{B}, \mu)$ o brevemente $\mathcal{L}^1(\mu)$.
+\end{definicion}
+
+\begin{observacion}
+	Una distinción crucial con el cálculo elemental es que en la teoría de Lebesgue, la integrabilidad de una función $f \in \mathcal{L}^1(\mu)$ implica obligatoriamente la integrabilidad de su módulo $|f| \in \mathcal{L}^1(\mu)$, cumpliéndose siempre la desigualdad triangular integral:
+	$$ \left| \int_X f \, d\mu \right| \le \int_X |f| \, d\mu $$
+	Por tanto, integrales impropias condicionalmente convergentes como $\int_0^\infty \frac{\sin x}{x} dx$ no son integrables según Lebesgue.
+\end{observacion}
+
+\section{Teoremas Fundamentales de Convergencia Integral}
+
+En el cálculo clásico de Riemann, intercambiar el límite de una sucesión con la operación de integración suele requerir la convergencia uniforme, una condición excesivamente restrictiva para el análisis funcional. La principal ventaja matemática de la integral de Lebesgue radica en sus potentes teoremas que permiten conmutar límites bajo hipótesis significativamente más suaves y naturales.
+
+\begin{teorema}[Teorema de Convergencia Monótona de Beppo Levi]
+	Sea $\{f_n\}_{n=1}^\infty$ una sucesión monótona creciente de funciones medibles no negativas en $X$, es decir:
+	$$ 0 \le f_1(x) \le f_2(x) \le \dots \le f_n(x) \le f_{n+1}(x) \le \dots, \quad \forall x \in X $$
+	Sea $f(x) = \lim_{n \to \infty} f_n(x) = \sup_{n \ge 1} f_n(x)$ la función límite puntual. Entonces la función $f$ es medible y el límite de las integrales coincide con la integral del límite:
+	$$ \lim_{n \to \infty} \int_X f_n \, d\mu = \int_X \left( \lim_{n \to \infty} f_n \right) \, d\mu = \int_X f \, d\mu $$
+\end{teorema}
+
+\begin{corolario}[Aditividad numerable integral para series]
+	Si $\{u_n\}_{n=1}^\infty$ es una sucesión cualquiera de funciones medibles no negativas en $X$, entonces la suma infinita de la serie conmuta con la integral:
+	$$ \int_X \left( \sum_{n=1}^\infty u_n(x) \right) \, d\mu = \sum_{n=1}^\infty \int_X u_n \, d\mu $$
+\end{corolario}
+\begin{proof}
+	Basta definir la sucesión de sumas parciales $f_N(x) = \sum_{n=1}^N u_n(x)$. Como cada término $u_n \ge 0$, la sucesión $\{f_N\}_{N=1}^\infty$ es monótona creciente en todo punto. Por la linealidad de la integral sobre sumas finitas, $\int_X f_N \, d\mu = \sum_{n=1}^N \int_X u_n \, d\mu$. Aplicando el Teorema de Beppo Levi a la sucesión $f_N$ cuando $N \to \infty$, se obtiene el resultado.
+\end{proof}
+
+\begin{lema}[Lema de Fatou]
+	Sea $\{f_n\}_{n=1}^\infty$ una sucesión cualquiera de funciones medibles no negativas en el espacio $(X, \mathcal{B}, \mu)$. Entonces la integral del límite inferior de la sucesión está acotada superiormente por el límite inferior de las integrales:
+	$$ \int_X \left( \liminf_{n \to \infty} f_n \right) \, d\mu \le \liminf_{n \to \infty} \int_X f_n \, d\mu $$
+\end{lema}
+
+\begin{proof}[Demostración formal del Lema de Fatou]
+	Para cada entero $k \ge 1$, definamos la función auxiliar $g_k(x) = \inf_{n \ge k} f_n(x)$. Por las propiedades del ínfimo, la sucesión $\{g_k\}_{k=1}^\infty$ es monótona creciente:
+	$$ 0 \le g_1(x) \le g_2(x) \le \dots \le g_k(x) \le g_{k+1}(x) \le \dots $$
+	y por definición de límite inferior, converge puntualmente hacia $\lim_{k \to \infty} g_k(x) = \liminf_{n \to \infty} f_n(x)$.
+	
+	Dado que $\{g_k\}_{k=1}^\infty$ es una sucesión monótona creciente de funciones medibles no negativas, podemos aplicarle el Teorema de Convergencia Monótona de Beppo Levi:
+	$$ \int_X \left( \liminf_{n \to \infty} f_n \right) \, d\mu = \int_X \left( \lim_{k \to \infty} g_k \right) \, d\mu = \lim_{k \to \infty} \int_X g_k \, d\mu = \liminf_{k \to \infty} \int_X g_k \, d\mu $$
+	Por otra parte, por la propia definición del ínfimo para cada índice $k$, se tiene que $g_k(x) \le f_n(x)$ para todo $n \ge k$. Por la monotonía integral, esto implica que:
+	$$ \int_X g_k \, d\mu \le \int_X f_n \, d\mu, \quad \forall n \ge k $$
+	Tomando el ínfimo sobre todos los índices $n \ge k$ en el lado derecho de la desigualdad:
+	$$ \int_X g_k \, d\mu \le \inf_{n \ge k} \int_X f_n \, d\mu $$
+	Tomando ahora el límite cuando $k \to \infty$ en ambos extremos de la relación, concluimos rigurosamente:
+	$$ \int_X \left( \liminf_{n \to \infty} f_n \right) \, d\mu = \lim_{k \to \infty} \int_X g_k \, d\mu \le \lim_{k \to \infty} \left( \inf_{n \ge k} \int_X f_n \, d\mu \right) = \liminf_{n \to \infty} \int_X f_n \, d\mu $$
+\end{proof}
+
+\begin{definicion}[Propiedad Casi Siempre (c.s.)]
+	Sea $(X, \mathcal{B}, \mu)$ un espacio de medida. Decimos que una propiedad o proposición $P(x)$ referida a los puntos del espacio $X$ se cumple \textbf{casi siempre} (denotado por c.s., o a.e. en inglés por \textit{almost everywhere}) respecto a la medida $\mu$, si el conjunto de puntos donde la propiedad falla está contenido dentro de un conjunto medible de medida cero. Es decir, existe $N \in \mathcal{B}$ con $\mu(N) = 0$ tal que:
+	$$ \{ x \in X : P(x) \text{ es falsa} \} \subseteq N $$
+	Por ejemplo, $f = g$ c.s. significa que $\mu(\{x \in X : f(x) \neq g(x)\}) = 0$.
+\end{definicion}
+
+\begin{teorema}[Teorema de Convergencia Dominada de Lebesgue]
+	Sea $\{f_n\}_{n=1}^\infty$ una sucesión de funciones medibles en $X$ que converge puntualmente casi siempre hacia una función límite $f$, es decir, $\lim_{n \to \infty} f_n(x) = f(x)$ c.s. en $X$. Supongamos que existe una función no negativa integrable $g \in \mathcal{L}^1(\mu)$ que \textbf{domina} a la sucesión en todo su proceso:
+	$$ |f_n(x)| \le g(x) \quad \text{c.s. en } X, \quad \forall n \in \mathbb{N} $$
+	Entonces la función límite es integrable ($f \in \mathcal{L}^1(\mu)$), la sucesión converge en norma integral hacia $f$, es decir, $\lim_{n \to \infty} \int_X |f_n - f| \, d\mu = 0$, y se permite conmutar el límite con la integral:
+	$$ \lim_{n \to \infty} \int_X f_n \, d\mu = \int_X \left( \lim_{n \to \infty} f_n \right) \, d\mu = \int_X f \, d\mu $$
+\end{teorema}
+
+\begin{proof}[Demostración usando el Lema de Fatou]
+	Al redefinir las funciones en un conjunto de medida cero si es necesario, podemos asumir sin pérdida de generalidad que la convergencia y la dominación se cumplen en todo el espacio $X$.
+	Como $|f_n(x)| \le g(x)$, al tomar el límite puntual obtenemos $|f(x)| \le g(x)$. Por la monotonía de la integral, $\int_X |f| \, d\mu \le \int_X g \, d\mu < +\infty$, por lo que $f \in \mathcal{L}^1(\mu)$.
+	
+	Consideremos la sucesión de funciones no negativas dadas por:
+	$$ h_n(x) = 2g(x) - |f_n(x) - f(x)| $$
+	Por la desigualdad triangular y la cota dominante, $|f_n(x) - f(x)| \le |f_n(x)| + |f(x)| \le 2g(x)$, por lo que efectivamente $h_n(x) \ge 0$ para todo $n$ y $x$. Además, como $f_n \to f$ puntualmente, $\lim_{n \to \infty} |f_n(x) - f(x)| = 0$, lo que implica que $\liminf_{n \to \infty} h_n(x) = \lim_{n \to \infty} h_n(x) = 2g(x)$.
+	
+	Aplicando el Lema de Fatou a la sucesión de funciones no negativas $\{h_n\}_{n=1}^\infty$:
+	\begin{align*}
+		\int_X 2g \, d\mu &= \int_X \left( \liminf_{n \to \infty} h_n \right) \, d\mu \le \liminf_{n \to \infty} \int_X h_n \, d\mu \\
+		&= \liminf_{n \to \infty} \left( \int_X 2g \, d\mu - \int_X |f_n - f| \, d\mu \right) \\
+		&= \int_X 2g \, d\mu - \limsup_{n \to \infty} \int_X |f_n - f| \, d\mu
+	\end{align*}
+	Dado que $\int_X 2g \, d\mu < +\infty$, podemos restar este valor finita en ambos lados de la desigualdad sin alterar el sentido, obteniendo:
+	$$ 0 \le -\limsup_{n \to \infty} \int_X |f_n - f| \, d\mu \implies \limsup_{n \to \infty} \int_X |f_n - f| \, d\mu \le 0 $$
+	Como la integral de una cantidad no negativa es siempre mayor o igual a cero, se concluye que:
+	$$ 0 \le \liminf_{n \to \infty} \int_X |f_n - f| \, d\mu \le \limsup_{n \to \infty} \int_X |f_n - f| \, d\mu \le 0 \implies \lim_{n \to \infty} \int_X |f_n - f| \, d\mu = 0 $$
+	Finalmente, por la desigualdad triangular para la integral:
+	$$ \left| \int_X f_n \, d\mu - \int_X f \, d\mu \right| \le \int_X |f_n - f| \, d\mu \xrightarrow{n \to \infty} 0 \implies \lim_{n \to \infty} \int_X f_n \, d\mu = \int_X f \, d\mu $$
+\end{proof}
+
+\begin{ejercicio}
+	Demuestre que el Lema de Fatou puede fallar si se elimina la hipótesis de que las funciones son no negativas ($f_n \ge 0$).
+\end{ejercicio}
+\begin{proof}[Solución mediante contraejemplo]
+	Sea el espacio de medida de Lebesgue en toda la recta real $(\mathbb{R}, \mathcal{L}, m)$. Consideremos la sucesión de funciones indicadoras negativas:
+	$$ f_n(x) = -\frac{1}{n} \chi_{[0, n]}(x), \quad \text{para } n \in \mathbb{N} $$
+	Para cualquier punto fijo $x \in \mathbb{R}$, cuando $n \to \infty$, se tiene que $\lim_{n \to \infty} f_n(x) = 0$, ya que si $x \in [0, +\infty)$, para $n$ suficientemente grande $f_n(x) = -1/n \to 0$. Luego, $\liminf_{n \to \infty} f_n(x) = 0$ para todo $x$, y su integral es trivialmente:
+	$$ \int_\mathbb{R} \left( \liminf_{n \to \infty} f_n \right) \, dm = \int_\mathbb{R} 0 \, dm = 0 $$
+	Sin embargo, al calcular la integral individual para cada paso de la sucesión obtenemos:
+	$$ \int_\mathbb{R} f_n \, dm = -\frac{1}{n} m([0, n]) = -\frac{1}{n} \cdot n = -1, \quad \forall n \in \mathbb{N} $$
+	Al tomar el límite inferior de estas integrales:
+	$$ \liminf_{n \to \infty} \int_\mathbb{R} f_n \, dm = \lim_{n \to \infty} (-1) = -1 $$
+	Comparando los resultados, obtenemos la relación absurda $0 \le -1$, demostrando que la hipótesis de no negatividad o dominación por una función integrable es absolutamente imprescindible en la teoría.
+\end{proof}
+
+% =========================================================================
+% --- FIN INPUT SEMANA 8 ---
+% =========================================================================

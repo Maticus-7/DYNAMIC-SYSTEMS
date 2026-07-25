@@ -22,3 +22,47 @@
 \contentsline {section}{\numberline {6.1}Conceptos Fundamentales}{37}{section.6.1}%
 \contentsline {section}{\numberline {6.2}Familia Cuadrática}{38}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Gráficos y Dinámica del Mapa Cuadrático $Q_c(x)$}{40}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Semana 7: Fundamentos de Teoría de la Medida}{42}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Espacios Medibles y $\sigma $-álgebras}{42}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Espacios de Medida}{45}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Completación de un Espacio de Medida}{47}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Construcción de Medidas y Medida de Lebesgue}{48}{section.7.4}%
+\contentsline {subsection}{\numberline {7.4.1}La Medida de Lebesgue en el Intervalo $[0,1]$}{49}{subsection.7.4.1}%
+\contentsline {subsection}{\numberline {7.4.2}La Medida de Lebesgue en toda la Recta Real $\mathbb {R}$}{50}{subsection.7.4.2}%
+\contentsline {chapter}{\numberline {8}Semana 8: Funciones Medibles e Integración de Lebesgue}{52}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Funciones Medibles}{52}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Funciones Simples y Aproximación}{54}{section.8.2}%
+\contentsline {section}{\numberline {8.3}La Integral de Lebesgue}{55}{section.8.3}%
+\contentsline {subsection}{\numberline {8.3.1}Integración de Funciones Simples No Negativas}{55}{subsection.8.3.1}%
+\contentsline {subsection}{\numberline {8.3.2}Integración de Funciones Medibles No Negativas}{56}{subsection.8.3.2}%
+\contentsline {subsection}{\numberline {8.3.3}Integración de Funciones Medibles Generales y el Espacio $\mathcal {L}^1(\mu )$}{56}{subsection.8.3.3}%
+\contentsline {section}{\numberline {8.4}Teoremas Fundamentales de Convergencia Integral}{57}{section.8.4}%
+\contentsline {chapter}{\numberline {9}Semana 9: Medidas Invariantes y Conservación del Volumen}{61}{chapter.9}%
+\contentsline {section}{\numberline {9.1}Definición y Ejemplos Fundamentales}{61}{section.9.1}%
+\contentsline {section}{\numberline {9.2}Criterio de Invariancia en Generadores y Clases Monótonas}{62}{section.9.2}%
+\contentsline {section}{\numberline {9.3}Medida Imagen (Push-Forward) y Semi-Conjugación}{65}{section.9.3}%
+\contentsline {section}{\numberline {9.4}Caracterización Integral de Medidas Invariantes}{68}{section.9.4}%
+\contentsline {section}{\numberline {9.5}La Medida de Lebesgue en el Círculo y Rotaciones}{70}{section.9.5}%
+\contentsline {subsection}{\numberline {9.5.1}Construcción de la Medida de Lebesgue en $\mathbb {R}/\mathbb {Z}$}{70}{subsection.9.5.1}%
+\contentsline {subsection}{\numberline {9.5.2}Invariancia bajo las Rotaciones en el Círculo}{71}{subsection.9.5.2}%
+\contentsline {section}{\numberline {9.6}Ejercicios Propuestos y Unicidad de Medidas}{73}{section.9.6}%
+\contentsline {chapter}{\numberline {10}Semana 10: Sistemas Dinámicos Ergódicos}{74}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Definiciones y Ejemplos Básicos}{74}{section.10.1}%
+\contentsline {section}{\numberline {10.2}Ergodicidad del Shift de Bernoulli}{75}{section.10.2}%
+\contentsline {section}{\numberline {10.3}Ejercicios Resueltos}{76}{section.10.3}%
+\contentsline {section}{\numberline {10.4}Ergodicidad y Semiconjugación}{78}{section.10.4}%
+\contentsline {section}{\numberline {10.5}Caracterizaciones de la Ergodicidad}{79}{section.10.5}%
+\contentsline {chapter}{\numberline {11}Semana 11: Caracterización Funcional y Rotaciones Irracionales}{81}{chapter.11}%
+\contentsline {section}{\numberline {11.1}Caracterización Funcional de la Ergodicidad}{81}{section.11.1}%
+\contentsline {section}{\numberline {11.2}Ergodicidad de las Rotaciones Irracionales en el Círculo}{83}{section.11.2}%
+\contentsline {chapter}{\numberline {12}Semana 12: Teorema Ergódico de Birkhoff y Caracterización}{85}{chapter.12}%
+\contentsline {section}{\numberline {12.1}Tiempo Medio de Visita y Motivación}{85}{section.12.1}%
+\contentsline {section}{\numberline {12.2}Teorema Ergódico de Birkhoff}{86}{section.12.2}%
+\contentsline {section}{\numberline {12.3}Caracterización Espectral de la Ergodicidad}{87}{section.12.3}%
+\contentsline {chapter}{\numberline {13}Semana 13: Sistemas Mixing y Caracterización}{92}{chapter.13}%
+\contentsline {section}{\numberline {13.1}Medidas Mixing: Definición y Observaciones}{92}{section.13.1}%
+\contentsline {section}{\numberline {13.2}Caracterización Funcional de Sistemas Mixing}{93}{section.13.2}%
+\contentsline {chapter}{\numberline {14}Semana 14: Conexión entre Dinámica Métrica y Topológica}{97}{chapter.14}%
+\contentsline {section}{\numberline {14.1}Soporte de una Medida de Borel}{97}{section.14.1}%
+\contentsline {section}{\numberline {14.2}Propiedades Topológicas del Soporte}{98}{section.14.2}%
+\contentsline {section}{\numberline {14.3}Implicaciones Topológicas de la Ergodicidad y el Mixing}{100}{section.14.3}%

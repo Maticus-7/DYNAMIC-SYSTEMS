@@ -1,0 +1,289 @@
+% =========================================================================
+% --- INICIO INPUT SEMANA 7 ---
+% =========================================================================
+
+\chapter{Semana 7: Fundamentos de Teoría de la Medida}
+
+\section{Espacios Medibles y \texorpdfstring{$\sigma$}{sigma}-álgebras}
+
+Para desarrollar una teoría estadística y cuantitativa de los sistemas dinámicos —el objeto central de la teoría ergódica— es indispensable abandonar la noción puramente topológica de tamaño y dotar a nuestros espacios de una estructura que permita medir subconjuntos de forma rigurosa.
+
+\begin{definicion}[Álgebra de conjuntos]
+	Un \textbf{álgebra} sobre un conjunto no vacío $X$ es una familia $\mathcal{B}$ de subconjuntos de $X$ que satisface las siguientes tres propiedades:
+	\begin{enumerate}[1)]
+		\item El conjunto vacío pertenece a la familia: $\emptyset \in \mathcal{B}$.
+		\item Es cerrada bajo complementación: Si $A \in \mathcal{B} \implies A^c \in \mathcal{B}$.
+		\item Es cerrada bajo uniones finitas: Si $A, B \in \mathcal{B} \implies A \cup B \in \mathcal{B}$.
+	\end{enumerate}
+\end{definicion}
+
+\begin{observacion}
+	De las propiedades operatorias básicas de la teoría de conjuntos (Leyes de De Morgan), es inmediato verificar que toda álgebra $\mathcal{B}$ también es cerrada bajo las siguientes operaciones finitas:
+	\begin{itemize}
+		\item \textbf{Intersecciones finitas:} Dados $A, B \in \mathcal{B}$, por complementación tenemos $A^c, B^c \in \mathcal{B}$. Por la cerradura de la unión, $A^c \cup B^c \in \mathcal{B}$, y volviendo a complementar:
+		$$ A \cap B = (A^c \cup B^c)^c \in \mathcal{B} $$
+		\item \textbf{Diferencias de conjuntos:} Si $A, B \in \mathcal{B}$, entonces su diferencia aritmética es medible ya que $A \setminus B = A \cap B^c \in \mathcal{B}$.
+		\item \textbf{Generalización finita:} Por inducción matemática, si $A_1, A_2, \dots, A_n \in \mathcal{B}$, entonces:
+		$$ \bigcup_{j=1}^n A_j \in \mathcal{B} \quad \text{y} \quad \bigcap_{j=1}^n A_j \in \mathcal{B} $$
+	\end{itemize}
+\end{observacion}
+
+\begin{definicion}[\texorpdfstring{$\sigma$}{sigma}-álgebra]
+	Una \textbf{$\sigma$-álgebra} sobre un conjunto $X$ es una familia $\mathcal{B}$ de subconjuntos de $X$ tal que:
+	\begin{enumerate}[1)]
+		\item $\mathcal{B}$ es un álgebra sobre $X$.
+		\item Es cerrada bajo uniones numerables: Si $\{A_j\}_{j=1}^\infty \subset \mathcal{B}$, entonces:
+		$$ \bigcup_{j=1}^\infty A_j \in \mathcal{B} $$
+	\end{enumerate}
+\end{definicion}
+
+\begin{observacion}
+	Nuevamente, aplicando las Leyes de De Morgan a una colección numerable, si $\{A_j\}_{j=1}^\infty \subset \mathcal{B}$, sus complementos $A_j^c$ pertenecen a $\mathcal{B}$. Luego, su unión numerable es un elemento de $\mathcal{B}$, lo que implica que:
+	$$ \bigcap_{j=1}^\infty A_j = \left( \bigcup_{j=1}^\infty A_j^c \right)^c \in \mathcal{B} $$
+	Por tanto, una $\sigma$-álgebra es cerrada tanto para uniones como para intersecciones numerables.
+\end{observacion}
+
+\begin{definicion}[Espacio medible]
+	Un \textbf{espacio medible} es el par ordenado $(X, \mathcal{B})$, donde $X$ es un conjunto no vacío y $\mathcal{B}$ es una $\sigma$-álgebra sobre $X$. A los elementos $E \in \mathcal{B}$ se les denomina \textbf{conjuntos medibles}.
+\end{definicion}
+
+\begin{ejemplo}
+	Sea $X$ un conjunto no vacío arbitrario.
+	\begin{itemize}
+		\item La colección de todos los subconjuntos de $X$, denotada por el conjunto potencia $2^X$, es una $\sigma$-álgebra en $X$. Así, $(X, 2^X)$ es el espacio medible más discreto posible.
+		\item La familia $\mathcal{B} = \{\emptyset, X\}$ es una $\sigma$-álgebra en $X$, constituyendo el espacio medible trivial.
+	\end{itemize}
+\end{ejemplo}
+
+\begin{ejemplo}[La \texorpdfstring{$\sigma$}{sigma}-álgebra co-numerable]
+	Sea $X$ un conjunto no vacío (típicamente no numerable, como $\mathbb{R}$). Demostraremos que la colección de conjuntos que son numerables o poseen complemento numerable:
+	$$ \mathcal{B} = \{E \subset X : E \text{ es numerable o } E^c \text{ es numerable}\} $$
+	es una $\sigma$-álgebra sobre $X$.
+\end{ejemplo}
+
+\begin{proof}[Demostración]
+	Verifiquemos rigurosamente los axiomas definitorios:
+	\begin{enumerate}[i)]
+		\item \textbf{Elemento vacío:} Como el conjunto vacío $\emptyset$ es finito, en particular es numerable. Por lo tanto, $\emptyset \in \mathcal{B}$.
+		\item \textbf{Cerradura bajo complementación:} Sea $E \in \mathcal{B}$. Por definición, o bien $E$ es numerable, o bien $E^c$ es numerable. 
+		Si $E$ es numerable, el complemento de $E^c$ es $(E^c)^c = E$, el cual es numerable $\implies E^c \in \mathcal{B}$.
+		Si $E^c$ es numerable, automáticamente cumple la condición de pertenencia para su complemento $\implies E^c \in \mathcal{B}$.
+		\item \textbf{Cerradura bajo uniones numerables:} Sea una sucesión de conjuntos $\{A_j\}_{j=1}^\infty \subset \mathcal{B}$. Analicemos dos posibles casos para su unión $U = \bigcup_{j=1}^\infty A_j$:
+		
+		\textbf{Caso 1:} Todos los conjuntos $A_j$ son numerables para todo $j \in \mathbb{N}$. 
+		Sabemos por teoría de conjuntos que la unión numerable de conjuntos numerables es un conjunto numerable. Por lo tanto, el conjunto unión $U$ es numerable, lo que garantiza que $U \in \mathcal{B}$.
+		
+		\textbf{Caso 2:} Existe al menos un índice $i \in \mathbb{N}$ tal que $A_i$ no es numerable.
+		Como $A_i \in \mathcal{B}$ y no es numerable, su complemento $A_i^c$ debe ser obligatoriamente numerable. Tomando el complemento de la unión total y aplicando De Morgan:
+		$$ U^c = \left( \bigcup_{j=1}^\infty A_j \right)^c = \bigcap_{j=1}^\infty A_j^c \subseteq A_i^c $$
+		Dado que $U^c$ es un subconjunto del conjunto numerable $A_i^c$, deducimos que $U^c$ es numerable. En consecuencia, la unión $U$ posee un complemento numerable, lo que implica que $U \in \mathcal{B}$.
+	\end{enumerate}
+	Al cumplirse las tres condiciones, concluimos que $\mathcal{B}$ es una $\sigma$-álgebra.
+\end{proof}
+
+\begin{proposicion}
+	Si $\{\mathcal{B}_i\}_{i \in I}$ es una colección arbitraria (finitamente, numerablemente o no numerablemente infinita) de $\sigma$-álgebras sobre un mismo conjunto $X$, entonces su intersección:
+	$$ \mathcal{B} = \bigcap_{i \in I} \mathcal{B}_i $$
+	es también una $\sigma$-álgebra sobre $X$.
+\end{proposicion}
+
+\begin{definicion}[\texorpdfstring{$\sigma$}{sigma}-álgebra generada]
+	Sea $\mathcal{E}$ una colección arbitraria de subconjuntos de $X$. La \textbf{$\sigma$-álgebra generada} por $\mathcal{E}$, denotada por $\sigma(\mathcal{E})$, se define como la menor $\sigma$-álgebra de $X$ que contiene a $\mathcal{E}$. Matemáticamente, corresponde a la intersección de todas las $\sigma$-álgebras de $X$ que contienen a dicha familia:
+	$$ \sigma(\mathcal{E}) = \bigcap \{ \mathcal{F} : \mathcal{F} \text{ es una } \sigma\text{-álgebra en } X \text{ y } \mathcal{E} \subseteq \mathcal{F} \} $$
+\end{definicion}
+
+\begin{definicion}[\texorpdfstring{$\sigma$}{sigma}-álgebra de Borel]
+	Sea $(X, \tau)$ un espacio topológico (por ejemplo, un espacio métrico provisto de la topología inducida por su distancia). La \textbf{$\sigma$-álgebra de Borel} sobre $X$, denotada por $\mathcal{B}_X$, es la $\sigma$-álgebra generada por la colección de todos los conjuntos abiertos $\tau$ de $X$:
+	$$ \mathcal{B}_X = \sigma(\tau) $$
+	A los elementos de $\mathcal{B}_X$ se les denomina clásicamente \textbf{borelianos} o conjuntos de Borel.
+\end{definicion}
+
+\begin{proposicion}[Generadores clásicos de \texorpdfstring{$\mathcal{B}_\mathbb{R}$}{B\_R}]
+	La $\sigma$-álgebra de Borel sobre los números reales, $\mathcal{B}_\mathbb{R}$, puede ser generada de manera idéntica por cualquiera de las siguientes ocho colecciones fundamentales de intervalos:
+	\begin{align*}
+		\mathcal{E}_1 &= \{(a,b) : a < b\} & \mathcal{E}_2 &= \{[a,b] : a < b\} \\
+		\mathcal{E}_3 &= \{(a,b] : a < b\} & \mathcal{E}_4 &= \{[a,b) : a < b\} \\
+		\mathcal{E}_5 &= \{(a,+\infty) : a \in \mathbb{R}\} & \mathcal{E}_6 &= \{[a,+\infty) : a \in \mathbb{R}\} \\
+		\mathcal{E}_7 &= \{(-\infty,b) : b \in \mathbb{R}\} & \mathcal{E}_8 &= \{(-\infty,b] : b \in \mathbb{R}\}
+	\end{align*}
+	Es decir, $\mathcal{B}_\mathbb{R} = \sigma(\mathcal{E}_k)$ para todo $k \in \{1, 2, \dots, 8\}$.
+\end{proposicion}
+
+\section{Espacios de Medida}
+
+\begin{definicion}[Medida]
+	Sea $(X, \mathcal{B})$ un espacio medible. Una \textbf{medida} en $(X, \mathcal{B})$ es una función de conjunto $\mu: \mathcal{B} \to [0, +\infty]$ que satisface:
+	\begin{enumerate}[1)]
+		\item \textbf{Cero en el vacío:} $\mu(\emptyset) = 0$.
+		\item \textbf{$\sigma$-aditividad:} Para cualquier sucesión numerable $\{E_j\}_{j=1}^\infty \subset \mathcal{B}$ de conjuntos medibles disjuntos dos a dos ($E_i \cap E_j = \emptyset$ si $i \neq j$), la medida de la unión equivale a la serie de las medidas:
+		$$ \mu\left( \bigcup_{j=1}^\infty E_j \right) = \sum_{j=1}^\infty \mu(E_j) $$
+	\end{enumerate}
+\end{definicion}
+
+\begin{definicion}[Espacio de medida y clasificación]
+	El trío $(X, \mathcal{B}, \mu)$ se denomina \textbf{espacio de medida}. Dependiendo de la masa total del espacio, clasificamos la medida como:
+	\begin{itemize}
+		\item \textbf{Medida finita:} Si $\mu(X) < +\infty$.
+		\item \textbf{Medida de probabilidad:} Si $\mu(X) = 1$. En este escenario central para la ergodicidad, el trío $(X, \mathcal{B}, \mu)$ se denomina \textbf{espacio de probabilidad}.
+		\item \textbf{Medida semifinita:} Si para cada $E \in \mathcal{B}$ con medida infinita $\mu(E) = +\infty$, existe un subconjunto medible $F \subset E$ cuya medida es estrictamente positiva y finita: $0 < \mu(F) < +\infty$.
+		\item \textbf{Medida $\sigma$-finita:} Si el espacio total $X$ puede ser cubierto por una unión numerable de conjuntos medibles de medida finita. Es decir, existe una sucesión $\{E_i\}_{i=1}^\infty \subset \mathcal{B}$ tal que:
+		$$ X = \bigcup_{i=1}^\infty E_i \quad \text{con} \quad \mu(E_i) < +\infty \text{ para todo } i \in \mathbb{N} $$
+	\end{itemize}
+\end{definicion}
+
+\begin{ejemplo}[Medida de Dirac]
+	Sea $(X, \mathcal{B})$ un espacio medible arbitrario y fijemos un punto $p \in X$. La aplicación $\delta_p: \mathcal{B} \to [0, +\infty]$ definida por:
+	$$ \delta_p(E) = \begin{cases} 1 & \text{si } p \in E \\ 0 & \text{si } p \notin E \end{cases} $$
+	es una medida de probabilidad sobre $(X, \mathcal{B})$, denominada \textbf{medida de Dirac centrada en $p$}. Es de vital importancia en dinámica topológica para modelar medidas soportadas en órbitas periódicas.
+\end{ejemplo}
+
+\begin{ejemplo}[Medida del conteo]
+	Sea el espacio medible discreto $(X, 2^X)$. Definimos la aplicación $\mu: 2^X \to [0, +\infty]$ como:
+	$$ \mu(E) = \begin{cases} \text{card}(E) & \text{si } E \text{ es un conjunto finito} \\ +\infty & \text{si } E \text{ es un conjunto infinito} \end{cases} $$
+	Esta función define una medida elemental en $X$, llamada \textbf{medida del conteo}.
+\end{ejemplo}
+
+\begin{proposicion}[Propiedades estructurales de la medida del conteo]
+	Sea $(X, 2^X, \mu)$ el espacio dotado de la medida del conteo. Se cumplen las siguientes afirmaciones:
+	\begin{enumerate}[a)]
+		\item La medida $\mu$ es siempre \textbf{semifinita}, sin importar la cardinalidad de $X$.
+		\item La medida $\mu$ es \textbf{$\sigma$-finita} si y solo si el conjunto $X$ es a lo sumo numerable.
+	\end{enumerate}
+\end{proposicion}
+
+\begin{proof}[Demostración]
+	\textbf{a)} Debemos verificar la condición de semifinitud. Sea $E \in 2^X$ un conjunto cualquiera con medida infinita, es decir, $\mu(E) = +\infty$. Por definición de nuestra medida, esto significa que $E$ es un conjunto infinito. 
+	
+	Como $E$ tiene infinitos elementos, podemos seleccionar un único punto arbitrario $x_0 \in E$ y construir el subconjunto unitario $F = \{x_0\}$. Claramente $F \subset E$ y $F \in 2^X$. Al ser un conjunto finito de un solo elemento, su medida es:
+	$$ \mu(F) = \text{card}(\{x_0\}) = 1 $$
+	Por lo tanto, hemos encontrado un subconjunto que cumple $0 < \mu(F) = 1 < +\infty$, demostrando que la medida del conteo es siempre semifinita.
+	
+	\textbf{b)} $[\Rightarrow]$ Supongamos que $\mu$ es $\sigma$-finita. Por definición, existe una sucesión numerable de subconjuntos $\{E_i\}_{i=1}^\infty \subset 2^X$ tal que $X = \bigcup_{i=1}^\infty E_i$ con $\mu(E_i) < +\infty$ para cada $i$. Como la medida de cada $E_i$ es finita, cada $E_i$ es un conjunto finito (por ende, numerable). Dado que una unión numerable de conjuntos finitos es a lo sumo numerable, concluimos que $X$ es numerable.
+	
+	$[\Leftarrow]$ Supongamos que $X$ es numerable. Podemos listar sus elementos como una sucesión $X = \{x_1, x_2, x_3, \dots\}$. Definiendo los subconjuntos unitarios $E_i = \{x_i\}$ para cada $i \in \mathbb{N}$, obtenemos una sucesión numerable que cubre al espacio: $X = \bigcup_{i=1}^\infty E_i$. Además, para todo $i$, se tiene que $\mu(E_i) = 1 < +\infty$. Esto demuestra que la medida del conteo sobre un conjunto numerable es $\sigma$-finita.
+\end{proof}
+
+\begin{teorema}[Propiedades algebraicas de una medida]
+	Sea $(X, \mathcal{B}, \mu)$ un espacio de medida. Entonces la función $\mu$ cumple las siguientes propiedades fundamentales:
+	\begin{enumerate}[1)]
+		\item \textbf{Monotonía:} Si $E, F \in \mathcal{B}$ son tales que $E \subset F$, entonces:
+		$$ \mu(E) \le \mu(F) $$
+		Si además $\mu(E) < +\infty$, entonces la medida de la diferencia es $\mu(F \setminus E) = \mu(F) - \mu(E)$.
+		\item \textbf{Subaditividad numerable:} Para cualquier sucesión de conjuntos medibles $\{E_j\}_{j=1}^\infty \subset \mathcal{B}$ (no necesariamente disjuntos), la medida de la unión está acotada por la serie:
+		$$ \mu\left( \bigcup_{j=1}^\infty E_j \right) \le \sum_{j=1}^\infty \mu(E_j) $$
+		\item \textbf{Continuidad inferior:} Sea $\{E_j\}_{j=1}^\infty \subset \mathcal{B}$ una sucesión creciente de conjuntos medibles, es decir, $E_1 \subset E_2 \subset E_3 \subset \dots$. Entonces la medida conmuta con el límite operacional de la unión:
+		$$ \mu\left( \bigcup_{j=1}^\infty E_j \right) = \lim_{j \to \infty} \mu(E_j) $$
+		\item \textbf{Continuidad superior:} Sea $\{E_j\}_{j=1}^\infty \subset \mathcal{B}$ una sucesión decreciente de conjuntos medibles, es decir, $E_1 \supset E_2 \supset E_3 \supset \dots$. Si existe al menos un índice $k \in \mathbb{N}$ tal que $\mu(E_k) < +\infty$ (en particular si el espacio es finito o de probabilidad), entonces:
+		$$ \mu\left( \bigcap_{j=1}^\infty E_j \right) = \lim_{j \to \infty} \mu(E_j) $$
+	\end{enumerate}
+\end{teorema}
+
+\section{Completación de un Espacio de Medida}
+
+Uno de los principales problemas técnicos en los espacios de Borel es la existencia de conjuntos que tienen "medida nula" pero poseen subconjuntos que escapan de la $\sigma$-álgebra, por lo que formalmente no se les puede asignar el valor cero.
+
+\begin{definicion}[Medida completa]
+	Sea $(X, \mathcal{B}, \mu)$ un espacio de medida. Decimos que la medida $\mu$ es \textbf{completa} si todo subconjunto de un conjunto medible de medida nula es también un conjunto medible. Formalmente:
+	$$ \forall E \in \mathcal{B} \text{ con } \mu(E) = 0 \quad \text{y} \quad \forall F \subset E \implies F \in \mathcal{B} \text{ (y por tanto } \mu(F) = 0\text{)} $$
+\end{definicion}
+
+\begin{observacion}[Incompletud de la medida de Borel]
+	Consideremos el intervalo $X = [0,1]$ dotado de su $\sigma$-álgebra de Borel $\mathcal{B}_{[0,1]}$ y la medida de Borel estándar $m_1$. Demostraremos que esta medida \textbf{no es completa}.
+	
+	Sea $\mathcal{C} \subset [0,1]$ el clásico Conjunto de Cantor ternario. Sabemos por construcción geométrica que $\mathcal{C}$ es un conjunto compacto (por ende, cerrado y boreliano: $\mathcal{C} \in \mathcal{B}_{[0,1]}$) cuya medida total es nula: $m_1(\mathcal{C}) = 0$. 
+	
+	Sin embargo, por su estructura fractal, el conjunto de Cantor es equipotente al intervalo real, es decir, posee la cardinalidad del continuo: $\text{card}(\mathcal{C}) = 2^{\aleph_0}$. El teorema de Cantor de la teoría de conjuntos nos asegura que la cardinalidad de su conjunto potencia es estrictamente mayor: $\text{card}(2^\mathcal{C}) = 2^{2^{\aleph_0}}$. 
+	
+	Por otro lado, por argumentos de inducción transfinita, se sabe que la cardinalidad de la $\sigma$-álgebra de Borel de un espacio separable como el intervalo es exactamente la del continuo: $\text{card}(\mathcal{B}_{[0,1]}) = 2^{\aleph_0}$. 
+	
+	Dado que el número total de subconjuntos de $\mathcal{C}$ supera estrictamente al número total de conjuntos borelianos en todo $[0,1]$, se concluye que \textbf{debe existir algún subconjunto $F \subset \mathcal{C}$ tal que $F \notin \mathcal{B}_{[0,1]}$}. Un conjunto $F$ contenido dentro de un conjunto de medida cero que no puede ser medido evidencia la incompletud de la medida de Borel.
+\end{observacion}
+
+Para evitar las patologías de conjuntos no medibles dentro de zonas de medida nula, existe un procedimiento canónico para "completar" cualquier espacio de medida sin alterar sus propiedades fundamentales.
+
+\begin{teorema}[Teorema de la Completación]
+	Sea $(X, \mathcal{B}, \mu)$ un espacio de medida arbitrario. Definamos la familia ampliada de subconjuntos $\overline{\mathcal{B}}$ como:
+	$$ \overline{\mathcal{B}} = \{ A \subset X : \exists B_1, B_2 \in \mathcal{B} \text{ tales que } B_1 \subset A \subset B_2 \text{ con } \mu(B_2 \setminus B_1) = 0 \} $$
+	y la función extendida $\overline{\mu}: \overline{\mathcal{B}} \to [0, +\infty]$ dada por $\overline{\mu}(A) = \mu(B_1) = \mu(B_2)$. Entonces se cumple que:
+	\begin{enumerate}[1)]
+		\item La familia $\overline{\mathcal{B}}$ es una $\sigma$-álgebra en $X$ que contiene estrictamente a la original: $\mathcal{B} \subseteq \overline{\mathcal{B}}$.
+		\item La función $\overline{\mu}$ está bien definida (es independiente de la elección de los conjuntos aproximantes $B_1, B_2$) y es una verdadera medida sobre $\overline{\mathcal{B}}$.
+		\item La medida $\overline{\mu}$ es una extensión de la medida original, es decir, $\overline{\mu}(E) = \mu(E)$ para todo $E \in \mathcal{B}$.
+		\item El espacio de medida $(X, \overline{\mathcal{B}}, \overline{\mu})$ es una \textbf{medida completa}.
+	\end{enumerate}
+\end{teorema}
+
+\begin{proof}[Demostración esquemática de completitud]
+	Para verificar la completitud de $\overline{\mu}$, tomemos un conjunto $A \in \overline{\mathcal{B}}$ con medida nula $\overline{\mu}(A) = 0$ y sea un subconjunto arbitrario $F \subset A$. 
+	
+	Como $A \in \overline{\mathcal{B}}$, existen borelianos originales $B_1, B_2 \in \mathcal{B}$ tales que $B_1 \subset A \subset B_2$ y por definición $\mu(B_2) = \overline{\mu}(A) = 0$. 
+	
+	Notemos que el conjunto vacío $\emptyset$ pertenece a $\mathcal{B}$ y cumple la doble inclusión de atrapamiento para nuestro subconjunto:
+	$$ \emptyset \subset F \subset B_2 $$
+	Evaluemos la medida original de la diferencia de los extremos atrapantes:
+	$$ \mu(B_2 \setminus \emptyset) = \mu(B_2) = 0 $$
+	Por la propia definición del espacio ampliado, esto garantiza inmediatamente que el subconjunto $F$ es medible: $F \in \overline{\mathcal{B}}$, con medida extendida $\overline{\mu}(F) = \mu(\emptyset) = 0$. Así, el espacio extendido no tiene huecos y es completamente cerrado bajo subconjuntos nulos.
+\end{proof}
+
+\section{Construcción de Medidas y Medida de Lebesgue}
+
+El método universal para generar medidas abstractas sobre $\sigma$-álgebras complejas consiste en definir intuitivamente un "volumen" preliminar sobre un álgebra sencilla de conjuntos (como intervalos finitos) y luego extenderlo de forma única mediante el Teorema de Carathéodory.
+
+\begin{teorema}[Teorema de Extensión de Carathéodory-Hahn]
+	Sea $\mathcal{A}$ un álgebra de subconjuntos de $X$ y sea $\mu_0: \mathcal{A} \to [0, +\infty]$ una función pre-medida, es decir, una función $\sigma$-aditiva sobre álgebra:
+	$$ \mu_0\left( \bigcup_{i=1}^\infty E_i \right) = \sum_{i=1}^\infty \mu_0(E_i) \quad \text{siempre que } \{E_i\} \subset \mathcal{A} \text{ sean disjuntos y } \bigcup_{i=1}^\infty E_i \in \mathcal{A} $$
+	Si la pre-medida es finita en el espacio total ($\mu_0(X) < +\infty$), entonces existe una \textbf{única medida $\mu$} definida sobre la $\sigma$-álgebra generada $\sigma(\mathcal{A})$ que es una extensión auténtica de $\mu_0$:
+	$$ \mu(A) = \mu_0(A), \quad \forall A \in \mathcal{A} $$
+\end{teorema}
+
+\begin{teorema}[Teorema de Aproximación de Borelianos]
+	Sea $(X, \mathcal{B}, \mu)$ un espacio de probabilidad y sea $\mathcal{A}$ un álgebra generadora de la $\sigma$-álgebra, es decir, $\mathcal{B} = \sigma(\mathcal{A})$. Entonces, para cualquier tolerancia $\epsilon > 0$ y para cualquier conjunto medible $B \in \mathcal{B}$, existe un conjunto elemental del álgebra $A \in \mathcal{A}$ que lo aproxima con un error métrico controlado:
+	$$ \mu(A \triangle B) < \epsilon $$
+	donde $A \triangle B = (A \setminus B) \cup (B \setminus A)$ denota la diferencia simétrica de los conjuntos.
+\end{teorema}
+
+\subsection{La Medida de Lebesgue en el Intervalo \texorpdfstring{$[0,1]$}{[0,1]}}
+
+Apliquemos el Teorema de Extensión para formalizar la longitud geométrica habitual sobre el intervalo unitario $X = [0,1]$.
+\begin{enumerate}[1)]
+	\item Sea $\mathcal{A}$ la familia elemental constituida por el conjunto vacío y por todos los subconjuntos que pueden escribirse como una unión finita de intervalos disjuntos dos a dos:
+	$$ \mathcal{A} = \{ I_1 \cup I_2 \cup \dots \cup I_N : I_k \subset [0,1] \text{ son intervalos disjuntos}\} \cup \{\emptyset\} $$
+	Es sencillo verificar por operaciones elementales de intersección que $\mathcal{A}$ es un álgebra sobre $[0,1]$.
+	\item Definamos intuitivamente la pre-medida $m_0: \mathcal{A} \to [0,1]$ asignando a cada unión de intervalos la suma aritmética de sus longitudes clásicas:
+	$$ m_0(I_1 \cup I_2 \cup \dots \cup I_N) = |I_1| + |I_2| + \dots + |I_N| $$
+	donde si $I = (a,b)$ o $[a,b]$, su longitud es simplemente $|I| = b - a$. Se demuestra analíticamente que $m_0$ es una función $\sigma$-aditiva en el álgebra $\mathcal{A}$, con $m_0(\emptyset) = 0$ y volumen total normalizado $m_0([0,1]) = 1$.
+	\item Sabemos por topología elemental que todo conjunto abierto en un intervalo métrico puede expresarse como una unión numerable de intervalos abiertos disjuntos. Por tanto, la $\sigma$-álgebra generada por nuestro álgebra elemental coincide exactamente con la $\sigma$-álgebra de Borel del intervalo:
+	$$ \sigma(\mathcal{A}) = \mathcal{B}_{[0,1]} $$
+	\item Como $m_0([0,1]) = 1 < +\infty$, invocando el Teorema de Extensión de Carathéodory, existe una única medida de probabilidad, denotada por $m_1$, definida formalmente sobre toda la $\sigma$-álgebra de Borel $\mathcal{B}_{[0,1]}$, que extiende a la longitud clásica de intervalos.
+\end{enumerate}
+
+\subsection{La Medida de Lebesgue en toda la Recta Real \texorpdfstring{$\mathbb{R}$}{R}}
+
+Una vez asegurada la medida geométrica en un bloque unitario, la extendemos a todo el eje real mediante transformaciones de traslación espacial.
+\begin{enumerate}[1)]
+	\item Para cada entero $k \in \mathbb{Z}$, consideremos el homeomorfismo de traslación $T_k: \mathbb{R} \to \mathbb{R}$ definido por $T_k(x) = x - k$. Esta biyección mapea cualquier subintervalo unitario $C_k = [k, k+1)$ hacia el intervalo base de referencia $[0,1)$.
+	\item Definimos la medida trasladada local $m_k: \mathcal{B}_{[k, k+1)} \to [0, 1]$ induciendo la medida de Borel previamente construida:
+	$$ m_k(E) = m_1(T_k(E)) \quad \text{para todo boreliano } E \subset [k, k+1) $$
+	\item Como toda la recta real es una partición numerable disjunta de estos bloques enteros, $\mathbb{R} = \bigsqcup_{k \in \mathbb{Z}} [k, k+1)$, podemos adherir las medidas locales para construir una medida global $m: \mathcal{B}_\mathbb{R} \to [0, +\infty]$ sobre cualquier boreliano real $E \in \mathcal{B}_\mathbb{R}$:
+	$$ m(E) = \sum_{k \in \mathbb{Z}} m_k(E \cap [k, k+1)) $$
+	Esta función define una medida $\sigma$-finita de Borel sobre los números reales, que por construcción preserva la longitud canónica de cualquier intervalo real: $m([a,b]) = b - a$.
+\end{enumerate}
+
+\begin{definicion}[El Espacio de Medida de Lebesgue]
+	Aplicando el proceso de completación al espacio de Borel real $(\mathbb{R}, \mathcal{B}_\mathbb{R}, m)$, obtenemos el espacio extendido $(\mathbb{R}, \mathcal{L}, m_c)$. A la $\sigma$-álgebra completada $\mathcal{L} = \overline{\mathcal{B}_\mathbb{R}}$ se le denomina \textbf{$\sigma$-álgebra de Lebesgue}, a sus elementos se les llama \textbf{conjuntos medibles según Lebesgue}, y a la medida completa extendida $m_c = \overline{m}$ se le conoce universalmente como la \textbf{medida de Lebesgue en $\mathbb{R}$}. En contextos donde no exista ambigüedad, se denota simplemente por $m$.
+\end{definicion}
+
+\begin{proposicion}[Jerarquía estricta de las \texorpdfstring{$\sigma$}{sigma}-álgebras en \texorpdfstring{$\mathbb{R}$}{R}]
+	La estructura de los subconjuntos en la recta real obedece a una cadena de inclusiones estrictas:
+	$$ \mathcal{B}_\mathbb{R} \subsetneq \mathcal{L} \subsetneq 2^\mathbb{R} $$
+\end{proposicion}
+
+\begin{proof}[Justificación de inclusiones estrictas]
+	La primera inclusión estricta, $\mathcal{B}_\mathbb{R} \subsetneq \mathcal{L}$, es consecuencia directa de la existencia de subconjuntos patológicos de Cantor que poseen medida cero pero no son borelianos. Como la medida de Lebesgue $\mathcal{L}$ es por definición completa, absorbe absolutamente todos los subconjuntos del conjunto de Cantor como conjuntos medibles de medida nula, superando así el tamaño de $\mathcal{B}_\mathbb{R}$.
+	
+	La segunda inclusión estricta, $\mathcal{L} \subsetneq 2^\mathbb{R}$, se prueba mediante el célebre Teorema de Vitali, el cual demuestra, utilizando el Axioma de Elección al cocientar el intervalo bajo la relación de equivalencia relacional $x \sim y \iff x - y \in \mathbb{Q}$, que \textbf{existen subconjuntos de la recta real que no pueden ser medidos ni siquiera por la medida de Lebesgue sin romper la invariancia por traslación o la $\sigma$-aditividad}. Por lo tanto, el conjunto potencia total es estrictamente más grande que la $\sigma$-álgebra de Lebesgue.
+\end{proof}
+
+% =========================================================================
+% --- FIN INPUT SEMANA 7 ---
+% =========================================================================

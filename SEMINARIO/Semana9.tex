@@ -1,0 +1,545 @@
+% =========================================================================
+% --- INICIO INPUT SEMANA 9 ---
+% =========================================================================
+
+\chapter{Semana 9: Medidas Invariantes y Conservación del Volumen}
+
+\section{Definición y Ejemplos Fundamentales}
+
+En el estudio de los sistemas dinámicos desde la perspectiva de la teoría de la medida, el objeto central de investigación ya no son únicamente las órbitas individuales o la topología del espacio de fases, sino las medidas de probabilidad que se conservan invariantes bajo la evolución temporal del sistema.
+
+\begin{observacion}[Medibilidad de funciones continuas]
+	Si $X$ es un espacio topológico dotado de su $\sigma$-álgebra de Borel $\mathcal{B}_X$ (la cual es generada por la colección de todos los conjuntos abiertos de $X$, es decir, $\mathcal{B}_X = \sigma(\tau_X) = \bigcap_{\tau_X \subset \mathcal{F}} \mathcal{F}$), y $f: X \to X$ es una aplicación continua ($C^0$), entonces por las propiedades de la preimagen de conjuntos abiertos, $f$ es automáticamente una aplicación medible de Borel.
+\end{observacion}
+
+\begin{definicion}[Medida Invariante]
+	Sea $(M, \mathcal{B}, \mu)$ un espacio de medida y sea $f: M \to M$ una aplicación medible. Decimos que la medida $\mu$ es \textbf{invariante por $f$} (o que $f$ preserva la medida $\mu$) si la medida de la preimagen de cualquier conjunto medible coincide con la medida del conjunto original:
+	$$ \mu(f^{-1}(E)) = \mu(E), \quad \forall E \in \mathcal{B} $$
+\end{definicion}
+
+\begin{ejemplo}[Órbitas periódicas y medidas de Dirac]
+	Considere un espacio topológico $M$ dotado de su $\sigma$-álgebra de Borel $\mathcal{B}_M$, y sea $f: M \to M$ una aplicación continua. Supongamos que existe un punto $p \in M$ que es periódico de periodo 2, es decir, $f^2(p) = p$ con $f(p) \neq p$.
+	
+	Definamos la medida discreta soportada en la órbita de $p$ como la suma de medidas de Dirac:
+	$$ \mu = \delta_p + \delta_{f(p)} $$
+	\textbf{Afirmación:} La medida $\mu$ es invariante por $f$.
+\end{ejemplo}
+
+\begin{proof}[Demostración]
+	Sea $E \in \mathcal{B}_M$ un conjunto boreliano cualquiera. Evaluemos la medida de la preimagen $f^{-1}(E)$ utilizando la aditividad de la medida $\mu$:
+	$$ \mu(f^{-1}(E)) = \delta_p(f^{-1}(E)) + \delta_{f(p)}(f^{-1}(E)) $$
+	Por la definición de la medida de Dirac, evaluamos cada término mediante funciones características:
+	\begin{align*}
+		\delta_p(f^{-1}(E)) &= \begin{cases} 1 & \text{si } p \in f^{-1}(E) \\ 0 & \text{si } p \notin f^{-1}(E) \end{cases} = \begin{cases} 1 & \text{si } f(p) \in E \\ 0 & \text{si } f(p) \notin E \end{cases} = \delta_{f(p)}(E) \\[0.3cm]
+		\delta_{f(p)}(f^{-1}(E)) &= \begin{cases} 1 & \text{si } f(p) \in f^{-1}(E) \\ 0 & \text{si } f(p) \notin f^{-1}(E) \end{cases} = \begin{cases} 1 & \text{si } f^2(p) \in E \\ 0 & \text{si } f^2(p) \notin E \end{cases} = \begin{cases} 1 & \text{si } p \in E \\ 0 & \text{si } p \notin E \end{cases} = \delta_p(E)
+	\end{align*}
+	Sumando ambos resultados, obtenemos exactamente la medida del conjunto original:
+	$$ \mu(f^{-1}(E)) = \delta_{f(p)}(E) + \delta_p(E) = (\delta_p + \delta_{f(p)})(E) = \mu(E), \quad \forall E \in \mathcal{B}_M $$
+	Por lo tanto, $\mu$ es invariante por $f$.
+\end{proof}
+
+\begin{ejercicio}[Generalización a periodo $m$]
+	En general, si $p \in M$ es un punto periódico de periodo minimal $m \ge 1$, es decir, $f^m(p) = p$ y $f^j(p) \neq p$ para todo $j \in \{1, 2, \dots, m-1\}$, demuestre que la medida:
+	$$ \mu = \sum_{i=0}^{m-1} \delta_{f^i(p)} = \delta_p + \delta_{f(p)} + \delta_{f^2(p)} + \dots + \delta_{f^{m-1}(p)} $$
+	es invariante por $f$.
+\end{ejercicio}
+
+\section{Criterio de Invariancia en Generadores y Clases Monótonas}
+
+Verificar la condición de invariancia $\mu(f^{-1}(E)) = \mu(E)$ directamente sobre toda la $\sigma$-álgebra suele ser una tarea impracticable. El siguiente lema establece que, en espacios de medida finita, basta verificar la invariancia sobre un álgebra que genere a la $\sigma$-álgebra.
+
+\begin{lema}[Criterio de invariancia en generadores]
+	Sea $(M, \mathcal{B}, \mu)$ un espacio de medida finita ($\mu(M) < +\infty$) y sea $f: M \to M$ una aplicación medible. Supongamos que existe un álgebra $\mathcal{A}$ de subconjuntos de $M$ que genera la $\sigma$-álgebra $\mathcal{B}$, esto es, $\mathcal{B} = \sigma(\mathcal{A})$. Si se cumple que:
+	$$ \mu(f^{-1}(E)) = \mu(E), \quad \forall E \in \mathcal{A} $$
+	entonces la medida se preserva en toda la $\sigma$-álgebra:
+	$$ \mu(f^{-1}(F)) = \mu(F), \quad \forall F \in \mathcal{B} $$
+\end{lema}
+
+\begin{ejemplo}[Invariancia de la medida de Lebesgue bajo $3x \pmod 1$]
+	Considere la transformación multiplicativa en el intervalo unitario $f: [0,1] \to [0,1]$ definida por:
+	$$ f(x) = 3x \pmod 1 $$
+	Sea $(M, \mathcal{B}, \mu) = ([0,1], \mathcal{B}_{[0,1]}, m)$, donde $m$ denota la medida de Lebesgue en el intervalo. 
+	
+	\textbf{Afirmación:} La medida de Lebesgue $m$ es invariante por $f$.
+\end{ejemplo}
+
+\begin{proof}[Demostración utilizando el Lema de Generadores]
+	Sea $\mathcal{A}$ la colección constituida por las uniones finitas de intervalos disjuntos dos a dos en $[0,1]$:
+	$$ \mathcal{A} = \{ I_1 \cup I_2 \cup \dots \cup I_k : I_j \subset [0,1] \text{ son intervalos disjuntos} \} \cup \{\emptyset\} $$
+	Sabemos por teoría de la medida que $\mathcal{A}$ es un álgebra sobre $[0,1]$ y que genera la $\sigma$-álgebra de Borel: $\sigma(\mathcal{A}) = \mathcal{B}_{[0,1]}$.
+	
+	Sea un intervalo elemental cualquiera $I = (a, b) \subset [0,1]$. Su preimagen bajo la transformación $f(x) = 3x \pmod 1$ consta exactamente de tres componentes conexas disjuntas, una en cada rama de la función:
+	$$ f^{-1}(I) = I_1 \cup I_2 \cup I_3 $$
+	donde los subintervalos están dados explícitamente por:
+	$$ I_1 = \left(\frac{a}{3}, \frac{b}{3}\right), \quad I_2 = \left(\frac{a+1}{3}, \frac{b+1}{3}\right), \quad I_3 = \left(\frac{a+2}{3}, \frac{b+2}{3}\right) $$
+	Calculando la medida de Lebesgue de la preimagen mediante la aditividad sobre conjuntos disjuntos:
+	\begin{align*}
+		m(f^{-1}(I)) &= m(I_1) + m(I_2) + m(I_3) \\
+		&= \left(\frac{b}{3} - \frac{a}{3}\right) + \left(\frac{b+1}{3} - \frac{a+1}{3}\right) + \left(\frac{b+2}{3} - \frac{a+2}{3}\right) \\
+		&= \frac{b-a}{3} + \frac{b-a}{3} + \frac{b-a}{3} = b - a = m(I)
+	\end{align*}
+	Ahora, sea $E \in \mathcal{A}$ un elemento arbitrario del álgebra, es decir, $E = I_1 \cup I_2 \cup \dots \cup I_k$ con los intervalos $I_j$ disjuntos dos a dos. Dado que la preimagen conmuta con las uniones y preserva la disjunción:
+	$$ f^{-1}(E) = f^{-1}(I_1) \cup f^{-1}(I_2) \cup \dots \cup f^{-1}(I_k) $$
+	Evaluando la medida de Lebesgue:
+	$$ m(f^{-1}(E)) = \sum_{j=1}^k m(f^{-1}(I_j)) = \sum_{j=1}^k m(I_j) = m\left( \bigcup_{j=1}^k I_j \right) = m(E) $$
+	Como $m(f^{-1}(E)) = m(E)$ para todo $E \in \mathcal{A}$ y el volumen total es finito ($m([0,1]) = 1 < +\infty$), por el Lema de invariancia concluimos que $m(f^{-1}(F)) = m(F)$ para todo boreliano $F \in \mathcal{B}_{[0,1]}$.
+\end{proof}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[scale=5, >=Latex]
+		% Ejes y caja unitaria [0,1] x [0,1]
+		\draw[->, thick] (-0.1, 0) -- (1.1, 0) node[right] {$x$};
+		\draw[->, thick] (0, -0.1) -- (0, 1.1) node[above] {$f(x)$};
+		\draw[thick] (0, 1) -- (1, 1) -- (1, 0);
+		
+		% Líneas de cuadrícula punteadas para las tres ramas
+		\draw[dotted, gray] (1/3, 0) -- (1/3, 1);
+		\draw[dotted, gray] (2/3, 0) -- (2/3, 1);
+		
+		% Ramas de la función f(x) = 3x mod 1
+		\draw[very thick, blue] (0, 0) -- (1/3, 1);
+		\draw[very thick, blue] (1/3, 0) -- (2/3, 1);
+		\draw[very thick, blue] (2/3, 0) -- (1, 1);
+		
+		% Definición de un intervalo I = (a,b) en el eje Y (a=0.3, b=0.7)
+		\def\a{0.3}
+		\def\b{0.7}
+		
+		% Intervalo I en el eje Y (resaltado en rojo)
+		\draw[ultra thick, red] (0, \a) -- (0, \b);
+		\node[left, red, font=\bfseries] at (0, {(\a+\b)/2}) {$I$};
+		\draw[dashed, red] (0, \a) -- (1, \a);
+		\draw[dashed, red] (0, \b) -- (1, \b);
+		
+		% Preimágenes I_1, I_2, I_3 en el eje X (resaltadas en verde oscuro)
+		\draw[ultra thick, green!50!black] ({\a/3}, 0) -- ({\b/3}, 0);
+		\draw[ultra thick, green!50!black] ({(1+\a)/3}, 0) -- ({(1+\b)/3}, 0);
+		\draw[ultra thick, green!50!black] ({(2+\a)/3}, 0) -- ({(2+\b)/3}, 0);
+		
+		% Proyecciones verticales discontinuas hacia el eje X
+		\foreach \k in {0, 1, 2} {
+			\draw[dashed, green!50!black] ({(\k+\a)/3}, \a) -- ({(\k+\a)/3}, 0);
+			\draw[dashed, green!50!black] ({(\k+\b)/3}, \b) -- ({(\k+\b)/3}, 0);
+		}
+		
+		% Etiquetas de los subintervalos en el eje X
+		\node[below, green!50!black, font=\bfseries] at ({(\a+\b)/6}, 0) {$I_1$};
+		\node[below, green!50!black, font=\bfseries] at ({(2+\a+\b)/6}, 0) {$I_2$};
+		\node[below, green!50!black, font=\bfseries] at ({(4+\a+\b)/6}, 0) {$I_3$};
+		
+		% Ticks en los ejes (LÍNEA CORREGIDA AQUÍ)
+		\node[below] at (1/3, 0) {$\frac{1}{3}$};
+		\node[below, text height=1.5ex] at (2/3, 0) {$\frac{2}{3}$};
+		\node[below] at (1, 0) {$1$};
+		\node[left] at (0, 1) {$1$};
+	\end{tikzpicture}
+	\caption{Acción de la preimagen bajo la transformación expansiva $f(x) = 3x \text{ (mod 1)} $. El intervalo $I$ se distribuye uniformemente en tres subintervalos $I_1, I_2, I_3$, conservando la medida de Lebesgue total: $m(f^{-1}(I)) = m(I_1)+m(I_2)+m(I_3) = m(I)$.}
+	\label{fig:ejemplo_3x_mod_1}
+\end{figure}
+
+Para demostrar el Lema de manera rigurosa, es necesario introducir una de las herramientas de extensión más potentes en teoría de la medida: las clases monótonas.
+
+
+
+\begin{definicion}[Clase Monótona]
+	Sea $X \neq \emptyset$ un conjunto no vacío. Decimos que una familia de subconjuntos $\mathcal{G} \subset 2^X$ es una \textbf{clase monótona} en $X$ si satisface las siguientes dos condiciones de cerradura bajo límites algebraicos:
+	\begin{enumerate}[1)]
+		\item Es cerrada bajo uniones numerables crecientes: Si $A_1 \subset A_2 \subset A_3 \subset \dots$ con $A_i \in \mathcal{G}$, entonces su unión pertenece a la familia:
+		$$ \bigcup_{i=1}^\infty A_i \in \mathcal{G} $$
+		\item Es cerrada bajo intersecciones numerables decrecientes: Si $A_1 \supset A_2 \supset A_3 \supset \dots$ con $A_i \in \mathcal{G}$, entonces su intersección pertenece a la familia:
+		$$ \bigcap_{i=1}^\infty A_i \in \mathcal{G} $$
+	\end{enumerate}
+\end{definicion}
+
+\begin{teorema}[Teorema de la Clase Monótona de Halmos]
+	Sea $\mathcal{A}$ un álgebra de subconjuntos sobre un espacio $X$ y sea $\mathcal{G}$ una clase monótona en $X$ que contiene al álgebra, es decir, $\mathcal{A} \subseteq \mathcal{G}$. Entonces, la $\sigma$-álgebra generada por $\mathcal{A}$ está completamente contenida en la clase monótona:
+	$$ \sigma(\mathcal{A}) \subseteq \mathcal{G} $$
+	(En particular, la menor clase monótona que contiene a $\mathcal{A}$, denotada por $\mathcal{M}(\mathcal{A}) = \bigcap_{\mathcal{A} \subset \mathcal{D}} \mathcal{D}$, coincide exactamente con $\sigma(\mathcal{A})$).
+\end{teorema}
+
+\begin{proof}[Demostración del Lema de Invariancia en Generadores]
+	Consideremos la familia $\mathcal{G}$ constituida por todos los conjuntos medibles de $\mathcal{B}$ que preservan su medida bajo la preimagen de $f$:
+	$$ \mathcal{G} = \{ E \in \mathcal{B} : \mu(f^{-1}(E)) = \mu(E) \} \subseteq \mathcal{B} $$
+	Por hipótesis del Lema, sabemos que el álgebra generadora está contenida en esta familia: $\mathcal{A} \subseteq \mathcal{G}$. 
+	
+	\textbf{Afirmación:} $\mathcal{G}$ es una clase monótona sobre el espacio $M$.
+	\begin{enumerate}[i)]
+		\item \textbf{Cerradura bajo uniones crecientes:} Sea $\{E_i\}_{i=1}^\infty \subset \mathcal{G}$ una sucesión monótona creciente de conjuntos ($E_1 \subset E_2 \subset E_3 \subset \dots$) y definamos su límite como $E = \bigcup_{i=1}^\infty E_i$.
+		Como las preimágenes preservan el orden de inclusión, obtenemos una sucesión creciente de preimágenes en $\mathcal{B}$:
+		$$ f^{-1}(E_1) \subset f^{-1}(E_2) \subset f^{-1}(E_3) \subset \dots $$
+		Por la propiedad de continuidad inferior de cualquier medida hacia uniones crecientes, tenemos:
+		$$ \mu(E) = \mu\left( \bigcup_{i=1}^\infty E_i \right) = \lim_{i \to \infty} \mu(E_i) $$
+		Dado que cada $E_i \in \mathcal{G}$, sustituimos la medida por la de su preimagen y aplicamos la continuidad inferior para la sucesión creciente $f^{-1}(E_i)$:
+		$$ \lim_{i \to \infty} \mu(E_i) = \lim_{i \to \infty} \mu(f^{-1}(E_i)) = \mu\left( \bigcup_{i=1}^\infty f^{-1}(E_i) \right) = \mu\left( f^{-1}\left( \bigcup_{i=1}^\infty E_i \right) \right) = \mu(f^{-1}(E)) $$
+		Por tanto, $\mu(f^{-1}(E)) = \mu(E)$, lo que garantiza que la unión creciente $E \in \mathcal{G}$.
+		
+		\item \textbf{Cerradura bajo intersecciones decrecientes:} Sea $\{E_i\}_{i=1}^\infty \subset \mathcal{G}$ una sucesión monótona decreciente ($E_1 \supset E_2 \supset E_3 \supset \dots$) y sea $E = \bigcap_{i=1}^\infty E_i$.
+		Aquí es donde resulta indispensable la hipótesis de que la medida del espacio es finita ($\mu(M) < +\infty$). Al ser la medida finita, podemos aplicar la propiedad de continuidad superior para sucesiones decrecientes:
+		$$ \mu(E) = \mu\left( \bigcap_{i=1}^\infty E_i \right) = \lim_{i \to \infty} \mu(E_i) = \lim_{i \to \infty} \mu(f^{-1}(E_i)) = \mu\left( \bigcap_{i=1}^\infty f^{-1}(E_i) \right) = \mu(f^{-1}(E)) $$
+		Luego, $\mu(f^{-1}(E)) = \mu(E) \implies E \in \mathcal{G}$.
+	\end{enumerate}
+	Habiendo verificado ambas condiciones, concluimos que $\mathcal{G}$ es una clase monótona que contiene al álgebra $\mathcal{A}$. Invocando el Teorema de la Clase Monótona de Halmos, obtenemos:
+	$$ \mathcal{B} = \sigma(\mathcal{A}) \subseteq \mathcal{G} \subseteq \mathcal{B} \implies \mathcal{G} = \mathcal{B} $$
+	Por lo tanto, la igualdad $\mu(f^{-1}(E)) = \mu(E)$ se cumple rigurosamente para todo $E \in \mathcal{B}$.
+\end{proof}
+
+\section{Medida Imagen (Push-Forward) y Semi-Conjugación}
+
+Cuando dos sistemas dinámicos están relacionados geométricamente mediante un mapeo que preserva las trayectorias (una semi-conjugación o un factor), es posible trasladar las medidas invariantes de un espacio a otro mediante el operador imagen.
+
+\begin{definicion}[Medida Imagen o Push-Forward]
+	Sean $(M, \mathcal{B})$ y $(N, \zeta)$ dos espacios medibles, y sea $\phi: M \to N$ una aplicación medible. Dada una medida $\mu$ en el espacio origen $(M, \mathcal{B})$, el \textbf{push-forward de $\mu$ por $\phi$} (o medida imagen), denotado por $\phi_* \mu$, es la función de conjunto $\phi_* \mu: \zeta \to [0, +\infty]$ definida por:
+	$$ (\phi_* \mu)(E) = \mu(\phi^{-1}(E)), \quad \forall E \in \zeta $$
+	Es sencillo verificar por $\sigma$-aditividad de la preimagen que $\phi_* \mu$ constituye una verdadera medida en el espacio destino $(N, \zeta)$.
+\end{definicion}
+
+\begin{proposicion}[Invariancia bajo semi-conjugación]
+	Sean $(M, \mathcal{B})$ y $(N, \zeta)$ espacios medibles dotados de aplicaciones medibles $f: M \to M$ y $g: N \to N$. Supongamos que existe una aplicación medible $\phi: M \to N$ que semi-conjuga las dinámicas, es decir, el siguiente diagrama conmuta ($\phi \circ f = g \circ \phi$):
+	
+	\begin{center}
+		\begin{tikzpicture}[node distance=3cm, auto, >=Latex]
+			\node (M1) {$M$};
+			\node (M2) [right of=M1] {$M$};
+			\node (N1) [below of=M1, yshift=1.2cm] {$N$};
+			\node (N2) [right of=N1] {$N$};
+			
+			\draw[->] (M1) to node {$f$} (M2);
+			\draw[->] (M1) to node [swap] {$\phi$} (N1);
+			\draw[->] (M2) to node {$\phi$} (N2);
+			\draw[->] (N1) to node [swap] {$g$} (N2);
+		\end{tikzpicture}
+	\end{center}
+	
+	Si $\mu$ es una medida en $(M, \mathcal{B})$ invariante por $f$, entonces el push-forward $\nu = \phi_* \mu$ es una medida en $(N, \zeta)$ invariante por $g$.
+\end{proposicion}
+
+\begin{proof}[Demostración]
+	Sea $E \in \zeta$ un conjunto medible arbitrario en el codominio $N$. Debemos verificar que $\nu(g^{-1}(E)) = \nu(E)$. Evaluamos la medida de la preimagen bajo $g$ aplicando la definición del push-forward:
+	$$ \nu(g^{-1}(E)) = (\phi_* \mu)(g^{-1}(E)) = \mu\left( \phi^{-1}(g^{-1}(E)) \right) $$
+	Por las propiedades algebraicas de la preimagen de una composición de funciones:
+	$$ \phi^{-1}(g^{-1}(E)) = (g \circ \phi)^{-1}(E) $$
+	Utilizando la hipótesis de semi-conjugación $\phi \circ f = g \circ \phi$, sustituimos la composición en la preimagen:
+	$$ \mu\left( (g \circ \phi)^{-1}(E) \right) = \mu\left( (\phi \circ f)^{-1}(E) \right) = \mu\left( f^{-1}(\phi^{-1}(E)) \right) $$
+	Como la medida $\mu$ es invariante por $f$, al aplicar la propiedad de invariancia al conjunto medible $\phi^{-1}(E) \in \mathcal{B}$, la acción de $f^{-1}$ se elimina:
+	$$ \mu\left( f^{-1}(\phi^{-1}(E)) \right) = \mu(\phi^{-1}(E)) = (\phi_* \mu)(E) = \nu(E) $$
+	Por lo tanto, $\nu(g^{-1}(E)) = \nu(E)$ para todo $E \in \zeta$, lo que prueba que $\nu = \phi_* \mu$ es invariante por $g$.
+\end{proof}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[scale=4, >=Latex]
+		% ---------------------------------------------------------
+		% SUBGRÁFICO 1: MAPA TIENDA g(x) (Izquierda)
+		% ---------------------------------------------------------
+		\draw[->, thick] (-0.1, 0) -- (1.1, 0) node[right] {$x$};
+		\draw[->, thick] (0, -0.1) -- (0, 1.1) node[above] {$g(x)$};
+		\draw[thick, gray!50] (0, 0) rectangle (1, 1);
+		
+		% Gráfica Mapa Tienda
+		\draw[very thick, blue] (0, 0) -- (0.5, 1) -- (1, 0);
+		
+		\node[below] at (0.5, 0) {$\frac{1}{2}$};
+		\node[below] at (1, 0) {$1$};
+		\node[left] at (0, 1) {$1$};
+		\node[above, font=\bfseries, text=blue] at (0.5, 1) {Mapa Tienda $g$};
+		
+		% Flecha de conjugación central
+		\draw[<->, ultra thick, purple] (1.3, 0.5) -- (1.7, 0.5) 
+		node[midway, above, font=\small] {$h(x) = \sin^2\left(\frac{\pi x}{2}\right)$} 
+		node[midway, below, font=\small] {Conjugación};
+		
+		% ---------------------------------------------------------
+		% SUBGRÁFICO 2: MAPA LOGÍSTICO f(x) (Derecha)
+		% ---------------------------------------------------------
+		\begin{scope}[xshift=2cm]
+			\draw[->, thick] (-0.1, 0) -- (1.1, 0) node[right] {$x$};
+			\draw[->, thick] (0, -0.1) -- (0, 1.1) node[above] {$f(x)$};
+			\draw[thick, gray!50] (0, 0) rectangle (1, 1);
+			
+			% Gráfica Mapa Logístico 4x(1-x)
+			\draw[very thick, red, domain=0:1, samples=100] plot (\x, {4*\x*(1-\x)});
+			
+			\node[below] at (0.5, 0) {$\frac{1}{2}$};
+			\node[below] at (1, 0) {$1$};
+			\node[left] at (0, 1) {$1$};
+			\node[above, font=\bfseries, text=red] at (0.5, 1) {Mapa Logístico $f$};
+		\end{scope}
+		
+		% ---------------------------------------------------------
+		% SUBGRÁFICO 3: DENSIDADES INVARIANTES (Abajo)
+		% ---------------------------------------------------------
+		\begin{scope}[yshift=-1.4cm, xscale=1, yscale=0.3]
+			% Densidad Uniforme para el Mapa Tienda
+			\draw[->, thick] (-0.1, 0) -- (1.1, 0) node[right] {$x$};
+			\draw[->, thick] (0, -0.1) -- (0, 2.5) node[above] {$\frac{dm}{dx}$};
+			\draw[ultra thick, blue, fill=blue!10] (0, 0) -- (0, 1) -- (1, 1) -- (1, 0) -- cycle;
+			\node[above, font=\small, text=blue] at (0.5, 1) {Medida de Lebesgue (Uniforme)};
+			
+			% Flecha Push-forward
+			\draw[->, ultra thick, purple] (1.3, 1) -- (1.7, 1) node[midway, above, font=\small] {$\nu = (h^{-1})_* m$};
+			
+			% Densidad Arcoseno para el Mapa Logístico
+			\begin{scope}[xshift=2cm]
+				\draw[->, thick] (-0.1, 0) -- (1.1, 0) node[right] {$x$};
+				\draw[->, thick] (0, -0.1) -- (0, 2.5) node[above] {$\frac{d\nu}{dx}$};
+				\draw[ultra thick, red, fill=red!10, domain=0.015:0.985, samples=100] 
+				plot (\x, {1/(3.14159*sqrt(\x*(1-\x)))}) -- (0.985, 0) -- (0.015, 0) -- cycle;
+				\node[above, font=\small, text=red] at (0.5, 2.2) {Densidad Arcoseno: $\frac{1}{\pi\sqrt{x(1-x)}}$};
+			\end{scope}
+		\end{scope}
+	\end{tikzpicture}
+	\caption{Arriba: Conjugación topológica entre el Mapa Tienda y el Mapa Logístico. Abajo: Transferencia de la medida invariante por el operador push-forward; la medida de Lebesgue uniforme se transforma en una medida absolutamente continua con densidad en forma de ``U''.}
+	\label{fig:ejemplo_conjugacion_pushforward}
+\end{figure}
+
+\begin{ejemplo}[Conjugación entre el Mapa Tienda y el Mapa Logístico]
+	Sabemos por análisis previo que el mapa tienda $g: [0,1] \to [0,1]$ definido por:
+	$$ g(x) = \begin{cases} 2x & \text{si } 0 \le x \le 1/2 \\ 2-2x & \text{si } 1/2 < x \le 1 \end{cases} $$
+	deja invariante a la medida de Lebesgue $m$ en el intervalo $[0,1]$.
+	
+	En el estudio de dinámica topológica (Semana 6), demostramos que existe un homeomorfismo $h: [0,1] \to [0,1]$ que conjuga topológicamente al mapa tienda $g$ con el mapa logístico de parámetro máximo $f(x) = 4x(1-x)$, cumpliendo $h \circ f = g \circ h$.
+	
+	\begin{center}
+		\begin{tikzpicture}[node distance=3cm, auto, >=Latex]
+			\node (01a) {$[0,1]$};
+			\node (01b) [right of=01a] {$[0,1]$};
+			\node (01c) [below of=01a, yshift=1.2cm] {$[0,1]$};
+			\node (01d) [right of=01c] {$[0,1]$};
+			
+			\draw[->] (01a) to node {$f$} (01b);
+			\draw[->] (01a) to node [swap] {$h$} (01c);
+			\draw[->] (01b) to node {$h$} (01d);
+			\draw[->] (01c) to node [swap] {$g$} (01d);
+		\end{tikzpicture}
+	\end{center}
+	
+	Aplicando la Proposición anterior (utilizando $h^{-1}$ como el mapeo que conjuga $g$ hacia $f$), deducimos que la medida push-forward $\nu = (h^{-1})_* m$ es una medida invariante por el mapa logístico $f(x) = 4x(1-x)$. 
+	
+	\textit{Nota analítica:} ¿Es esta medida inducida $\nu$ equivalente a la medida de Lebesgue clásica? No, un cálculo analítico detallado muestra que $\nu$ corresponde a la medida absolutamente continua con respecto a Lebesgue dada por la densidad arcoseno: $d\nu = \frac{1}{\pi \sqrt{x(1-x)}} dx$.
+\end{ejemplo}
+
+
+\section{Caracterización Integral de Medidas Invariantes}
+
+Desde el punto de vista del análisis funcional, la invariancia de una medida está íntimamente ligada a la conservación de la esperanza matemática o promedio espacial de las funciones integrables bajo la composición con la dinámica.
+
+\begin{teorema}[Caracterización Integral de la Invariancia]
+	Sea $(M, \mathcal{B}, \mu)$ un espacio de medida finita ($\mu(M) < +\infty$) y sea $f: M \to M$ una aplicación medible. La medida $\mu$ es invariante por $f$ si y solo si para toda función integrable $\varphi \in \mathcal{L}^1(M, \mathcal{B}, \mu)$ se cumple la identidad integral:
+	$$ \int_M \varphi \, d\mu = \int_M (\varphi \circ f) \, d\mu $$
+\end{teorema}
+
+\begin{proof}[Demostración]
+	$[\Leftarrow]$ Supongamos que la identidad integral se cumple para toda función $\varphi \in \mathcal{L}^1(\mu)$. Sea $E \in \mathcal{B}$ un conjunto medible arbitrario. Consideremos su función característica $\varphi = \chi_E$. Como el volumen del espacio es finito ($\mu(M) < +\infty$), la función $\chi_E$ es integrable:
+	$$ \int_M |\chi_E| \, d\mu = \int_M \chi_E \, d\mu = \mu(E) < +\infty \implies \chi_E \in \mathcal{L}^1(\mu) $$
+	Evaluemos la composición con $f$:
+	$$ (\chi_E \circ f)(x) = \chi_E(f(x)) = \begin{cases} 1 & \text{si } f(x) \in E \\ 0 & \text{si } f(x) \notin E \end{cases} = \begin{cases} 1 & \text{si } x \in f^{-1}(E) \\ 0 & \text{si } x \notin f^{-1}(E) \end{cases} = \chi_{f^{-1}(E)}(x) $$
+	Sustituyendo $\varphi = \chi_E$ en nuestra hipótesis integral y reemplazando la composición:
+	$$ \mu(E) = \int_M \chi_E \, d\mu = \int_M (\chi_E \circ f) \, d\mu = \int_M \chi_{f^{-1}(E)} \, d\mu = \mu(f^{-1}(E)) $$
+	Como $\mu(f^{-1}(E)) = \mu(E)$ para todo $E \in \mathcal{B}$, la medida $\mu$ es invariante por $f$.
+	
+	$[\Rightarrow]$ Supongamos que $\mu$ es invariante por $f$. Demostraremos la identidad integral en cuatro etapas estructurales según la teoría de integración de Lebesgue:
+	
+	\textbf{Etapa 1 (Funciones Características):} Por el cálculo realizado en la primera parte, para cualquier $E \in \mathcal{B}$, la invariancia de la medida garantiza que:
+	$$ \int_M (\chi_E \circ f) \, d\mu = \int_M \chi_{f^{-1}(E)} \, d\mu = \mu(f^{-1}(E)) = \mu(E) = \int_M \chi_E \, d\mu $$
+	
+	\textbf{Etapa 2 (Funciones Simples):} Sea $S = \sum_{i=1}^m \alpha_i \chi_{E_i}$ una función simple en su representación canónica ($E_i \in \mathcal{B}$ disjuntos cuya unión es $M$, y $\alpha_i \in \mathbb{R}$). Por la linealidad de la integral:
+	\begin{align*}
+		\int_M (S \circ f) \, d\mu &= \int_M \left( \sum_{i=1}^m \alpha_i \chi_{E_i} \right) \circ f \, d\mu = \int_M \sum_{i=1}^m \alpha_i (\chi_{E_i} \circ f) \, d\mu \\
+		&= \sum_{i=1}^m \alpha_i \int_M (\chi_{E_i} \circ f) \, d\mu = \sum_{i=1}^m \alpha_i \int_M \chi_{E_i} \, d\mu = \int_M S \, d\mu
+	\end{align*}
+	
+	\textbf{Etapa 3 (Funciones Medibles No Negativas Integrables):} Sea $\varphi \in \mathcal{L}^1(\mu)$ con $\varphi(x) \ge 0$ para todo $x \in M$. Por el Teorema de Aproximación Fundamental de Lebesgue, existe una sucesión monótona creciente de funciones simples no negativas $\{s_n\}_{n=1}^\infty$ tal que $0 \le s_1(x) \le s_2(x) \le \dots \le \varphi(x)$ y $\lim_{n \to \infty} s_n(x) = \varphi(x)$ en todo punto.
+	
+	Al componer con $f$, obtenemos la sucesión monótona creciente:
+	$$ 0 \le (s_1 \circ f)(x) \le (s_2 \circ f)(x) \le \dots \le (\varphi \circ f)(x), \quad \text{con } \lim_{n \to \infty} (s_n \circ f)(x) = (\varphi \circ f)(x) $$
+	Dado que $\varphi$ es integrable y domina a todas las $s_n$, aplicando el Teorema de Convergencia Dominada de Lebesgue (TCD) —o equivalente y directamente, el Teorema de Beppo Levi— a ambas sucesiones:
+	$$ \int_M \varphi \, d\mu = \lim_{n \to \infty} \int_M s_n \, d\mu = \lim_{n \to \infty} \int_M (s_n \circ f) \, d\mu = \int_M (\varphi \circ f) \, d\mu $$
+	
+	\textbf{Etapa 4 (Funciones Integrables Generales):} Para una función arbitraria $\varphi \in \mathcal{L}^1(\mu)$, descomponemos unívocamente en sus partes positiva y negativa: $\varphi = \varphi^+ - \varphi^-$, donde ambas son medibles, no negativas e integrables ($\varphi^+, \varphi^- \in \mathcal{L}^1(\mu)$). Aplicando el resultado de la Etapa 3 a cada componente y usando la linealidad:
+	$$ \int_M \varphi \, d\mu = \int_M \varphi^+ \, d\mu - \int_M \varphi^- \, d\mu = \int_M (\varphi^+ \circ f) \, d\mu - \int_M (\varphi^- \circ f) \, d\mu = \int_M (\varphi \circ f) \, d\mu $$
+	Con lo cual queda plenamente establecida la caracterización.
+\end{proof}
+
+\section{La Medida de Lebesgue en el Círculo y Rotaciones}
+
+Para formalizar analíticamente las medidas en el círculo unitario $S^1$, es conveniente trabajar en su modelo de espacio cociente $\mathbb{R}/\mathbb{Z}$, identificando los puntos que difieren en un número entero: $x \sim y \iff x - y \in \mathbb{Z}$.
+
+\subsection{Construcción de la Medida de Lebesgue en \texorpdfstring{$\mathbb{R}/\mathbb{Z}$}{R/Z}}
+
+Sea $\pi: \mathbb{R} \to \mathbb{R}/\mathbb{Z}$ la proyección canónica cociente definida por $\pi(x) = [x]$. 
+Sabemos que un subconjunto $E \subset \mathbb{R}/\mathbb{Z}$ es abierto en la topología cociente si y solo si su preimagen $\pi^{-1}(E)$ es un conjunto abierto en la recta real $\mathbb{R}$. 
+
+De forma análoga, dotamos a $\mathbb{R}/\mathbb{Z}$ de la $\sigma$-álgebra de Borel cociente:
+$$ \mathcal{B}_{\mathbb{R}/\mathbb{Z}} = \{ E \subset \mathbb{R}/\mathbb{Z} : \pi^{-1}(E) \in \mathcal{B}_\mathbb{R} \} $$
+donde $\mathcal{B}_\mathbb{R}$ es la $\sigma$-álgebra de Borel estándar en $\mathbb{R}$.
+
+\begin{definicion}[Medida cociente en $\mathbb{R}/\mathbb{Z}$]
+	Sea $m$ la medida de Lebesgue en toda la recta real $\mathbb{R}$. Definimos la aplicación $\\mu: \mathcal{B}_{\mathbb{R}/\mathbb{Z}} \to [0, +\infty]$ asignando a cada conjunto boreliano cociente la medida de Lebesgue de su preimagen restringida a un intervalo unitario entero:
+	$$ \mu(E) = m\left( \pi^{-1}(E) \cap [k, k+1) \right), \quad \text{para algún } k \in \mathbb{Z} $$
+\end{definicion}
+
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[scale=1.6, >=Latex]
+		% =========================================================
+		% 1. RECTA REAL R (ARRIBA)
+		% =========================================================
+		\draw[<->, thick] (-4.2, 3) -- (4.2, 3) node[right, font=\bfseries] {$\mathbb{R}$};
+		
+		% Ticks enteros y preimágenes
+		\foreach \k/\pos in {-3/below, -2/below, -1/below, 0/below, 1/below, 2/below, 3/below} {
+			\draw[thick] (\k, 2.85) -- (\k, 3.15);
+			\node[\pos=2pt, font=\small] at (\k, 2.85) {$\k$};
+			
+			% Subintervalo preimagen [k+0.2, k+0.5]
+			\draw[ultra thick, blue, line cap=round] ({(\k+0.2)}, 3) -- ({(\k+0.5)}, 3);
+			\draw[blue, fill=blue!20] ({(\k+0.2)}, 2.92) rectangle ({(\k+0.5)}, 3.08);
+		}
+		
+		% Etiquetas superiores escalonadas (sin superposición)
+		\node[above=12pt, font=\footnotesize\bfseries, text=blue] at (0.35, 3) {$\pi^{-1}(E) \cap [0, 1)$};
+		\draw[->, thin, blue] (0.35, 3.4) -- (0.35, 3.1);
+		
+		\node[above=25pt, font=\footnotesize\bfseries, text=blue] at (1.35, 3) {$\pi^{-1}(E) \cap [1, 2)$};
+		\draw[->, thin, blue] (1.35, 3.85) -- (1.35, 3.1);
+		
+		\node[above=25pt, font=\footnotesize\bfseries, text=blue] at (-0.65, 3) {$\pi^{-1}(E) \cap [-1, 0)$};
+		\draw[->, thin, blue] (-0.65, 3.85) -- (-0.65, 3.1);
+		
+		% =========================================================
+		% 2. FLECHAS DE PROYECCIÓN COCIENTE \pi
+		% =========================================================
+		\draw[->, thick, dashed, gray!80] (-0.65, 2.5) -- (-0.8, 0.8);
+		\draw[->, thick, dashed, gray!80] (0.35, 2.5) -- (0.5, 1.1);
+		\draw[->, thick, dashed, gray!80] (1.35, 2.5) -- (1.1, 0.6);
+		
+		\node[font=\normalsize\bfseries, fill=white, inner sep=4pt] at (1.8, 1.8) {$\pi(x) = e^{2\pi i x} \equiv [x]$};
+		
+		% =========================================================
+		% 3. CIRCUNFERENCIA S^1 ~ R/Z (ABAJO)
+		% =========================================================
+		\begin{scope}[yshift=0cm]
+			% Círculo base
+			\draw[thick] (0, 0) circle (1.3cm);
+			\draw[->, thin, gray] (-1.7, 0) -- (1.7, 0);
+			\draw[->, thin, gray] (0, -1.7) -- (0, 1.7);
+			
+			% Puntos de referencia en el círculo
+			\filldraw[black] (1.3, 0) circle (1.5pt) node[below right, font=\small] {$0 \equiv 1$};
+			\filldraw[black] (0, 1.3) circle (1.5pt) node[above right, font=\small] {$1/4$};
+			\filldraw[black] (-1.3, 0) circle (1.5pt) node[below left, font=\small] {$1/2$};
+			
+			% Arco boreliano E en rojo (CORREGIDO: usando \x en lugar de \\x)
+			\draw[ultra thick, red, domain=72:180, samples=50] plot ({1.3*cos(\x)}, {1.3*sin(\x)});
+			
+			% Etiqueta del arco rojo E con flecha indicadora
+			\node[font=\bfseries, text=red] (labelE) at (-2.2, 1.2) {Arco $E \in \mathcal{B}_{S^1}$};
+			\draw[->, thick, red, bend left=15] (labelE) to (-0.9, 1.0);
+			
+			\node[below=1.6cm, font=\bfseries] at (0, 0) {Espacio Cociente $\mathbb{R}/\mathbb{Z} \cong S^1$};
+		\end{scope}
+	\end{tikzpicture}
+	\caption{La proyección canónica $\pi: \mathbb{R} \to S^1$. Un arco boreliano $E$ en la circunferencia se levanta en la recta real como una infinidad de copias idénticas espaciadas por números enteros. La medida de Lebesgue local en cualquier intervalo unitario $[k, k+1)$ es idéntica y define sin ambigüedad la medida invariante en el círculo.}
+	\label{fig:definicion_medida_cociente}
+\end{figure}
+
+
+\begin{proposicion}[Independencia del representante integral]
+	El valor de $\mu(E)$ en la definición anterior está bien definido, ya que el lado derecho de la igualdad no depende de la elección del número entero $k \in \mathbb{Z}$.
+\end{proposicion}
+
+\begin{proof}[Demostración rigurosa]
+	Para verificar la independencia respecto de $k$, demostraremos la siguiente identidad conjuntista que relaciona un bloque entero con el bloque fundamental $[0, 1)$:
+	$$ \pi^{-1}(E) \cap [k, k+1) = \left( \pi^{-1}(E) \cap [0, 1) \right) + k $$
+	Procurando la doble inclusión:
+	\begin{itemize}
+		\item $[\subseteq]$ Sea un punto cualquiera $x \in \pi^{-1}(E) \cap [k, k+1)$. Por definición de preimagen, $\pi(x) = [x] \in E$, y además satisface la acotación de intervalo:
+		$$ k \le x < k+1 \implies 0 \le x - k < 1 $$
+		Dado que la proyección canónica es periódica de periodo entero, al evaluar en la traslación $x - k$ tenemos:
+		$$ \pi(x - k) = [x - k] = [x] = \pi(x) \in E \implies x - k \in \pi^{-1}(E) $$
+		Por tanto, $x - k \in \pi^{-1}(E) \cap [0, 1)$. Al despejar $x$ como $(x - k) + k$, concluimos que $x \in \left( \pi^{-1}(E) \cap [0, 1) \right) + k$.
+		
+		\item $[\supseteq]$ Sea un elemento de la forma $y = z + k$ donde $z \in \pi^{-1}(E) \cap [0, 1)$. Al estar $z \in [0, 1)$, sumando el entero $k$ obtenemos inmediatamente $k \le z + k < k+1 \implies y \in [k, k+1)$. Además, por la periodicidad del cociente, $\pi(y) = \pi(z + k) = \pi(z) \in E \implies y \in \pi^{-1}(E)$. Consecuentemente, $y \in \pi^{-1}(E) \cap [k, k+1)$.
+	\end{itemize}
+	Habiendo probado la identidad de traslación de conjuntos, evaluamos la medida de Lebesgue $m$. Recordando la propiedad fundamental de que la medida de Lebesgue es invariante bajo traslaciones reales ($m(A + c) = m(A)$ para todo $c \in \mathbb{R}$):
+	$$ m\left( \pi^{-1}(E) \cap [k, k+1) \right) = m\left( \left( \pi^{-1}(E) \cap [0, 1) \right) + k \right) = m\left( \pi^{-1}(E) \cap [0, 1) \right) $$
+	Dado que para cualquier $k \in \mathbb{Z}$ el volumen coincide idénticamente con el evaluado en el bloque canónico $[0, 1)$, la función $\mu(E)$ no depende de $k$ y constituye una medida de probabilidad finita en $\mathbb{R}/\mathbb{Z}$ (con $\mu(\mathbb{R}/\mathbb{Z}) = m([0,1)) = 1$). 
+	
+	\textit{Nota geométrica:} Si consideramos el homeomorfismo biyectivo local $\pi|_{[0,1)}: [0,1) \to S^1$, se deduce directamente que nuestra medida equivale al push-forward: $\mu = (\pi|_{[0,1)})_* m$.
+\end{proof}
+
+\subsection{Invariancia bajo las Rotaciones en el Círculo}
+
+\begin{definicion}[Rotación en $\mathbb{R}/\mathbb{Z}$]
+	Dado un ángulo fijo $\theta \in \mathbb{R}$, definimos la transformación de rotación $R_\theta: \mathbb{R}/\mathbb{Z} \to \mathbb{R}/\mathbb{Z}$ como:
+	$$ R_\theta([x]) = [x + \theta] $$
+\end{definicion}
+
+\begin{teorema}[Invariancia de Lebesgue bajo Rotaciones]
+	La medida de Lebesgue cociente $\mu$ definida en el círculo $\mathbb{R}/\mathbb{Z}$ es invariante por la rotación $R_\theta$ para cualquier valor del ángulo $\theta \in \mathbb{R}$.
+\end{teorema}
+
+\begin{proof}[Demostración algebraica de invariancia]
+	Debemos demostrar que para todo boreliano cociente $E \in \mathcal{B}_{\mathbb{R}/\mathbb{Z}}$, se cumple $\mu(R_\theta^{-1}(E)) = \mu(E)$. Por la definición de nuestra medida en el bloque base:
+	$$ \mu(R_\theta^{-1}(E)) = m\left( \pi^{-1}(R_\theta^{-1}(E)) \cap [0, 1) \right) $$
+	\textbf{Paso 1 (Cálculo de la preimagen doble):} Verifiquemos la relación geométrica $\pi^{-1}(R_\theta^{-1}(E)) = \pi^{-1}(E) - \theta$. En efecto:
+	\begin{align*}
+		x \in \pi^{-1}(R_\theta^{-1}(E)) &\iff \pi(x) = [x] \in R_\theta^{-1}(E) \\
+		&\iff R_\theta([x]) \in E \\
+		&\iff [x + \theta] = \pi(x + \theta) \in E \\
+		&\iff x + \theta \in \pi^{-1}(E) \\
+		&\iff x \in \pi^{-1}(E) - \theta
+	\end{align*}
+	
+	\textbf{Paso 2 (Descomposición modular de la integral):} Sustituyendo este conjunto trasladado en el cálculo del volumen:
+	$$ \mu(R_\theta^{-1}(E)) = m\left( (\pi^{-1}(E) - \theta) \cap [0, 1) \right) $$
+	Utilizando nuevamente la invariancia por traslaciones espaciales de la medida de Lebesgue $m$, trasladamos todo el argumento del lado derecho sumando $+\theta$:
+	$$ m\left( (\pi^{-1}(E) - \theta) \cap [0, 1) \right) = m\left( \left( (\pi^{-1}(E) - \theta) \cap [0, 1) \right) + \theta \right) = m\left( \pi^{-1}(E) \cap [\theta, \theta + 1) \right) $$
+	
+	Sea $k = \lfloor \theta \rfloor \in \mathbb{Z}$ la parte entera del ángulo, por lo cual se cumple $k \le \theta < k+1$. Particionamos el intervalo $[\theta, \theta+1)$ introduciendo el punto entero intermedio $k+1$:
+	$$ [\theta, \theta+1) = [\theta, k+1) \cup [k+1, \theta+1) $$
+	Al ser la unión disjunta, por la aditividad de la medida de Lebesgue tenemos:
+	$$ m\left( \pi^{-1}(E) \cap [\theta, \theta + 1) \right) = m\left( \pi^{-1}(E) \cap [\theta, k+1) \right) + m\left( \pi^{-1}(E) \cap [k+1, \theta+1) \right) $$
+	Analicemos el segundo sumando. Como la preimagen $\pi^{-1}(E)$ es un conjunto periódico en la recta real (es decir, es invariante bajo traslaciones enteras: $\pi^{-1}(E) - 1 = \pi^{-1}(E)$), al aplicar una traslación de $-1$ al segundo bloque obtenemos:
+	\begin{align*}
+		m\left( \pi^{-1}(E) \cap [k+1, \theta+1) \right) &= m\left( \left( \pi^{-1}(E) \cap [k+1, \theta+1) \right) - 1 \right) \\
+		&= m\left( (\pi^{-1}(E) - 1) \cap [k, \theta) \right) \\
+		&= m\left( \pi^{-1}(E) \cap [k, \theta) \right)
+	\end{align*}
+	
+	\textbf{Paso 3 (Reconstrucción del volumen en el bloque entero):} Reemplazando este bloque trasladado en nuestra suma original de volumen:
+	\begin{align*}
+		\mu(R_\theta^{-1}(E)) &= m\left( \pi^{-1}(E) \cap [\theta, k+1) \right) + m\left( \pi^{-1}(E) \cap [k, \theta) \right) \\
+		&= m\left( \pi^{-1}(E) \cap \left( [k, \theta) \cup [\theta, k+1) \right) \right) \\
+		&= m\left( \pi^{-1}(E) \cap [k, k+1) \right)
+	\end{align*}
+	Finalmente, por la Proposición anterior de independencia del representante para el entero $k$, sabemos que este volumen equivale precisamente a la medida en el cociente:
+	$$ m\left( \pi^{-1}(E) \cap [k, k+1) \right) = \mu(E) $$
+	Por lo tanto, $\mu(R_\theta^{-1}(E)) = \mu(E)$ para todo boreliano $E$, concluyendo que la medida de Lebesgue es invariante por cualquier rotación.
+\end{proof}
+
+
+\section{Ejercicios Propuestos y Unicidad de Medidas}
+
+Para consolidar el estudio de la conservación del volumen y su relación con la estructura topológica y métrica de los sistemas, se proponen los siguientes problemas de investigación y demostración:
+
+\begin{ejercicio}[Unicidad Ergódica en Rotaciones Irracionales]
+	Demuestre que si el ángulo de rotación no es racional, es decir, $\theta \in \mathbb{R} \setminus \mathbb{Q}$, entonces la medida de Lebesgue $\mu$ en el círculo unitario $S^1$ es la \textbf{única} medida de probabilidad boreliana que es invariante por la rotación $R_\theta$. (A esta propiedad trascendental, donde existe una única medida invariante de probabilidad, se le denomina \textit{unicidad ergódica}).
+\end{ejercicio}
+
+\begin{ejercicio}[Invariancia de la Unicidad bajo Conjugación Topológica]
+	Sean $X$ e $Y$ dos espacios topológicos compactos y métricos, y sean $f: X \to X$, $g: Y \to Y$ aplicaciones continuas. Supongamos que $f$ y $g$ son \textbf{topológicamente conjugadas}, es decir, existe un homeomorfismo $h: X \to Y$ tal que $h \circ f = g \circ h$.
+	
+	Muestre rigurosamente que si el sistema $f$ posee una única medida de probabilidad invariante, entonces lo mismo sucede para el sistema $g$.
+\end{ejercicio}
+
+\begin{ejercicio}[Unicidad Ergódica en Semiconjugaciones y Factores]
+	Sean $f: X \to X$ y $g: Y \to Y$ aplicaciones continuas en espacios compactos. Supongamos que $g$ es un \textbf{factor} de $f$, es decir, existe una aplicación continua y sobreyectiva $\phi: X \to Y$ tal que $\phi \circ f = g \circ \phi$ (semi-conjugación).
+	
+	Si el sistema dominio $f$ posee una única medida invariante de probabilidad, ¿se puede afirmar que el sistema factor $g$ también tiene una única medida invariante? (¡Demuestre formalmente la afirmación o construya un contraejemplo riguroso que la refute!).
+\end{ejercicio}
+
+% =========================================================================
+% --- FIN INPUT SEMANA 9 ---
+% =========================================================================

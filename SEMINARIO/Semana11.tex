@@ -1,0 +1,128 @@
+% =========================================================================
+% --- INICIO INPUT SEMANA 11 ---
+% =========================================================================
+
+\chapter{Semana 11: Caracterización Funcional y Rotaciones Irracionales}
+
+\section{Caracterización Funcional de la Ergodicidad}
+
+\begin{teorema} \label{teo:caracterizacion_funcional}
+	Sean $(M, \mathcal{B}, \mu)$ un espacio de probabilidad y $f: M \to M$ una aplicación medible que preserva $\mu$. Son equivalentes:
+	\begin{enumerate}[a)]
+		\item $\mu$ es ergódica respecto a $f$.
+		\item Si $\varphi: M \to \mathbb{R}$ es medible (es decir, $\varphi \in \mathcal{L}^0(M, \mathcal{B}, \mu)$) con $\varphi(f(x)) = \varphi(x)$ para todo $x \in M$, entonces $\varphi = \text{cte}$ para $\mu$-c.t.p. $x \in M$. \\
+		(O en su versión casi siempre: si $\varphi(f(x)) = \varphi(x)$ para $\mu$-c.t.p. $x \in M$, entonces $\varphi = \text{cte}$ para $\mu$-c.t.p. $x \in M$).
+		\item Si $\varphi \in \mathcal{L}^1(M, \mathcal{B}, \mu)$ satisface $\varphi(f(x)) = \varphi(x)$ para $\mu$-c.t.p. $x \in M$, entonces $\varphi = \text{cte}$ para $\mu$-c.t.p. $x \in M$.
+		\item Si $\varphi \in \mathcal{L}^2(M, \mathcal{B}, \mu)$ satisface $\varphi(f(x)) = \varphi(x)$ para $\mu$-c.t.p. $x \in M$, entonces $\varphi = \text{cte}$ para $\mu$-c.t.p. $x \in M$.
+	\end{enumerate}
+\end{teorema}
+
+\begin{observacion}
+	Recordemos que $\mathcal{L}^0(M, \mathcal{B}, \mu)$ denota el espacio de las funciones medibles, y para $p = 2$ tenemos:
+	$$ \mathcal{L}^2(M, \mathcal{B}, \mu) = \left\{ \varphi \in \mathcal{L}^0 : \int_M |\varphi|^2 d\mu < \infty \right\} $$
+	Como $\varphi(f(x)) = \varphi(x)$ para todo $x \in M$, entonces, en particular, se cumple $\varphi(f(x)) = \varphi(x)$ para $\mu$-c.t.p. $x \in M$.
+\end{observacion}
+
+\begin{proof}[Demostración del Teorema \ref{teo:caracterizacion_funcional}]
+	Las implicaciones $b) \implies c) \implies d)$ son inmediatas utilizando el mismo argumento de restricción funcional, desde que en un espacio de probabilidad ($\mu(M) = 1 < \infty$) se tiene la cadena de inclusiones:
+	$$ \mathcal{L}^2(M, \mathcal{B}, \mu) \subseteq \mathcal{L}^1(M, \mathcal{B}, \mu) \subseteq \mathcal{L}^0(M, \mathcal{B}, \mu) $$
+	
+	Demostremos las implicaciones restantes para completar la equivalencia: $d) \implies a)$ y $a) \implies b)$.
+	
+	\textbf{Implicación $d) \implies a)$:}
+	Sea $E \in \mathcal{B}$ tal que $f^{-1}(E) = E$. Debemos mostrar que $\mu(E) = 0$ o $\mu(E) = 1$.
+	
+	Consideramos $\varphi = \chi_E$ (la función característica de $E$). Al estar acotada, es claro que $\chi_E \in \mathcal{L}^2(M, \mathcal{B}, \mu)$.
+	Evaluando la composición con la dinámica, tenemos:
+	$$ \varphi(f(x)) = \chi_E(f(x)) = \begin{cases} 1 & \text{si } f(x) \in E \\ 0 & \text{si } f(x) \notin E \end{cases} = \begin{cases} 1 & \text{si } x \in f^{-1}(E) \\ 0 & \text{si } x \notin f^{-1}(E) \end{cases} = \chi_E(x) = \varphi(x) $$
+	donde la última igualdad se justifica pues $f^{-1}(E) = E$.
+	
+	Así, $\varphi(f(x)) = \varphi(x)$ para todo $x \in M$. Por la hipótesis $d)$, la función debe ser constante casi siempre, es decir, existe $k \in \mathbb{R}$ tal que $\varphi = k$ para $\mu$-c.t.p. $x \in M$, lo cual significa que:
+	$$ \mu(M \setminus \{x \in M : \varphi(x) = k\}) = 0 \implies \mu(\{x \in M : \varphi(x) = k\}) = 1 $$
+	
+	Como $\varphi = \chi_E$, sus únicos valores posibles en el rango son $0$ o $1$. Así, necesariamente $k \in \{0, 1\}$.
+	Observe que al integrar la función característica obtenemos la medida del conjunto:
+	$$ \mu(E) = \int_M \chi_E \, d\mu = \int_{\{x : \varphi(x)=k\}} \chi_E \, d\mu + \int_{\{x : \varphi(x)=k\}^c} \chi_E \, d\mu $$ $$= \int_{\{x : \varphi(x)=k\}} k \, d\mu = k \cdot \mu(\{x : \varphi(x)=k\}) = k $$
+	Por lo tanto, $\mu(E) = k \implies \mu(E) = 0$ o $\mu(E) = 1$, lo que prueba que $\mu$ es ergódica respecto a $f$.
+	
+	\textbf{Implicación $a) \implies b)$:}
+	Sea $\varphi \in \mathcal{L}^0$ tal que $\varphi(f(x)) = \varphi(x)$ para $\mu$-c.t.p. $x \in M$. (Sin pérdida de generalidad, podemos asumir que la invariancia se da para todo $x \in M$).
+	
+	Para cada $n \in \mathbb{N}$ fijo, y para cada nivel $k \in \mathbb{Z}$, considere el estrato medible:
+	$$ E_{(k,n)} = \left\{ x \in M : \frac{k}{2^n} \le \varphi(x) < \frac{k+1}{2^n} \right\} = \varphi^{-1}\left( \left[ \frac{k}{2^n}, \frac{k+1}{2^n} \right) \right) $$
+	Se observa inmediatamente que estos estratos forman una partición de todo el espacio:
+	$$ M = \bigcup_{k \in \mathbb{Z}} E_{(k,n)} $$
+	
+	Tenemos que para la diferencia simétrica:
+	$$ f^{-1}(E_{(k,n)}) \triangle E_{(k,n)} \subseteq \{x \in M : \varphi(f(x)) \neq \varphi(x)\} \implies \mu(f^{-1}(E_{(k,n)}) \triangle E_{(k,n)}) = 0 $$
+	
+	Por la caracterización de la ergodicidad (hipótesis $a$), deducimos que para cada $k \in \mathbb{Z}$:
+	$$ \mu(E_{(k,n)}) = 0 \quad \text{o} \quad \mu(E_{(k,n)}) = 1 $$
+	Luego, como $\sum_{k \in \mathbb{Z}} \mu(E_{(k,n)}) = \mu(M) = 1$, existe un único entero $k_n \in \mathbb{Z}$ tal que:
+	$$ \mu(E_{(k_n,n)}) = 1 $$
+	
+	Observemos la relación de anidamiento al aumentar la resolución de $n$ a $n+1$. Como los intervalos diádicos satisfacen:
+	$$ \left[ \frac{k_{n+1}}{2^{n+1}}, \frac{k_{n+1}+1}{2^{n+1}} \right) \subseteq \left[ \frac{k_n}{2^n}, \frac{k_n+1}{2^n} \right) $$
+	aplicando preimágenes obtenemos:
+	$$ E_{(k_{n+1}, n+1)} = \varphi^{-1}\left( \left[ \frac{k_{n+1}}{2^{n+1}}, \frac{k_{n+1}+1}{2^{n+1}} \right) \right) \subseteq \varphi^{-1}\left( \left[ \frac{k_n}{2^n}, \frac{k_n+1}{2^n} \right) \right) = E_{(k_n, n)} $$
+	
+	Así, $\{E_{(k_n, n)}\}_{n \in \mathbb{N}}$ es una sucesión monótona decreciente de conjuntos y limitada en medida, con $\mu(E_{(k_n, n)}) = 1$ para todo $n \in \mathbb{N}$.
+	Tomando el conjunto límite $Y = \bigcap_{n \in \mathbb{N}} E_{(k_n, n)}$, por la continuidad superior de la medida de probabilidad se tiene:
+	$$ \mu(Y) = \lim_{n \to \infty} \mu(E_{(k_n, n)}) = \lim_{n \to \infty} 1 = 1 $$
+	
+	\textbf{Afirmación:} La restricción $\varphi|_Y = \text{cte} = c$. 
+	
+	\textit{En efecto:} Si $x \in Y$, entonces $x \in E_{(k_n, n)}$ para todo $n \in \mathbb{N}$, lo cual implica la acotación:
+	$$ \frac{k_n}{2^n} \le \varphi(x) < \frac{k_n+1}{2^n} = \frac{k_n}{2^n} + \frac{1}{2^n}, \quad \forall n \in \mathbb{N} $$
+	Tomando el límite cuando $n \to \infty$, como la longitud del intervalo $\frac{1}{2^n} \to 0$, existe un único valor real $c \in \mathbb{R}$ tal que $\lim_{n \to \infty} \frac{k_n}{2^n} = c$. Por el Teorema del Sándwich, obtenemos:
+	$$ c \le \varphi(x) \le c \implies \varphi(x) = c, \quad \forall x \in Y $$
+	
+	Así, $\varphi = c$ para $\mu$-c.t.p. $x \in M$ (dado que $\mu(Y) = 1$), completando la demostración.
+\end{proof}
+
+\section{Ergodicidad de las Rotaciones Irracionales en el Círculo}
+
+\begin{proposicion} \label{prop:rotacion_irracional_ergodica}
+	La rotación irracional $R_\alpha: S^1 \to S^1$ (donde $\alpha \in \mathbb{R} \setminus \mathbb{Q}$) es ergódica respecto a la medida de Lebesgue $\mu$ en $S^1$.
+\end{proposicion}
+
+\begin{proof}[Demostración]
+	Sabemos por el análisis de Hilbert que el espacio $\mathcal{L}^2(S^1, \mathcal{B}_{S^1}, \mu)$ tiene una base ortonormal de Hilbert dada por la familia de exponenciales complejas:
+	$$ \left\{ \phi_n: S^1 \to \mathbb{C}, \ x \mapsto \phi_n(x) = e^{2\pi i n x} \right\}_{n \in \mathbb{Z}} $$
+	
+	Así, para cualquier función $\varphi \in \mathcal{L}^2(S^1, \mathcal{B}_{S^1}, \mu)$, existe una única sucesión de coeficientes de Fourier $\{c_n\}_{n \in \mathbb{Z}} \subset \mathbb{C}$ (con $\sum_{n \in \mathbb{Z}} |c_n|^2 < \infty$) tal que:
+	\begin{equation} \label{eq:fourier_phi}
+		\varphi(x) = \sum_{n \in \mathbb{Z}} c_n e^{2\pi i n x} \quad \text{para } \mu\text{-c.t.p. } x \in S^1
+	\end{equation}
+	
+	Supongamos que $\varphi$ es invariante por la rotación, es decir:
+	$$ \varphi(R_\alpha(x)) = \varphi(x) \quad \text{para } \mu\text{-c.t.p. } x \in S^1 $$
+	Por el Teorema \ref{teo:caracterizacion_funcional} anterior, si demostramos que $\varphi = \text{cte}$ para $\mu$-c.t.p., entonces la rotación $R_\alpha$ es ergódica respecto a $\mu$.
+	
+	Evaluando el desarrollo en serie de Fourier en el punto rotado $R_\alpha(x) = x + \alpha \pmod 1$, tenemos:
+	\begin{align*}
+		\varphi(R_\alpha(x)) = \varphi(x + \alpha \pmod 1) &= \sum_{n \in \mathbb{Z}} c_n e^{2\pi i n (x + \alpha)} \\
+		&= \sum_{n \in \mathbb{Z}} \left( c_n e^{2\pi i n \alpha} \right) e^{2\pi i n x}, \quad \forall x \in S^1
+	\end{align*}
+	
+	Por la unicidad de los coeficientes en el desarrollo espectral, al igualar término a término con la serie de $\varphi(x)$ en \eqref{eq:fourier_phi}, obtenemos:
+	$$ c_n = c_n e^{2\pi i n \alpha} \implies c_n \left( 1 - e^{2\pi i n \alpha} \right) = 0, \quad \forall n \in \mathbb{Z} $$
+	
+	Analicemos el factor parentético. Como el ángulo $\alpha$ es un número irracional ($\alpha \in \mathbb{R} \setminus \mathbb{Q}$), para todo entero no nulo $n \neq 0$ se cumple que el producto $n\alpha \notin \mathbb{Z}$. En consecuencia:
+	$$ e^{2\pi i n \alpha} \neq 1 \implies 1 - e^{2\pi i n \alpha} \neq 0, \quad \forall n \in \mathbb{Z} \setminus \{0\} $$
+	
+	Para que el producto algebraico sea cero, deducimos obligatoriamente que:
+	$$ c_n = 0, \quad \forall n \in \mathbb{Z} \setminus \{0\} $$
+	
+	Sustituyendo este resultado en la serie original \eqref{eq:fourier_phi}, todos los coeficientes armónicos de orden superior se anulan, sobreviviendo únicamente el término para $n=0$:
+	$$ \varphi(x) = c_0 e^{2\pi i (0) x} = c_0 \cdot 1 = c_0 \quad \text{para } \mu\text{-c.t.p. } x \in S^1 $$
+	
+	Así, $\varphi(x) = c_0$ para $\mu$-c.t.p. $x \in S^1$, lo que significa que $\varphi = \text{cte}$ casi siempre. Por el Teorema \ref{teo:caracterizacion_funcional}, concluimos que la medida de Lebesgue $\mu$ es ergódica respecto a la rotación irracional $R_\alpha$.
+\end{proof}
+
+
+
+
+% =========================================================================
+% --- FIN INPUT SEMANA 11 ---
+% =========================================================================
